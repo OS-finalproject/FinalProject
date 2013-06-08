@@ -4,27 +4,14 @@ namespace site\reservationBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use site\reservationBundle\Entity\Infocomp;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Cookies;
-use site\reservationBundle\Entity\Events;
 use site\reservationBundle\Entity\Customer;
+use Symfony\Component\HttpFoundation\Response;
+use site\reservationBundle\Entity\Events;
 
 class SiteController extends Controller
 {
     public function indexAction()
     {
-        $request = $this->getRequest();
-        
-        if( $request->cookies->has('type') ){
-        
-            $session = $request->getSession();
-            
-            $session->set('id', $request->cookies->get('id'));
-            $session->set('username', $request->cookies->get('username'));
-            $session->set('type', $request->cookies->get('type'));                     
-            
-        
-        }
         return $this->render('sitereservationBundle:Site:home.html.twig');
     }
 
@@ -69,115 +56,55 @@ class SiteController extends Controller
     	$offers = $repo->getOffers();
     	return $this->render('sitereservationBundle:Site:guestoffers.html.twig',array('offers'=>$offers));	
     }
-    
-    public function SignInAction(){
-        
-         $request = $this->getRequest();
-         $responseMessage = "";
-         $response = new Response();
-                  
-         if($request->getMethod()== "POST"){
-        
-              $userEmail = $request->request->get('userEmail');
-              $userPassword = $request->request->get('userPass');
-              $checkBox = $request->request->get('rememberMe');
-              
-                       
-              $em = $this->getDoctrine()->getEntityManager();
-              $result = $em->getRepository('sitereservationBundle:Customer')->getCustomerInfo($userEmail,$userPassword);
-
-              if( $result){
-                  
-                  $session = $request->getSession();
-                  
-                  $session->start();
-                  
-                  $session->set('id',$result[0]->getId());
-                  $session->set('username',$result[0]->getUsername());
-                  //$session->set('email',$result[0]->getEmail());
-                  //$session->set('password',$result[0]->getPassword());
-                  //$session->set('image',$result[0]->getFile());
-                  //$session->set('telephone',$result[0]->getTelephone());
-                  $session->set('type',$result[0]->getType());
-                  
-                  
-                  if($checkBox == "rememderMe"){
-                      
-                      $id = new Cookie('id',$result[0]->getId(),  time() + 3600 * 24 * 30 );
-                      $username = new Cookie('username',$result[0]->getUsername(),  time() + 3600 * 24 * 30 );
-                      /*$email = new Cookie('email',$result[0]->getEmail(),  time() + 3600 * 24 * 30 );
-                      $password = new Cookie('password',$result[0]->getPassword(),  time() + 3600 * 24 * 30 );
-                      $iamge = new Cookie('image',$result[0]->getFile(),  time() + 3600 * 24 * 30 );
-                      $telephone = new Cookie('telephone',$result[0]->getTelephone(),  time() + 3600 * 24 * 30 );*/
-                      $type = new Cookie('type',$result[0]->getType(),  time() + 3600 * 24 * 30 );
-                      
-                      
-                      $response->headers->setCookie($id);
-                      $response->headers->setCookie($username);
-                      /*$response->headers->setCookie($email);
-                      $response->headers->setCookie($password);
-                      $response->headers->setCookie($iamge);
-                      $response->headers->setCookie($telephone);*/
-                      $response->headers->setCookie($type);
-                      
-                      
-                  }
-                  
-                  
-                  $responseMessage ="ok";
-                  
-              }  else {
-
-                  $responseMessage ="fail";                                                                             
-              }
-                          
-             
-             $response->setContent($responseMessage);
-             
-             return $response->sendHeaders();
-                          
-             
-         }
-        
-                
-    }
-    
-    
-    public function companyMenuAction($company){
-        
+    public function companyMenuAction($company)
+    {
     	$em = $this->getDoctrine()->getEntityManager();
     	$repo = $em->getRepository('sitereservationBundle:Infocomp');
     	$Companies = $repo->getCompanies($company);
     	return $this->render('sitereservationBundle:Site:company.html.twig',array('companies'=>$Companies , 'type'=>$company));	
     }
-    
-    public function allCompaniesAction(){
-        
+    public function allCompaniesAction()
+    {
     	$em = $this->getDoctrine()->getEntityManager();
     	$repo = $em->getRepository('sitereservationBundle:Infocomp');
     	$Companies = $repo->getAllCompanies();
     	return $this->render('sitereservationBundle:Site:allCompanies.html.twig',array('companies'=>$Companies));		
     }
-    
-    public function getAddressCompanyAction($id){
+    public function custhomeAction()
+    {
         
-        $em = $this->getDoctrine()->getEntityManager();
-        $repo = $em->getRepository('sitereservationBundle:Address');
-        $Address = $repo->getCompanyAddress($id);   
-        return new Response ($Address->getStreet().", ".$Address->getCity().", ".$Address->getCountry());
-    }
-    
-    public function companyProfileAction($id){
-        
-        
-        $em = $this->getDoctrine()->getEntityManager();
-        $repo = $em->getRepository('sitereservationBundle:Infocomp');
-        $companyDetails = $repo->getthisCompany($id);
-        $em = $this->getDoctrine()->getEntityManager();
-        $repo = $em->getRepository('sitereservationBundle:Address');
-        $Address = $repo->getCompanyAddress($id);
-        return $this->render('sitereservationBundle:Site:companyProfile.html.twig',array('address'=>$Address , 'company'=> $companyDetails));   
+        return $this->render('sitereservationBundle:Site:custhome.html.twig');  
     }
 
-
+    public function UserProfileAction(){
+        
+        $custid=1; 
+   
+        
+        $cust= $this->getDoctrine()->getEntityManager();
+        $repo=$cust->getRepository('sitereservationBundle:Customer');
+        $info=$repo->getProfileInfo($custid);
+        file:///
+        $user= $this->getDoctrine()->getEntityManager();
+        $rep=$user->getRepository('sitereservationBundle:Userinfo');
+        $extrainfo=$rep->getProfileInfoUser($custid);
+      
+        return $this->render('sitereservationBundle:Site:userprofile.html.twig', array('custinfo'=>$info,'extrainfo'=>$extrainfo));
+             
+        
+    }
+    
+        public function UserserviceProviderAction(){
+        
+            
+        $cust= $this->getDoctrine()->getEntityManager();
+        $repo=$cust->getRepository('sitereservationBundle:Customer');
+        $info=$repo->getAllServiceprovider();
+        
+   
+      
+        return $this->render('sitereservationBundle:Site:userprofile.html.twig', array('custinfo'=>$info,'extrainfo'=>$extrainfo));
+             
+        
+    }
 }

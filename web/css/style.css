@@ -721,14 +721,13 @@
 	left:0px;
 }
 #toPopup {
-    
-    font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+	font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
     background: none repeat scroll 0 0 #FFFFFF;
     border: 10px solid #ccc;
     border-radius: 3px 3px 3px 3px;
     color: #333333;
     display: none;
-    font-size: 14px;
+	font-size: 14px;
     left: 50%;
     margin-left: -402px;
     position: fixed;
@@ -811,8 +810,7 @@ div#popup_content {
     margin-left: -402px;
     position: fixed;
     top: 30%;
-    width: 58%;
-    height:14%;
+    width: 800px;
     z-index: 2;
 }
 div.loader {
@@ -889,12 +887,11 @@ h2 {display:inline;}
 #ribbon {width:111px;height:111px;position:absolute;top:-4px;left:-4px;background:url(./images/ribbon.png) no-repeat;z-index:7;}
         
 #slider {
-        width:700px;
-        height:306px;/* Make it the same size as your images */
+    width:700px;height:306px;/* Make it the same size as your images */
 	background:#fff url(./images/loading.gif) no-repeat 50% 50%;
 	position:relative;
 	margin:0 auto;/*make the image slider center-aligned */
-        box-shadow: 0px 1px 5px #999999;
+    box-shadow: 0px 1px 5px #999999;
 }
 #slider img {
 	position: relative;
@@ -915,7 +912,7 @@ h2 {display:inline;}
 div.mc-caption-bg, div.mc-caption-bg2 {
 	position:absolute;
 	width:100%;
-	height:auto;
+	height:aut`o;
 	padding:0;
 	left:0px; /*if the caption needs to be aligned from right, specify by right instead of left. i.e. right:20px;*/
 	bottom:0px;/*if the caption needs to be aligned from top, specify by top instead of bottom. i.e. top:150px;*/
@@ -974,30 +971,13 @@ div.navBulletsWrapper div.active {background-position:0 -11px;}
     -o-transform:translate3d(0,0,0);
 }
 
+/*-------------- Abdou-----------------*/
 
-/*------ Sign In Div ----- */
-
-.signInDiv{
+.userprofile{
+    margin:auto; 
+    width: 35%;
+    height: 40%;
+    background-color: gainsboro;
     
-   float:left;
-   width:48%;
-   height:80%;    
-}
-
-.signInVerticalLine{
     
-    float:left;
-    width: 2px;
-    height: 190px;
-    background-color:black;
-    margin-right: 2%; 
 }
-
-#signInError{
- margin-bottom:5%;    
- color:red;       
-}
-
-
-
-/*------------------------------*/

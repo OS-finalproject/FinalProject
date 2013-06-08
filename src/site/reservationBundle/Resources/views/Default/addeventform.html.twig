@@ -1,0 +1,27 @@
+{# src/Acme/TaskBundle/Resources/views/Default/new.html.twig #}
+<form action="{{ path('sitereservation_addeventform') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_label(form.name) }}<br>
+    {{ form_errors(form.name) }}
+    {{ form_widget(form.name) }}<br>
+    {{ form_label(form.available) }}<br>
+    {{ form_errors(form.available) }}
+    {{ form_widget(form.available) }}<br>
+    {{ form_label(form.datefrom) }}<br>
+    {{ form_errors(form.datefrom) }}
+    {{ form_widget(form.datefrom) }}
+    {{ form_label(form.dateto) }}<br>
+    {{ form_errors(form.dateto) }}
+    {{ form_widget(form.dateto) }}
+    {{ form_label(form.file) }}<br>
+    {{ form_errors(form.file) }}
+    {{ form_widget(form.file) }}<br>
+    {{ form_label(form.comp) }}<br>
+    {{ form_errors(form.comp) }}
+    {{ form_widget(form.comp) }}<br>
+    {{ form_label(form.category) }}<br>
+    {{ form_errors(form.category) }}
+    {{ form_widget(form.category) }}<br>
+    {{ form_rest(form) }}
+
+    <input type="submit" value="Create Event"/>
+</form>

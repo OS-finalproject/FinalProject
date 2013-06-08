@@ -1,0 +1,49 @@
+{% extends '::basecust.html.twig' %}
+{% block title %}profile{% endblock %}
+
+{% block body %}
+<script>
+        $('li').removeClass('current_page_item');
+        $('#l3').addClass('current_page_item');
+ 
+    </script>
+    <div class="userprofile">
+        <center>
+        <table>     
+           {% for info in custinfo  %}
+
+                <tr>
+                    <td><lable> name: </lable></td> <td>  </td> <td> {{ info.username }}</td>
+                </tr>
+                <tr>
+                    <td>  <label> email: </label> </td> <td>  </td> <td> {{ info.email }}</td>
+                </tr>
+                <tr>
+                   
+                </tr>
+
+
+            {% endfor %}
+
+             {% for extinfo in extrainfo  %}
+
+                <tr>
+                    <td><lable> address: </lable> </td> <td>  </td> <td> {{ extinfo.address }}</td>
+                </tr>
+                 <td><label> telephone: </label> </td> <td>  </td> <td> {{ extinfo.telephone }}</td>
+                <tr>
+                    <td> <label> mobile: </label> </td> <td>  </td> <td> {{ extinfo.mobile }}</td>
+                </tr>
+                <tr>
+                    <td><label> gendar: </label> </td> <td>  </td> <td> {{ extinfo.gendar }}</td>
+                </tr>
+
+             {% endfor %}
+
+
+
+            </table>
+        </center>
+        </div>        
+{% endblock %}
+

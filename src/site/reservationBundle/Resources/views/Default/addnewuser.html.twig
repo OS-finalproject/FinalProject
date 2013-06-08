@@ -1,0 +1,46 @@
+{# src/Acme/TaskBundle/Resources/views/Default/new.html.twig #}
+{% extends '::base.html.twig' %}
+{% block title %}Index{% endblock %}
+{% block body %}
+	<div class="row">
+						<div class="12u">
+							<!-- Banner -->
+								<section class="box">
+									<div  style="position:relative;left:375px;">
+<form action="{{ path('sitereservation_addnewuserform') }}" method="post" {{ form_enctype(form) }}>
+<table>
+
+    <tr>
+    <td colspan='2'>{{ form_widget(form.customers) }}</td>
+    
+    </tr>
+
+    <tr>
+    <td>{{ form_label(form.mobile) }}</td>
+    <td> {{ form_errors(form.mobile) }}
+    {{ form_widget(form.mobile) }}</td>
+    </tr>
+    <tr>
+    <td>{{ form_label(form.num_children) }}</td>
+    <td> {{ form_errors(form.num_children) }}
+    {{ form_widget(form.num_children) }}</td>
+    </tr>
+    <tr>
+    <td>{{ form_label(form.gendar) }}</td>
+    <td> {{ form_errors(form.gendar) }}
+    {{ form_widget(form.gendar) }}</td>
+    </tr>
+    <tr>
+    <td>{{ form_label(form.address) }}</td>
+    <td> {{ form_errors(form.address) }}
+    {{ form_widget(form.address) }}</td>
+    </tr>   
+    <tr><td colspan='2'>{{ form_rest(form) }}</td></tr>
+    <tr><td colspan='2'><center><br><br><input type="submit" value="Save"/></center></td></tr>
+    </table>
+</form>
+</div>
+								</section>
+						</div>
+						</div>
+{% endblock %}
