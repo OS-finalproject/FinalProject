@@ -25,5 +25,23 @@ class CustomerRepository extends EntityRepository {
        
        
     }
+    
+    
+    public function getCustomerInfo($email,$pass){
+        
+        $query = $this->getEntityManager()->createQuery('
+            
+                select c
+                from sitereservationBundle:customer c
+                where c.email = :email and c.password = :pass
+
+        ');
+        
+        $query->setParameter('email', $email);
+        $query->setParameter('pass',$pass);
+        
+        return $query->getResult();
+        
+    }
 
 }

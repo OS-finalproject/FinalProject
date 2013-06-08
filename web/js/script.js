@@ -38,17 +38,30 @@ jQuery(function($) {
 
 	//--- scoll up and down 
 	
-        var current_top = parseInt($('#toPopup').css('top')); 
+        var current_top = parseInt($('#toPopup').css('top'));
+        var bottomOfPopup = parseInt(200);
+        var bottomOfWindow = $(window).height();
+ 
 		
+	//alert(heightOfPopup);
+	 	
 	$(window).scroll(function(){
 		
 		var top = $(window).scrollTop();
+		//var heightOfPopup = parseInt($('#toPopup').height());
+		//var bottomOfPopup = parseInt($('#toPopup').css('top')) + parseInt($('#toPopup').height()) +150 ;
+		//alert(bottomOfWindow);
+		//console.log('b '+bottomOfPopup);
+		bottomOfPopup +=parseInt(top);
 		
-		if( top+current_top > current_top+200 ){
+		if( (top+current_top > current_top+200)  ){
+		
+			if  (bottomOfPopup < bottomOfWindow ){
 			
-			$('#toPopup').animate({
-				top:top + current_top		
-			},200);
+				$('#toPopup').animate({
+					top:top + current_top		
+				},'slow');
+			}
 		}	
 	});
 	
@@ -68,6 +81,10 @@ jQuery(function($) {
 	function loadPopup() { 
 		if(popupStatus == 0) { // if value is 0, show popup
 			closeloading(); // fadeout loading
+                        $('input[name="signInEmail"]').val(""); 
+                        $('input[name="signInPassword"]').val("");
+                        $('input[name="rememderMe"]').removeAttr('checked');
+                        $('#signInError').html("");
 			$("#toPopup").fadeIn(0500); // fadein popup div
 			$("#backgroundPopup").css("opacity", "0.7"); // css opacity, supports IE7, IE8
 			$("#backgroundPopup").fadeIn(0001); 
@@ -82,5 +99,57 @@ jQuery(function($) {
 			popupStatus = 0;  // and set value to 0
 		}
 	}
-	/************** end: functions. **************/
+	/************** end: popup functions. **************/
+        
+        //-------- Sign in --///
+        
+        var url = $('#signInButton').attr('name');
+        
+        $('#signInButton').on('click',function(){
+            
+           var userEmail = $('input[name="signInEmail"]').val(); 
+           var userPass = $('input[name="signInPassword"]').val();
+           var checkBox = $('input[name="rememderMe"]:checked').val();
+           var errorMessage = "";
+           
+           
+           if( userEmail != "" && userPass != "" ){
+
+                    $.ajax({
+
+                        url:url,
+                        type:"POST",
+                        dataType:"html",
+                        data:{
+                           userEmail:userEmail,
+                           userPass:userPass,
+                           rememberMe:checkBox
+                        },
+                        success:function(respo){
+
+                            if(respo.toString() == "ok"){
+                                     window.location.reload(true);
+                            }else if (respo.toString() == "fail"){
+                                     errorMessage = " Incorrect Email or Password";
+                                     $('#signInError').html(errorMessage);                           
+                            }
+                        }
+
+                    });  
+                    
+           }else{
+               
+               errorMessage = "Enter your Email and Password";
+               $('#signInError').html(errorMessage);
+               
+           }
+            
+            
+            
+        });
+        
+        
+        
+        //---------------------///
+        
 }); // jQuery End

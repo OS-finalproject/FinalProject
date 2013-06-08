@@ -81,23 +81,56 @@
 					{% block body %}{% endblock %}
             </div>
         </div>
-        <div id="toPopup">
-            <div class="close"></div>
-            <span class="ecs_tooltip">Press Esc to close <span class="arrow"></span></span>
-            <div id="popup_content"> <!--your content start-->
-                <section class="box">
-                    <div style="float:left;position:relative;left:100px;">
-                        <a href="{{ path('sitereservation_addnewuserform') }}" class="button">Sign up as a Customer</a>
-                    </div>
-                    <div style="position:relative;left:175px;">
-                        <a href="{{ path('sitereservation_companysignup') }}" class="button">Sign up as a Company</a>
-                    </div>
-                </section>	
-            </div> <!--your content end-->
-        </div> <!--toPopup end-->
-        <div class="loader"></div>
-        <div id="backgroundPopup"></div>	
-
+			    <div id="toPopup">
+			        <div class="close"></div>
+			       	<span class="ecs_tooltip">Press Esc to close <span class="arrow"></span></span>
+					<div id="popup_content"> <!--your content start-->
+                                            
+                                            
+							<section class="box">
+                                                            <div class="signIn">
+                                                                <div class="signInDiv">
+                                                                        <center><span id="signInError"></span></center>
+                                                                   <!-- <form method="POST">-->
+                                                                        <table>
+                                                                        <tr>   
+                                                                        <td><lebal>Email</lebal></td>
+                                                                        <td><input type="text" name="signInEmail"  /></td>
+                                                                        </tr>
+                                                                        <tr>    
+                                                                        <td><p></p></td>
+                                                                        </tr>        
+                                                                        <tr>   
+                                                                        <td><lebal>Password</lebal></td>
+                                                                        <td><input type="password" name="signInPassword" /></td>
+                                                                        </tr>   
+                                                                        </table>
+                                                                        <center><input type="checkbox" name="rememderMe" value="rememderMe" />&nbsp;<label>Remember Me</label></center>
+                                                                        <input  class="button" style="margin-left:65%;margin-top:5%;" value="Login" type="button" id="signInButton" name="{{ path('sitereservation_signIn') }}" />    
+                                                                            
+                                                                    
+                                                                    <!--</form>-->
+                                                                </div>    
+                                                                <div class="signInVerticalLine">
+                                                                </div>                                                                       
+                                                                <div class="signInDiv" >
+                                                                <br/>    
+								<div>
+									<a href="{{ path('sitereservation_addnewuserform') }}" class="button">Sign up as a Customer</a>
+								</div>
+                                                                <br/>    
+								<div>
+									<a href="{{ path('sitereservation_companysignup') }}" class="button">Sign up as a Company</a>
+								</div>
+                                                                </div>        
+                                                             </div>       
+							</section>
+                                                        
+        			</div> <!--your content end-->
+    			</div> <!--toPopup end-->
+				<div class="loader"></div>
+			   	<div id="backgroundPopup"></div>	
+				
 
         <!-- Footer Wrapper -->
         <div id="footer-wrapper">

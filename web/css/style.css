@@ -810,7 +810,8 @@ div#popup_content {
     margin-left: -402px;
     position: fixed;
     top: 30%;
-    width: 800px;
+    width: 58%;
+    height:14%;
     z-index: 2;
 }
 div.loader {
@@ -981,3 +982,32 @@ div.navBulletsWrapper div.active {background-position:0 -11px;}
     
     
 }
+
+/*--------------*/
+
+/*------ Sign In Div ----- */
+
+.signInDiv{
+    
+   float:left;
+   width:48%;
+   height:80%;    
+}
+
+.signInVerticalLine{
+    
+    float:left;
+    width: 2px;
+    height: 190px;
+    background-color:black;
+    margin-right: 2%; 
+}
+
+#signInError{
+ margin-bottom:5%;    
+ color:red;       
+}
+
+
+
+/*------------------------------*/
