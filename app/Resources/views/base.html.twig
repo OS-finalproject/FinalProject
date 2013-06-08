@@ -35,13 +35,28 @@
         <!--[if lte IE 8]><script src="js/html5shiv.js"></script><link rel="stylesheet" href="css/ie8.css" /><![endif]-->
     </head>
     <body class="homepage">
+        
+       {% set type = app.session.get('type') %}
+        
         <!-- Header Wrapper -->
         <div id="header-wrapper">
             <div class="container">
-                <div align="right" class="actions">
-                    <a class="button" data-inline="true" href="#">log in</a>
-                    <a class="button topopup" href="#">sign up</a>
-                </div>
+                
+                {% if type %}
+                
+                    <div align="right" class="actions">
+                        hi,<a class="button" data-inline="true" href="#">{{ app.session.get('username') }}</a>
+                        <a class="button" href="#">sign out</a>
+                    </div>                
+                
+                {% else %}
+                
+                    <div align="right" class="actions">
+                        <a class="button" data-inline="true" href="#">log in</a>
+                        <a class="button topopup" href="#">sign up</a>
+                    </div>
+                
+                {% endif %}
                 <div class="row">
                     <div class="12u">
 
@@ -51,27 +66,38 @@
                             <h1><a href="{{ path('sitereservation_homepage') }}">Agenda</a></h1>
 
                             <!-- Nav -->
-                            <nav id="nav">
-                                <ul>
-                                    <li class="current_page_item"><a href="{{ path('sitereservation_homepage') }}">Home</a></li>
-                                    <li>
-                                        <a href="">Service Providers</a>
-                                        <!-- <ul>
-                                                <li><a href="#"></a></li>
-                                                <li><a href="#"></a></li>
-                                                <li><a href="#"></a></li>
-                                                <li>
-                                                        <a href=""></a>
-                                                        <ul>
-                                                                <li><a href="#"></a></li>
-                                                                <li><a href="#"></a></li>
-                                                                <li><a href="#"></a></li>
-                                                        </ul> -->
-                                    </li>
-                                    <li><a href="">About</a></li>
-                                    <li><a href="">Contact Us</a></li>
-                                </ul>
-                            </nav>
+                            
+                            {% if type == "user" %}
+                            
+                                    <nav id="nav">
+                                        <ul>
+                                            <li class="current_page_item"><a href="{{ path('sitereservation_homepage') }}">Home</a></li>
+                                            <li>
+                                                <a href="">Service Providers</a>
+                                                <!-- <ul>
+                                                        <li><a href="#"></a></li>
+                                                        <li><a href="#"></a></li>
+                                                        <li><a href="#"></a></li>
+                                                        <li>
+                                                                <a href=""></a>
+                                                                <ul>
+                                                                        <li><a href="#"></a></li>
+                                                                        <li><a href="#"></a></li>
+                                                                        <li><a href="#"></a></li>
+                                                                </ul> -->
+                                            </li>
+                                            <li><a href="">About</a></li>
+                                            <li><a href="">Contact Us</a></li>
+                                        </ul>
+                                    </nav>
+                            
+                            {% elseif type == "company" %}
+                            
+                            {% elseif type == "admin" %}
+                            
+                            {% else %}
+                            
+                            {% endif %}
 
                         </section>
 
