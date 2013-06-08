@@ -45,14 +45,14 @@
                 {% if type %}
                 
                     <div align="right" class="actions">
-                        hi,<a class="button" data-inline="true" href="#">{{ app.session.get('username') }}</a>
-                        <a class="button" href="#">sign out</a>
+                        <a class="button" data-inline="true" href="#">HI , {{ app.session.get('username') }}</a>
+                        <a class="button" id="signOut" name="{{ path('sitereservation_signOut') }}" href="#">sign out</a>
                     </div>                
                 
                 {% else %}
                 
                     <div align="right" class="actions">
-                        <a class="button" data-inline="true" href="#">log in</a>
+                        <a class="button topopup " data-inline="true" href="#">log in</a>
                         <a class="button topopup" href="#">sign up</a>
                     </div>
                 

@@ -40,7 +40,12 @@ sitereservation_address:
     
 sitereservation_userprofile:
     pattern:  /userprofile
-    defaults: { _controller: sitereservationBundle:Site:UserProfile }    
+    defaults: { _controller: sitereservationBundle:Site:UserProfile } 
+    
 sitereservation_userserviceprovider:
     pattern:  /userprofile
-    defaults: { _controller: sitereservationBundle:Site:UserserviceProvider }    
+    defaults: { _controller: sitereservationBundle:Site:UserserviceProvider }
+
+sitereservation_signOut:
+    pattern: /signOut
+    defaults: { _controller: sitereservationBundle:Site:signOut }

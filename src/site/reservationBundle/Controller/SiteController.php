@@ -5,7 +5,8 @@ namespace site\reservationBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use site\reservationBundle\Entity\Infocomp;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Cookies;
+use Symfony\Component\HttpFoundation\Cookie;
+use \Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use site\reservationBundle\Entity\Events;
 use site\reservationBundle\Entity\Customer;
 
@@ -211,4 +212,39 @@ class SiteController extends Controller
              
         
     }
+    
+    public function signOutAction(){
+
+          $request = $this->getRequest();
+          $response = new Response($this->generateUrl('sitereservation_index'));
+          
+          if( $request->getMethod() == "POST"){
+              
+                $session = $request->getSession();
+                
+                $session->clear();
+                
+                if( $request->cookies->has('type') ){
+                    
+                   $keys = $request->cookies->keys();
+                    
+                    foreach ($keys as $key ){
+                        
+                        //$cookie = new Cookie($key,'',time()-3600 * 24 * 30);    
+                       // $response->clearCookie($k);
+                        $response->headers->clearCookie($key);
+                        
+                    }
+                                        
+                                       
+                   
+                }
+                                                                
+          }
+          
+         return $response;
+                          
+    }
+    
+    
 }

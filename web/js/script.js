@@ -68,7 +68,7 @@ jQuery(function($) {
         //-- end scoll up and down
 	
 
-	 /************** start: functions. **************/
+	 /************** start: popup functions. **************/
 	function loading() {
 		$("div.loader").show();  
 	}
@@ -151,5 +151,32 @@ jQuery(function($) {
         
         
         //---------------------///
+        
+        //--- Sign Out -------///
+        
+        
+        $('#signOut').on('click',function(){
+            
+            var url = $('#signOut').attr('name');
+            
+            $.ajax({
+                
+                   url:url,
+                   type:"POST",
+                   dataType:'html',
+                   success:function(respo){
+                       
+                       window.location.replace(respo.toString());
+                   }
+                                                   
+            });
+                       
+        });
+        
+        
+        
+        
+        //----- --------------///
+        
         
 }); // jQuery End
