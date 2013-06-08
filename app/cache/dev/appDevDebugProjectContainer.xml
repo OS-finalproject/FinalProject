@@ -20,6 +20,7 @@
       <parameter key="JMSDiExtraBundle">JMS\DiExtraBundle\JMSDiExtraBundle</parameter>
       <parameter key="JMSSecurityExtraBundle">JMS\SecurityExtraBundle\JMSSecurityExtraBundle</parameter>
       <parameter key="sitereservationBundle">site\reservationBundle\sitereservationBundle</parameter>
+      <parameter key="AcmeDemoBundle">Acme\DemoBundle\AcmeDemoBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
       <parameter key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</parameter>
       <parameter key="SensioGeneratorBundle">Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle</parameter>
@@ -374,9 +375,7 @@
     <parameter key="assetic.value_supplier.class">Symfony\Bundle\AsseticBundle\DefaultValueSupplier</parameter>
     <parameter key="assetic.node.paths" type="collection"/>
     <parameter key="assetic.cache_dir">/var/www/FinalProject/app/cache/dev/assetic</parameter>
-    <parameter key="assetic.bundles" type="collection">
-      <parameter>sitereservationBundle</parameter>
-    </parameter>
+    <parameter key="assetic.bundles" type="collection"/>
     <parameter key="assetic.twig_extension.class">Symfony\Bundle\AsseticBundle\Twig\AsseticExtension</parameter>
     <parameter key="assetic.twig_formula_loader.class">Assetic\Extension\Twig\TwigFormulaLoader</parameter>
     <parameter key="assetic.helper.dynamic.class">Symfony\Bundle\AsseticBundle\Templating\DynamicAsseticHelper</parameter>
@@ -482,8 +481,8 @@
     <parameter key="jms_di_extra.disable_grep">false</parameter>
     <parameter key="jms_di_extra.doctrine_integration">true</parameter>
     <parameter key="jms_di_extra.cache_warmer.controller_file_blacklist" type="collection"/>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">/var/www/FinalProject/app/cache/dev/jms_diextra/doctrine/EntityManager_51b32ee5719d1.php</parameter>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager51b32ee5719d1_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">/var/www/FinalProject/app/cache/dev/jms_diextra/doctrine/EntityManager_51b34daca3a52.php</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager51b34daca3a52_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
     <parameter key="security.secured_services" type="collection"/>
     <parameter key="security.access.method_interceptor.class">JMS\SecurityExtraBundle\Security\Authorization\Interception\MethodSecurityInterceptor</parameter>
     <parameter key="security.access.method_access_control" type="collection"/>
@@ -663,6 +662,14 @@
         <argument type="collection">
           <argument>sensio_framework_extra.cache.listener</argument>
           <argument>onKernelResponse</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListenerService">
+        <argument>kernel.controller</argument>
+        <argument type="collection">
+          <argument>acme.demo.listener</argument>
+          <argument>onKernelController</argument>
         </argument>
         <argument>0</argument>
       </call>
@@ -2033,9 +2040,7 @@
             <argument type="service" id="templating.name_parser"/>
             <argument>true</argument>
             <argument type="collection"/>
-            <argument type="collection">
-              <argument>sitereservationBundle</argument>
-            </argument>
+            <argument type="collection"/>
             <argument type="service" id="assetic.value_supplier.default"/>
           </service>
         </argument>
@@ -2054,6 +2059,9 @@
             <argument type="service" id="security.context"/>
           </service>
         </argument>
+      </call>
+      <call method="addExtension">
+        <argument type="service" id="twig.extension.acme.demo"/>
       </call>
       <call method="addGlobal">
         <argument>app</argument>
@@ -2125,33 +2133,6 @@
           </service>
         </argument>
       </argument>
-      <call method="addResource">
-        <argument type="service">
-          <service class="Symfony\Bundle\AsseticBundle\Factory\Resource\CoalescingDirectoryResource" public="false">
-            <tag name="assetic.templating.twig"/>
-            <tag name="assetic.formula_resource" loader="twig"/>
-            <argument type="collection">
-              <argument type="service">
-                <service class="%assetic.directory_resource.class%" public="false">
-                  <argument type="service" id="templating.loader"/>
-                  <argument>sitereservationBundle</argument>
-                  <argument>/var/www/FinalProject/app/Resources/sitereservationBundle/views</argument>
-                  <argument>/\.[^.]+\.twig$/</argument>
-                </service>
-              </argument>
-              <argument type="service">
-                <service class="%assetic.directory_resource.class%" public="false">
-                  <argument type="service" id="templating.loader"/>
-                  <argument>sitereservationBundle</argument>
-                  <argument>/var/www/FinalProject/src/site/reservationBundle/Resources/views</argument>
-                  <argument>/\.[^.]+\.twig$/</argument>
-                </service>
-              </argument>
-            </argument>
-          </service>
-        </argument>
-        <argument>twig</argument>
-      </call>
       <call method="addResource">
         <argument type="service">
           <service class="Symfony\Bundle\AsseticBundle\Factory\Resource\DirectoryResource" public="false">
@@ -2259,6 +2240,9 @@
       </argument>
       <argument type="collection">
         <argument key="enum">string</argument>
+        <argument key="set">string</argument>
+        <argument key="varbinary">string</argument>
+        <argument key="tinyblob">text</argument>
       </argument>
     </service>
     <service id="form.type_guesser.doctrine" class="Symfony\Bridge\Doctrine\Form\DoctrineOrmTypeGuesser">
@@ -2280,8 +2264,8 @@
     <service id="doctrine.orm.default_manager_configurator" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator">
       <argument type="collection"/>
     </service>
-    <service id="doctrine.orm.default_entity_manager" class="EntityManager51b32ee5719d1_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
-      <file>/var/www/FinalProject/app/cache/dev/jms_diextra/doctrine/EntityManager_51b32ee5719d1.php</file>
+    <service id="doctrine.orm.default_entity_manager" class="EntityManager51b34daca3a52_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
+      <file>/var/www/FinalProject/app/cache/dev/jms_diextra/doctrine/EntityManager_51b34daca3a52.php</file>
       <argument type="service">
         <service class="Doctrine\ORM\EntityManager" factory-method="create" public="false">
           <argument type="service" id="doctrine.dbal.default_connection"/>
@@ -2514,6 +2498,14 @@
           </service>
         </argument>
       </call>
+    </service>
+    <service id="twig.extension.acme.demo" class="Acme\DemoBundle\Twig\Extension\DemoExtension" public="false">
+      <tag name="twig.extension"/>
+      <argument type="service" id="twig.loader"/>
+    </service>
+    <service id="acme.demo.listener" class="Acme\DemoBundle\EventListener\ControllerListener">
+      <tag name="kernel.event_listener" event="kernel.controller" method="onKernelController"/>
+      <argument type="service" id="twig.extension.acme.demo"/>
     </service>
     <service id="web_profiler.controller.profiler" class="Symfony\Bundle\WebProfilerBundle\Controller\ProfilerController">
       <argument type="service" id="router"/>
@@ -2800,6 +2792,10 @@
       <call method="addPath">
         <argument>/var/www/FinalProject/src/site/reservationBundle/Resources/views</argument>
         <argument>sitereservation</argument>
+      </call>
+      <call method="addPath">
+        <argument>/var/www/FinalProject/src/Acme/DemoBundle/Resources/views</argument>
+        <argument>AcmeDemo</argument>
       </call>
       <call method="addPath">
         <argument>/var/www/FinalProject/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views</argument>

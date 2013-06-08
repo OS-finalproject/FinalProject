@@ -201,6 +201,19 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
+        if (0 === strpos($pathinfo, '/userprofile')) {
+            // sitereservation_userprofile
+            if ($pathinfo === '/userprofile') {
+                return array (  '_controller' => 'site\\reservationBundle\\Controller\\SiteController::UserProfileAction',  '_route' => 'sitereservation_userprofile',);
+            }
+
+            // sitereservation_userserviceprovider
+            if ($pathinfo === '/userprofile') {
+                return array (  '_controller' => 'site\\reservationBundle\\Controller\\SiteController::UserserviceProviderAction',  '_route' => 'sitereservation_userserviceprovider',);
+            }
+
+        }
+
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();
     }
 }
