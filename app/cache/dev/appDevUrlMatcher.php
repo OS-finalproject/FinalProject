@@ -172,6 +172,35 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array (  '_controller' => 'site\\reservationBundle\\Controller\\SiteController::signInAction',  '_route' => 'sitereservation_signIn',);
         }
 
+        if (0 === strpos($pathinfo, '/compan')) {
+            if (0 === strpos($pathinfo, '/company')) {
+                // sitereservation_CompanyMenu
+                if (0 === strpos($pathinfo, '/companyMenu') && preg_match('#^/companyMenu/(?P<company>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'sitereservation_CompanyMenu')), array (  '_controller' => 'site\\reservationBundle\\Controller\\SiteController::companyMenuAction',));
+                }
+
+                // sitereservation_companyprofile
+                if (preg_match('#^/company/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'sitereservation_companyprofile')), array (  '_controller' => 'site\\reservationBundle\\Controller\\SiteController::companyProfileAction',));
+                }
+
+            }
+
+            if (0 === strpos($pathinfo, '/companies')) {
+                // sitereservation_AllCompanies
+                if ($pathinfo === '/companies') {
+                    return array (  '_controller' => 'site\\reservationBundle\\Controller\\SiteController::allCompaniesAction',  '_route' => 'sitereservation_AllCompanies',);
+                }
+
+                // sitereservation_address
+                if (0 === strpos($pathinfo, '/companiesAdd') && preg_match('#^/companiesAdd/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'sitereservation_address')), array (  '_controller' => 'site\\reservationBundle\\Controller\\SiteController::getAddressCompanyAction',));
+                }
+
+            }
+
+        }
+
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();
     }
 }

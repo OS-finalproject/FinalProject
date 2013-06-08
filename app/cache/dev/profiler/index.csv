@@ -240,3 +240,6 @@ f291dabde2aee521dd4a7470b3a23dd82c0846ec,127.0.0.1,POST,http://localhost/FinalPr
 a2e52bdf8eb901f8e2c485148cc994bdf2747bb7,127.0.0.1,POST,http://localhost/FinalProject/web/app_dev.php/signIn,1370697549,
 b3d05d05a95cee5a02a96587c34bb7d0d595326f,127.0.0.1,POST,http://localhost/FinalProject/web/app_dev.php/signIn,1370697605,
 90c002fa4a9dd861657b7e0f3e2fbeeb20cd4b40,127.0.0.1,GET,http://localhost/FinalProject/web/app_dev.php/,1370697606,
+e14ab5eabb87830416d3c333e9b03baa4f47bdd8,127.0.0.1,GET,http://localhost/FinalProject/web/app_dev.php/,1370699323,
+69010d88dc0a7d585f9a5307fcc15e79dd1e8675,127.0.0.1,GET,http://localhost/FinalProject/web/app_dev.php/company/1,1370699349,
+a5b45f3b323d15571ec2b8e42b540861984855d0,127.0.0.1,GET,http://localhost/FinalProject/web/app_dev.php/company/1,1370699350,

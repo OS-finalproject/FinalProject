@@ -21,4 +21,20 @@ sitereservation_GuestOffers:
 sitereservation_signIn:
     pattern: /signIn
     defaults: {_controller: sitereservationBundle:Site:signIn }
+    
+sitereservation_CompanyMenu:
+    pattern:  /companyMenu/{company}
+    defaults: { _controller: sitereservationBundle:Site:companyMenu }
+    
+sitereservation_companyprofile:
+    pattern:  /company/{id}
+    defaults: { _controller: sitereservationBundle:Site:companyProfile }
+    
+sitereservation_AllCompanies:
+    pattern:  /companies
+    defaults: { _controller: sitereservationBundle:Site:allCompanies }
 
+
+sitereservation_address:
+    pattern:  /companiesAdd/{id}
+    defaults: { _controller: sitereservationBundle:Site:getAddressCompany }

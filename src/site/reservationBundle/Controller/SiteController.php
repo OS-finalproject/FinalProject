@@ -141,6 +141,43 @@ class SiteController extends Controller
         
                 
     }
+    
+    
+    public function companyMenuAction($company){
+        
+    	$em = $this->getDoctrine()->getEntityManager();
+    	$repo = $em->getRepository('sitereservationBundle:Infocomp');
+    	$Companies = $repo->getCompanies($company);
+    	return $this->render('sitereservationBundle:Site:company.html.twig',array('companies'=>$Companies , 'type'=>$company));	
+    }
+    
+    public function allCompaniesAction(){
+        
+    	$em = $this->getDoctrine()->getEntityManager();
+    	$repo = $em->getRepository('sitereservationBundle:Infocomp');
+    	$Companies = $repo->getAllCompanies();
+    	return $this->render('sitereservationBundle:Site:allCompanies.html.twig',array('companies'=>$Companies));		
+    }
+    
+    public function getAddressCompanyAction($id){
+        
+        $em = $this->getDoctrine()->getEntityManager();
+        $repo = $em->getRepository('sitereservationBundle:Address');
+        $Address = $repo->getCompanyAddress($id);   
+        return new Response ($Address->getStreet().", ".$Address->getCity().", ".$Address->getCountry());
+    }
+    
+    public function companyProfileAction($id){
+        
+        
+        $em = $this->getDoctrine()->getEntityManager();
+        $repo = $em->getRepository('sitereservationBundle:Infocomp');
+        $companyDetails = $repo->getthisCompany($id);
+        $em = $this->getDoctrine()->getEntityManager();
+        $repo = $em->getRepository('sitereservationBundle:Address');
+        $Address = $repo->getCompanyAddress($id);
+        return $this->render('sitereservationBundle:Site:companyProfile.html.twig',array('address'=>$Address , 'company'=> $companyDetails));   
+    }
 
 
 }
