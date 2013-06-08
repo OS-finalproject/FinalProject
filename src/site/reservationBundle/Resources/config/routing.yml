@@ -1,0 +1,24 @@
+sitereservation_index:
+    pattern:  /
+    defaults: { _controller: sitereservationBundle:Site:index }
+
+sitereservation_homepage:
+    pattern:  /home
+    defaults: { _controller: sitereservationBundle:Site:index }
+
+sitereservation_companysignup:
+    pattern:  /companysignup
+    defaults: { _controller: sitereservationBundle:Site:sucompany }
+
+sitereservation_submitcompanysu:
+    pattern:  /submitcompanysu
+    defaults: { _controller: sitereservationBundle:Site:companySubmit }
+
+sitereservation_GuestOffers:
+    pattern:  /guestoffers
+    defaults: { _controller: sitereservationBundle:Site:getAllOffers }
+
+sitereservation_signIn:
+    pattern: /signIn
+    defaults: {_controller: sitereservationBundle:Site:signIn }
+

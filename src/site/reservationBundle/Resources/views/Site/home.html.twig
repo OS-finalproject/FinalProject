@@ -1,0 +1,76 @@
+{% extends '::base.html.twig' %}
+{% block title %}Index{% endblock %}
+{% block body %}
+	<div class="row">
+						<div class="12u">
+							<!-- Banner -->
+								<section class="box">
+											<div id="sliderFrame">
+									        	<div id="ribbon"></div>
+									        		<div id="slider">
+									            <a href="http://www.menucool.com/jquery-slider" target="_blank">
+									                <img src="{{ asset('images/image-slider-1.jpg') }}" alt="Welcome to Menucool.com" />
+									            </a>
+									            <img src="{{ asset('images/image-slider-2.jpg') }}" />
+								<img src="{{ asset('images/image-slider-3.jpg') }}" alt="Pure Javascript. No jQuery. No flash." />
+									            <img src="{{ asset('images/image-slider-4.jpg') }}" alt="#htmlcaption" />
+									            <img src="{{ asset('images/image-slider-5.jpg') }}" />
+									        </div>
+									        <div id="htmlcaption" style="display: none;">
+									            <em>HTML</em> caption. Link to <a href="http://www.google.com/">Google</a>.
+									        </div>
+									    </div>
+								</section>
+						</div>
+						</div>
+	<div class="row">
+						<div class="12u">
+								
+							<!-- Intro -->
+								<section id="intro">
+								
+									<div>
+										<div class="row">
+											<div class="4u">
+												<section class="first">
+													<span class="pennant pennant-alt2"><span class="icon64 icon64-3"></span></span>
+													<header>
+														<h2>Agenda</h2>
+													</header>
+													<p>If you want to save your time and enjoy yourself, So you need our Agenda</p>
+												</section>
+											</div>
+											<div class="4u">
+												<section class="middle">
+													<span class="pennant pennant-alt"><span class="icon64 icon64-2"></span></span>
+													<header>
+														<h2>We have alot of Offers, Check them</h2>
+													</header>
+													<p><form method="" action="">
+														Search&nbsp;<input type="search" name="keyword" placeholder="Type your Search Words"><br /><br>
+														<p><input type="submit" value="Search" class="button"></p>
+													</form></p>
+												</section>
+											</div>
+											<div class="4u">
+												<section class="last">
+													<header>
+														<h2>Our Service Providers</h2>
+													</header>
+													<p></p>
+												</section>
+											</div>
+
+										</div>
+									</div>
+
+									<div class="actions">
+										<a class="button button-big" href="{{ path('sitereservation_GuestOffers')}}">Start your tour</a>
+									</div>
+									
+												
+								</section>
+
+						</div>
+					</div>
+{% endblock %}

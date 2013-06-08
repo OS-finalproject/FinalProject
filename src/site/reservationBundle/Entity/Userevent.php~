@@ -1,0 +1,59 @@
+<?php
+
+namespace site\reservationBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Userevent
+ *
+ * @ORM\Table(name="userevent")
+ * @ORM\Entity
+ */
+class Userevent
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="rating", type="integer", nullable=false)
+     */
+    private $rating;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="evalstate", type="string", length=255, nullable=false)
+     */
+    private $evalstate;
+
+    /**
+     * @var \Events
+     *
+     * @ORM\ManyToOne(targetEntity="Events")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="event_id", referencedColumnName="id")
+     * })
+     */
+    private $event;
+
+    /**
+     * @var \Userinfo
+     *
+     * @ORM\ManyToOne(targetEntity="Userinfo")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * })
+     */
+    private $user;
+
+
+}

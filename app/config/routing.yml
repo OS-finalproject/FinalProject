@@ -1,0 +1,4 @@
+sitereservation:
+    resource: "@sitereservationBundle/Resources/config/routing.yml"
+    prefix:   /
+

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Events" table="events">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="name" type="string" column="name" length="255" nullable="false"/>
+    <field name="datefrom" type="datetime" column="datefrom" nullable="false"/>
+    <field name="dateto" type="datetime" column="dateto" nullable="false"/>
+    <field name="available" type="integer" column="available" nullable="false"/>
+    <field name="category" type="string" column="category" nullable="false"/>
+    <field name="rating" type="integer" column="rating" nullable="false"/>
+    <field name="ispublished" type="string" column="ispublished" nullable="true"/>
+    <field name="isdeleted" type="string" column="isdeleted" nullable="true"/>
+    <field name="image" type="text" column="image" nullable="false"/>
+    <many-to-one field="comp" target-entity="Infocomp">
+      <join-columns>
+        <join-column name="comp_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

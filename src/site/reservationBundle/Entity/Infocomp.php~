@@ -1,0 +1,67 @@
+<?php
+
+namespace site\reservationBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Infocomp
+ *
+ * @ORM\Table(name="infocomp")
+ * @ORM\Entity
+ */
+class Infocomp
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=255, nullable=false)
+     */
+    private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="website", type="text", nullable=false)
+     */
+    private $website;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image", type="text", nullable=false)
+     */
+    private $image;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="category", type="string", nullable=false)
+     */
+    private $category;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="password", type="string", length=255, nullable=false)
+     */
+    private $password;
+
+
+}

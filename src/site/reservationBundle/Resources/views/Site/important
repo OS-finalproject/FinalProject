@@ -1,0 +1,13 @@
+<div class="actions">
+										<a class="button button-big topopup" href="#">Start your tour</a>
+									</div>
+									<div id="toPopup"> 
+							        <div class="close"></div>
+							       	<span class="ecs_tooltip">Press Esc to close <span class="arrow"></span></span>
+									<div id="popup_content"> <!--your content start-->
+											{% render url('sitereservation_GuestOffers') %}
+				        			</div> <!--your content end-->
+				    			</div> <!--toPopup end-->
+								<div class="loader"></div>
+							   	<div id="backgroundPopup"></div>
+												

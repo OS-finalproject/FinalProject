@@ -1,0 +1,27 @@
+{% extends '::base.html.twig' %}
+{% block title %}Index{% endblock %}
+{% block body %}
+	<div class="row">
+						<div class="12u">
+							<!-- Banner -->
+								<section class="box">
+									<div  style="position:relative;left:375px;">
+											<form method="post" action="{{ path('sitereservation_submitcompanysu') }}">
+												<div><div style="width:150px;float:left;">Name</div><div><input type="text" name="Name"></div></div>
+												<div><div style="width:150px;float:left;">Email</div><div><input type="email" name="email"></div></div>
+												<div><div style="width:150px;float:left;">Password</div><div><input type="password" name="passwd"></div></div>
+												<div><div style="width:150px;float:left;">ConfirmPassword</div><div><input type="password" name="confPasswd"></div></div>
+												<div><div style="width:150px;float:left;">Website</div><div><input type="url" name="website"></div></div>
+												<div><div style="width:150px;float:left;">Activity</div><div><select name="activity">
+													<option value="1">Travel</option>
+													<option value="2">Tourism</option>
+												<option value="3">Shopping</option>
+													<option value="4">Resturant</option>
+												</select></div></div>
+												<div><div style="position:relative;left:100px;top:20px;"><input type="submit" class="button" value="Sign Up"></div></div>
+											</form>
+									</div>
+								</section>
+						</div>
+						</div>
+{% endblock %}
