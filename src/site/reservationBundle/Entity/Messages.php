@@ -92,7 +92,7 @@ class Messages
      */
     public function setMsgto(\site\reservationBundle\Entity\Customer $msgto = null)
     {
-        $this->msgto = $to;
+        $this->msgto = $msgto;
     
         return $this;
     }
@@ -115,7 +115,7 @@ class Messages
      */
     public function setMsgfrom(\site\reservationBundle\Entity\Customer $msgfrom = null)
     {
-        $this->msgfrom = $from;
+        $this->msgfrom = $msgfrom;
     
         return $this;
     }

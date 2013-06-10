@@ -25,11 +25,6 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         $allow = array();
         $pathinfo = rawurldecode($pathinfo);
 
-        // _assetic_e8b7ee0
-        if ($pathinfo === '/css/e8b7ee0.css') {
-            return array (  '_controller' => 'assetic.controller:render',  'name' => 'e8b7ee0',  'pos' => NULL,  '_format' => 'css',  '_route' => '_assetic_e8b7ee0',);
-        }
-
         if (0 === strpos($pathinfo, '/_')) {
             // _wdt
             if (0 === strpos($pathinfo, '/_wdt') && preg_match('#^/_wdt/(?P<token>[^/]++)$#s', $pathinfo, $matches)) {
@@ -138,15 +133,6 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
-        // sitereservation_index
-        if (rtrim($pathinfo, '/') === '') {
-            if (substr($pathinfo, -1) !== '/') {
-                return $this->redirect($pathinfo.'/', 'sitereservation_index');
-            }
-
-            return array (  '_controller' => 'site\\reservationBundle\\Controller\\SiteController::indexAction',  '_route' => 'sitereservation_index',);
-        }
-
         // sitereservation_homepage
         if ($pathinfo === '/home') {
             return array (  '_controller' => 'site\\reservationBundle\\Controller\\SiteController::indexAction',  '_route' => 'sitereservation_homepage',);
@@ -165,11 +151,6 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         // sitereservation_GuestOffers
         if ($pathinfo === '/guestoffers') {
             return array (  '_controller' => 'site\\reservationBundle\\Controller\\SiteController::getAllOffersAction',  '_route' => 'sitereservation_GuestOffers',);
-        }
-
-        // sitereservation_signIn
-        if ($pathinfo === '/signIn') {
-            return array (  '_controller' => 'site\\reservationBundle\\Controller\\SiteController::signInAction',  '_route' => 'sitereservation_signIn',);
         }
 
         if (0 === strpos($pathinfo, '/compan')) {
@@ -201,17 +182,87 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
-        if (0 === strpos($pathinfo, '/userprofile')) {
+        // sitereservation_about
+        if ($pathinfo === '/about') {
+            return array (  '_controller' => 'site\\reservationBundle\\Controller\\SiteController::aboutAction',  '_route' => 'sitereservation_about',);
+        }
+
+        // sitereservation_contactus
+        if (0 === strpos($pathinfo, '/contactus') && preg_match('#^/contactus/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'sitereservation_contactus')), array (  '_controller' => 'site\\reservationBundle\\Controller\\DefaultController::contactusAction',));
+        }
+
+        if (0 === strpos($pathinfo, '/event')) {
+            // sitereservation_eventcat
+            if (0 === strpos($pathinfo, '/eventscatuser') && preg_match('#^/eventscatuser/(?P<cat>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'sitereservation_eventcat')), array (  '_controller' => 'site\\reservationBundle\\Controller\\SiteController::eventcatuserAction',));
+            }
+
+            // sitereservation_EventProfileinfo
+            if (0 === strpos($pathinfo, '/eventprof') && preg_match('#^/eventprof/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'sitereservation_EventProfileinfo')), array (  '_controller' => 'site\\reservationBundle\\Controller\\SiteController::oneeventprofAction',));
+            }
+
+        }
+
+        // sitereservation_userAllOffers
+        if ($pathinfo === '/allOffersuser') {
+            return array (  '_controller' => 'site\\reservationBundle\\Controller\\SiteController::alloffersuserAction',  '_route' => 'sitereservation_userAllOffers',);
+        }
+
+        // sitereservation_Gcusthome
+        if ($pathinfo === '/custhome') {
+            return array (  '_controller' => 'site\\reservationBundle\\Controller\\SiteController::custhomeAction',  '_route' => 'sitereservation_Gcusthome',);
+        }
+
+        // sitereservation_extrauserinfo
+        if (0 === strpos($pathinfo, '/extrauser') && preg_match('#^/extrauser/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'sitereservation_extrauserinfo')), array (  '_controller' => 'site\\reservationBundle\\Controller\\DefaultController::extrauserAction',));
+        }
+
+        if (0 === strpos($pathinfo, '/add')) {
+            // sitereservation_addnewuserform
+            if ($pathinfo === '/adduser') {
+                return array (  '_controller' => 'site\\reservationBundle\\Controller\\DefaultController::addnewuserAction',  '_route' => 'sitereservation_addnewuserform',);
+            }
+
+            // sitereservation_addeventform
+            if ($pathinfo === '/addevent') {
+                return array (  '_controller' => 'site\\reservationBundle\\Controller\\DefaultController::addeventAction',  '_route' => 'sitereservation_addeventform',);
+            }
+
+        }
+
+        // sitereservation_signOut
+        if ($pathinfo === '/signOut') {
+            return array (  '_controller' => 'site\\reservationBundle\\Controller\\SiteController::signOutAction',  '_route' => 'sitereservation_signOut',);
+        }
+
+        if (0 === strpos($pathinfo, '/user')) {
+            // sitereservation_userserviceprovider
+            if ($pathinfo === '/userservice') {
+                return array (  '_controller' => 'site\\reservationBundle\\Controller\\SiteController::UserserviceProviderAction',  '_route' => 'sitereservation_userserviceprovider',);
+            }
+
             // sitereservation_userprofile
             if ($pathinfo === '/userprofile') {
                 return array (  '_controller' => 'site\\reservationBundle\\Controller\\SiteController::UserProfileAction',  '_route' => 'sitereservation_userprofile',);
             }
 
-            // sitereservation_userserviceprovider
-            if ($pathinfo === '/userprofile') {
-                return array (  '_controller' => 'site\\reservationBundle\\Controller\\SiteController::UserserviceProviderAction',  '_route' => 'sitereservation_userserviceprovider',);
+        }
+
+        // sitereservation_signIn
+        if ($pathinfo === '/signIn') {
+            return array (  '_controller' => 'site\\reservationBundle\\Controller\\SiteController::signInAction',  '_route' => 'sitereservation_signIn',);
+        }
+
+        // sitereservation_index
+        if (rtrim($pathinfo, '/') === '') {
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', 'sitereservation_index');
             }
 
+            return array (  '_controller' => 'site\\reservationBundle\\Controller\\SiteController::indexAction',  '_route' => 'sitereservation_index',);
         }
 
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();

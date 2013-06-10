@@ -14,8 +14,8 @@ class UserInfoType extends AbstractType
         $builder->add('mobile','text',array('label'=>'Mobile :','invalid_message'=>'Please Enter valid Mobile Number','constraints' => new Length(array('min' => 11,'max'=>20))));
         $builder->add('num_children','integer',array('label'=>'Number of Children'));
         $builder->add('gendar', 'choice', array('label'=>'Gendar','choices' => array('male' => 'Male', 'female' => 'Female'),'expanded' => true,));
-        $builder->add('customers', 'collection', array('type' => new CustomerType()));
-        //$builder->add('hobbies', 'collection', array('type' => new HobbiesType()));
+        $builder->add('telephone','text',array('label'=>'Telephone :','invalid_message'=>'Please Enter Valid Telephonne Number',
+                'constraints' => new Length(array('min' => 7,'max'=>15))));
         $builder->add('address','textarea');
 
     }

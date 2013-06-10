@@ -11,29 +11,24 @@
 <table>
 
     <tr>
-    <td colspan='2'>{{ form_widget(form.customers) }}</td>
-    
-    </tr>
-
-    <tr>
-    <td>{{ form_label(form.mobile) }}</td>
-    <td> {{ form_errors(form.mobile) }}
-    {{ form_widget(form.mobile) }}</td>
+    <td>{{ form_label(form.username) }}</td>
+    <td> {{ form_errors(form.username) }}
+    {{ form_widget(form.username) }}</td>
     </tr>
     <tr>
-    <td>{{ form_label(form.num_children) }}</td>
-    <td> {{ form_errors(form.num_children) }}
-    {{ form_widget(form.num_children) }}</td>
+    <td>{{ form_label(form.email) }}</td>
+    <td> {{ form_errors(form.email) }}
+    {{ form_widget(form.email) }}</td>
     </tr>
     <tr>
-    <td>{{ form_label(form.gendar) }}</td>
-    <td> {{ form_errors(form.gendar) }}
-    {{ form_widget(form.gendar) }}</td>
+    <td>{{ form_label(form.password) }}</td>
+    <td> {{ form_errors(form.password) }}
+    {{ form_widget(form.password) }}</td>
     </tr>
     <tr>
-    <td>{{ form_label(form.address) }}</td>
-    <td> {{ form_errors(form.address) }}
-    {{ form_widget(form.address) }}</td>
+    <td>{{ form_label(form.file) }}</td>
+    <td> {{ form_errors(form.file) }}
+    {{ form_widget(form.file) }}</td>
     </tr>   
     <tr><td colspan='2'>{{ form_rest(form) }}</td></tr>
     <tr><td colspan='2'><center><br><br><input type="submit" value="Save"/></center></td></tr>

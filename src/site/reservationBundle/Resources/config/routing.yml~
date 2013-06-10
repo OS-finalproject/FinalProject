@@ -1,0 +1,82 @@
+sitereservation_homepage:
+    pattern:  /home
+    defaults: { _controller: sitereservationBundle:Site:index }
+
+sitereservation_companysignup:
+    pattern:  /companysignup
+    defaults: { _controller: sitereservationBundle:Site:sucompany }
+
+sitereservation_submitcompanysu:
+    pattern:  /submitcompanysu
+    defaults: { _controller: sitereservationBundle:Site:companySubmit }
+
+sitereservation_GuestOffers:
+    pattern:  /guestoffers
+    defaults: { _controller: sitereservationBundle:Site:getAllOffers }
+
+sitereservation_CompanyMenu:
+    pattern:  /companyMenu/{company}
+    defaults: { _controller: sitereservationBundle:Site:companyMenu }
+
+sitereservation_companyprofile:
+    pattern:  /company/{id}
+    defaults: { _controller: sitereservationBundle:Site:companyProfile }
+
+sitereservation_AllCompanies:
+    pattern:  /companies
+    defaults: { _controller: sitereservationBundle:Site:allCompanies }
+
+sitereservation_address:
+    pattern:  /companiesAdd/{id}
+    defaults: { _controller: sitereservationBundle:Site:getAddressCompany }
+
+sitereservation_about:
+    pattern:  /about
+    defaults: { _controller: sitereservationBundle:Site:about }
+
+sitereservation_contactus:
+    pattern:  /contactus/{id}
+    defaults: { _controller: sitereservationBundle:Default:contactus
+sitereservation_eventcat:
+    pattern:  /eventscatuser/{cat}
+    defaults: { _controller: sitereservationBundle:Site:eventcatuser
+sitereservation_EventProfileinfo:
+    pattern: /eventprof/{id} 
+    defaults: { _controller: sitereservationBundle:Site:oneeventprof }
+sitereservation_userAllOffers:
+    pattern:  /allOffersuser
+    defaults: { _controller: sitereservationBundle:Site:alloffersuser }
+sitereservation_Gcusthome:
+    pattern:  /custhome
+    defaults: { _controller: sitereservationBundle:Site:custhome }
+sitereservation_extrauserinfo:
+    pattern:  /extrauser/{id}
+    defaults: { _controller: sitereservationBundle:Default:extrauser }
+sitereservation_addnewuserform:
+    pattern:  /adduser
+    defaults: { _controller: sitereservationBundle:Default:addnewuser }
+sitereservation_addeventform:
+    pattern:  /addevent
+    defaults: { _controller: sitereservationBundle:Default:addevent }
+sitereservation_signOut:
+    pattern: /signOut
+    defaults: { _controller: sitereservationBundle:Site:signOut }
+sitereservation_userserviceprovider:
+    pattern:  /userservice
+    defaults: { _controller: sitereservationBundle:Site:UserserviceProvider }
+sitereservation_userprofile:
+    pattern:  /userprofile
+    defaults: { _controller: sitereservationBundle:Site:UserProfile }
+sitereservation_signIn:
+    pattern: /signIn
+    defaults: {_controller: sitereservationBundle:Site:signIn }
+sitereservation_index:
+    pattern:  /
+    defaults: { _controller: sitereservationBundle:Site:index }
+
+
+
+
+
+
+

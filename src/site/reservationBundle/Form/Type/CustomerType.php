@@ -14,10 +14,7 @@ class CustomerType extends AbstractType
                             'constraints' => new Length(array('min' => 5,'max'=>30))));
         $builder->add('email','email',array('label'=>'Email','invalid_message'=>'Please Enter email form'));
         $builder->add('password','password',array('label'=>'Password :','invalid_message'=>'password must be at least 6 characters',
-                'constraints' => new Length(array('min' => 6,'max'=>10))));
-        $builder->add('telephone','text',array('label'=>'Telephone :','invalid_message'=>'Please Enter Valid Telephonne Number',
-                'constraints' => new Length(array('min' => 7,'max'=>15))));
-        
+                'constraints' => new Length(array('min' => 6,'max'=>10))));       
         $builder->add('file','file',array('label'=>'Choose Image : '));
 
     }

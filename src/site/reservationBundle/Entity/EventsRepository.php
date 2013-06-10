@@ -12,4 +12,29 @@ use Doctrine\ORM\EntityRepository;
  */
 class EventsRepository extends EntityRepository
 {
+	public function getAlluseroffers()
+	{
+		$query = $this->getEntityManager()->createQuery('
+				SELECT E
+				FROM sitereservationBundle:Events E
+				JOIN E.comp c
+				where E.ispublished like :pub and E.isdeleted like :del
+			');
+		$query->setParameter('pub','true');
+		$query->setParameter('del','0');
+		return $query->getResult();
+	}
+	public function getcatoffers($company)
+	{
+		$query = $this->getEntityManager()->createQuery('
+				SELECT E
+				FROM sitereservationBundle:Events E
+				JOIN E.comp c
+				where E.category like :cat and E.ispublished like :pub and E.isdeleted like :del
+			');
+		$query->setParameter('cat',$company);
+		$query->setParameter('pub','true');
+		$query->setParameter('del','0');
+		return $query->getResult();
+	}
 }

@@ -12,4 +12,15 @@ use Doctrine\ORM\EntityRepository;
  */
 class addressRepository extends EntityRepository
 {
+	public function getCompanyAddress($id)
+	{
+		$query = $this->getEntityManager()->createQuery('
+				SELECT A
+				FROM sitereservationBundle:Address A
+				JOIN A.comp c
+				where c.id like :id
+			');
+		$query->setParameter('id',$id);
+		return $query->getSingleResult();
+	}
 }

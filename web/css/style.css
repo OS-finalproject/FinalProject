@@ -810,8 +810,7 @@ div#popup_content {
     margin-left: -402px;
     position: fixed;
     top: 30%;
-    width: 58%;
-    height:14%;
+    width: 800px;
     z-index: 2;
 }
 div.loader {
@@ -971,43 +970,4 @@ div.navBulletsWrapper div.active {background-position:0 -11px;}
     -moz-transform:translate3d(0,0,0);
     -o-transform:translate3d(0,0,0);
 }
-
-/*-------------- Abdou-----------------*/
-
-.userprofile{
-    margin:auto; 
-    width: 35%;
-    height: 40%;
-    background-color: gainsboro;
-    
-    
-}
-
-/*--------------*/
-
-/*------ Sign In Div ----- */
-
-.signInDiv{
-    
-   float:left;
-   width:48%;
-   height:80%;    
-}
-
-.signInVerticalLine{
-    
-    float:left;
-    width: 2px;
-    height: 190px;
-    background-color:black;
-    margin-right: 2%; 
-}
-
-#signInError{
- margin-bottom:5%;    
- color:red;       
-}
-
-
-
-/*------------------------------*/
+/*--------------menu------------------*/

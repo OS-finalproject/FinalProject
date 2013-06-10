@@ -17,18 +17,18 @@
 											<div class="4u">
 												<section class="box">
 													<header>
-														<h3>{{ company.custid.getUsername() }}</h3>
+														<h3>{{ company.custid.username }}</h3>
 													</header>
 													<p>
 													<div style="color:#d52349;font-weight: 700;">Contact Details</div>
 													<div style="position:relative;left:20px">
-														<div><b>Email</b>&nbsp;{{ company.custid.getEmail() }}</div>
+														<div><b>Email</b>&nbsp;{{ company.custid.email }}</div>
 														<div><b>Website</b>&nbsp;{{ company.website }}</div>
 														<div><b>Activity</b>&nbsp;{{ company.category }}</div>
 													</div>
 													</p>
 													<footer>
-														<a href="{{ path('sitereservation_companyprofile',{"name" : company.id }) }}" class="button button-alt">Visit the company</a>
+														<a href="{{ path('sitereservation_companyprofile',{"id" : company.id }) }}" class="button button-alt">Visit the company</a>
 													</footer>
 												</section>
 												</div>

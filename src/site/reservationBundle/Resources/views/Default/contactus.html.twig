@@ -1,0 +1,48 @@
+
+
+{% extends '::base.html.twig' %}
+{% block title %}contact us{% endblock %}
+{% block body %}
+<div id="main-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="12u">
+                <section>
+                    <header class="major">
+                        <h2>Contact Us</h2>
+                    </header>
+                    <div>
+                            <div class="row">
+                                    <center>
+                                        <div class="box" style="width:60%">
+                                        <table>
+                                             <tr>
+                                             <td> From : </td><td> <input type="text" value="{{sender[0].username}}" editable="no"></td>
+                                             </tr>
+                                             <td> To : </td><td> <input type="text" value="Admin" editable="no"></td></tr>
+                                        </table>
+                                        <form action="{{path('sitereservation_contactus',{'id':sender[0].id})}}" method="post">
+                                             <table>
+                                             <tr>
+                                                <td colspan="2"> {{ form_label(form.message) }}</td>
+                                             </tr>
+                                             <tr>
+                                                <td colspan="2"><center> {{ form_errors(form.message) }}
+                                                 {{ form_widget(form.message) }}<center></td>
+                                            </tr>
+                                            <tr>
+                                               <td colspan="2"><center><input type="submit" value="send"></center></td>
+                                            <tr>                                        
+                                            </table>
+                                        </form>                                          
+                                        </div>
+                                    </center>
+                                    
+                                </div>      
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>                  
+{% endblock %}

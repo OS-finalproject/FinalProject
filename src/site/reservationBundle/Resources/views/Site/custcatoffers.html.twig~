@@ -1,0 +1,56 @@
+{% extends '::base.html.twig' %}
+{% block title %}companies{% endblock %}
+{% block body %}
+<script>
+	$("li").removeClass("current-page");
+	$("#nav2").addClass("current-page");
+</script>
+<div class="what-we-do container">
+	<div class="row">
+	<div>
+		<h2><span class="violet">{{ offers[0].category }}'s Offers</span></h2>
+	</div>
+	<div align="right" style="position:relative;left:-30px;">
+		<form method="get" action="http://www.google.com">
+			<input type="search" placeholder="Search">
+		</form>
+	</div>
+</div>
+</div>
+<div class="what-we-do container">
+		{% for offer in offers %}
+		{% if (loop.index-1)%4 == 0 %}
+                        <div class="row">	
+			{% endif %}
+                        <div class="service span3">
+                        <center><h4>{{ offer.name }}</h4></center>
+                        <div style="color:#d52349;font-weight: 700;">Event Details</div>
+                        <div style="position:relative;left:50px">
+                        <table>
+				<tr>
+				<td align="left"><b>Place</b></td>
+                                <td align="left">{{ offer.place }}</td>
+                                </tr>
+                                <tr>
+				<td align="left"><b>Availability</b></td>
+                                <td align="left">{{ offer.available }}</td>
+                                </tr>
+                                <tr>
+				<td align="left"><b>Activity</b></td>
+                                <td align="left">{{ offer.category }}</td>
+                                </tr>
+                        </table>
+                        </div>
+			<br />
+			<a href="{{ path('sitereservation_EventProfileinfo',{'id' : offer.id }) }}">More informaion</a>
+			</div>
+			{% if loop.index%4 == 0 %}
+                </div>
+                <br />
+            {% endif %}
+			{% endfor %}
+        
+</div>	
+<br />
+{% endblock %}
+                                           

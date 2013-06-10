@@ -21,11 +21,9 @@ class CustomerRepository extends EntityRepository {
                          where C.id= :id
                     ');
         $query->setParameter('id',$custid);
-		return $query->getResult();
+		return $query->getResult();       
        
-       
-    }
-    
+    }    
     
     public function getCustomerInfo($email,$pass){
         
@@ -39,6 +37,34 @@ class CustomerRepository extends EntityRepository {
         
         $query->setParameter('email', $email);
         $query->setParameter('pass',$pass);
+        
+        return $query->getResult();
+        
+    }
+    public function getAdmin() {
+
+        $query = $this->getEntityManager()->createQuery('
+            
+                         SELECT C 
+                         from sitereservationBundle:Customer C
+                         where C.type like :type
+                    ');
+        $query->setParameter('type','admin');
+        return $query->getSingleResult();
+       
+       
+    }
+    public function getCustomerId(){
+        
+        $query = $this->getEntityManager()->createQuery('
+            
+                select c
+                from sitereservationBundle:Customer c
+                order by c.id desc 
+
+        ');
+        
+        $query->setMaxResults(1);
         
         return $query->getResult();
         

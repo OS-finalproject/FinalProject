@@ -1,0 +1,35 @@
+{% extends '::base.html.twig' %}
+{% block title %}{{ company.custid.username }}{% endblock %}
+{% block body %}
+<script>
+	$("li").removeClass("current-page");
+	$("#nav2").addClass("current-page");
+</script>
+<div class="page-title">
+            <div class="container">
+                <div class="row">
+                    <div class="span12">
+                        <i class="icon-tasks"></i>
+                        <h2>{{ company.custid.username }}</h2>
+                        <p>Activity:{{ company.category }} </p>
+                    </div>
+                </div>
+        </div>
+</div>
+<div class="what-we-do container">
+	<div class="row">
+<div class="contact-address span5 pull-right">
+                    <h4>We Are Here</h4>
+       				{% include 'sitereservationBundle:Site:map.html.twig' with { 'id' : company.id } %}
+					<div id="map-canvas" style="position:fixed;width:20%px;height:350px"></div>
+                    <h4>Contact Details</h4>
+                    <div>
+                    <div style="position:relative;left:-100px"><b>Address:</b> </div><div>{{ address.street }}, {{ address.city }}, {{ address.country }}</div>
+                    <div style="position:relative;left:-100px"><b>Phone: </b></div><div>{{ address.telephone }}</div>
+                    <div style="position:relative;left:-100px"><b>Website: </b></div><div>{{ company.website }}</div>
+                    <div style="position:relative;left:-100px"><b>Email: </b></div><div>{{ company.custid.email }}</div>
+                    </div>
+ </div>
+</div>
+</div>
+{% endblock %}

@@ -24,15 +24,27 @@ class InfocompRepository extends EntityRepository
 		$query->setParameter('cat',$company);
 		return $query->getResult();
 	}
-	/*public function getAllCompanies()
+	public function getAllCompanies()
 	{
 		$query = $this->getEntityManager()->createQuery('
 				SELECT I
 				FROM sitereservationBundle:Infocomp I
-				JOIN I.customer c
+				JOIN I.custid c
 			');
+		$query->setMaxResults(16);
 		return $query->getResult();
-	}*/
-        
+	}
+    public function getthisCompany($id)
+	{
+		$query = $this->getEntityManager()->createQuery('
+				SELECT I
+				FROM sitereservationBundle:Infocomp I
+				JOIN I.custid c
+				where I.custid = :id
+			');
+		$query->setParameter('id',$id);
+		return $query->getSingleResult();
+	}
+
         
 }

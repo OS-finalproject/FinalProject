@@ -1,0 +1,29 @@
+<script>
+		var map;
+		var geocoder = new google.maps.Geocoder();
+		var latitude;
+		var longitude;
+		function initialize(){
+			var sAddress="{% render controller('sitereservationBundle:Site:getAddressCompany',{'id':id}) %}";
+        	geocoder.geocode({address: sAddress},function(results,status){
+						  if (status == google.maps.GeocoderStatus.OK) {
+						    latitude = results[0].geometry.location.lat();
+						    longitude = results[0].geometry.location.lng();
+						    latlng = new google.maps.LatLng(latitude,longitude);
+							myOptions={
+								zoom:17,
+								center:latlng,
+								mapTypeId: google.maps.MapTypeId.ROADMAP
+							}
+							var marker = new google.maps.Marker({
+									    position: latlng,
+									    title:sAddress
+									});
+							map = new google.maps.Map(document.getElementById("map-canvas"),myOptions);
+							marker.setMap(map);
+					  } 
+        			});
+			}
+		 google.maps.event.addDomListener(window, 'load', initialize);
+	</script>
+	

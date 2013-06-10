@@ -4,17 +4,16 @@ namespace site\reservationBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use site\reservationBundle\Entity\Infocomp;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Cookie;
-use \Symfony\Component\HttpFoundation\ResponseHeaderBag;
-use site\reservationBundle\Entity\Events;
 use site\reservationBundle\Entity\Customer;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Cookies;
+use site\reservationBundle\Entity\Events;
 
 class SiteController extends Controller
 {
     public function indexAction()
     {
-        $request = $this->getRequest();
+         $request = $this->getRequest();
         
         if( $request->cookies->has('type') ){
         
@@ -32,6 +31,7 @@ class SiteController extends Controller
     public function sucompanyAction()
     {
 
+        
         return $this->render('sitereservationBundle:Site:sucompany.html.twig');
     }
 
@@ -70,8 +70,126 @@ class SiteController extends Controller
     	$offers = $repo->getOffers();
     	return $this->render('sitereservationBundle:Site:guestoffers.html.twig',array('offers'=>$offers));	
     }
-    
-    public function SignInAction(){
+    public function companyMenuAction($company)
+    {
+    	$em = $this->getDoctrine()->getEntityManager();
+    	$repo = $em->getRepository('sitereservationBundle:Infocomp');
+    	$Companies = $repo->getCompanies($company);
+    	return $this->render('sitereservationBundle:Site:company.html.twig',array('companies'=>$Companies , 'type'=>$company));	
+    }
+    public function allCompaniesAction()
+    {
+    	$em = $this->getDoctrine()->getEntityManager();
+    	$repo = $em->getRepository('sitereservationBundle:Infocomp');
+    	$Companies = $repo->getAllCompanies();
+    	return $this->render('sitereservationBundle:Site:allCompanies.html.twig',array('companies'=>$Companies));		
+    }
+    public function getAddressCompanyAction($id)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $repo = $em->getRepository('sitereservationBundle:Address');
+        $Address = $repo->getCompanyAddress($id);   
+        return new Response ($Address->getStreet().", ".$Address->getCity().", ".$Address->getCountry());
+    }
+     public function companyProfileAction($id)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $repo = $em->getRepository('sitereservationBundle:Infocomp');
+        $companyDetails = $repo->getthisCompany($id);
+        $em = $this->getDoctrine()->getEntityManager();
+        $repo = $em->getRepository('sitereservationBundle:Address');
+        $Address = $repo->getCompanyAddress($id);
+        return $this->render('sitereservationBundle:Site:companyProfile.html.twig',array('address'=>$Address , 'company'=> $companyDetails));   
+    }
+    public function aboutAction()
+    {
+        
+        return $this->render('sitereservationBundle:Site:about.html.twig');  
+    }
+//--------------------------add-----------------------------------------
+public function UserProfileAction(){
+        
+        $custid=1; 
+   
+        
+        $cust= $this->getDoctrine()->getEntityManager();
+        $repo=$cust->getRepository('sitereservationBundle:Customer');
+        $info=$repo->getProfileInfo($custid);
+        $user= $this->getDoctrine()->getEntityManager();
+        $rep=$user->getRepository('sitereservationBundle:Userinfo');
+        $extrainfo=$rep->getProfileInfoUser($custid);
+      
+        return $this->render('sitereservationBundle:Site:userprofile.html.twig', array('custinfo'=>$info,'extrainfo'=>$extrainfo));
+             
+        
+    }
+    /*
+        public function UserserviceProviderAction(){
+        
+            
+        $cust= $this->getDoctrine()->getEntityManager();
+        $repo=$cust->getRepository('sitereservationBundle:Customer');
+        $info=$repo->getAllServiceprovider();
+        
+   
+      
+        return $this->render('sitereservationBundle:Site:userprofile.html.twig', array('custinfo'=>$info,'extrainfo'=>$extrainfo));
+             
+        
+    }*/
+    public function custhomeAction()
+    {
+        
+        return $this->render('sitereservationBundle:Site:custhome.html.twig');  
+    }
+ 
+    public function alloffersuserAction()
+    {
+         $cust= $this->getDoctrine()->getEntityManager();
+        $repo=$cust->getRepository('sitereservationBundle:Events');
+        $info=$repo->getAlluseroffers();
+        return $this->render('sitereservationBundle:Site:custoffers.html.twig',array('offers'=>$info));  
+    }
+    public function eventcatuserAction($cat)
+    {
+         $cust= $this->getDoctrine()->getEntityManager();
+        $repo=$cust->getRepository('sitereservationBundle:Events');
+        $info=$repo->getcatoffers($cat);
+        return $this->render('sitereservationBundle:Site:custcatoffers.html.twig',array('offers'=>$info));  
+    }
+    public function signOutAction(){
+
+          $request = $this->getRequest();
+          $response = new Response($this->generateUrl('sitereservation_index'));
+          
+          if( $request->getMethod() == "POST"){
+              
+                $session = $request->getSession();
+                
+                $session->clear();
+                
+                if( $request->cookies->has('type') ){
+                    
+                   $keys = $request->cookies->keys();
+                    
+                    foreach ($keys as $key ){
+                        
+                        //$cookie = new Cookie($key,'',time()-3600 * 24 * 30);    
+                       // $response->clearCookie($k);
+                        $response->headers->clearCookie($key);
+                        
+                    }
+                                        
+                                       
+                   
+                }
+                                                                
+          }
+          
+         return $response;
+                          
+    }
+ public function SignInAction(){
         
          $request = $this->getRequest();
          $responseMessage = "";
@@ -142,109 +260,5 @@ class SiteController extends Controller
         
                 
     }
-    
-    
-    public function companyMenuAction($company){
-        
-    	$em = $this->getDoctrine()->getEntityManager();
-    	$repo = $em->getRepository('sitereservationBundle:Infocomp');
-    	$Companies = $repo->getCompanies($company);
-    	return $this->render('sitereservationBundle:Site:company.html.twig',array('companies'=>$Companies , 'type'=>$company));	
-    }
-    
-    public function allCompaniesAction(){
-        
-    	$em = $this->getDoctrine()->getEntityManager();
-    	$repo = $em->getRepository('sitereservationBundle:Infocomp');
-    	$Companies = $repo->getAllCompanies();
-    	return $this->render('sitereservationBundle:Site:allCompanies.html.twig',array('companies'=>$Companies));		
-    }
-    
-    public function getAddressCompanyAction($id){
-        
-        $em = $this->getDoctrine()->getEntityManager();
-        $repo = $em->getRepository('sitereservationBundle:Address');
-        $Address = $repo->getCompanyAddress($id);   
-        return new Response ($Address->getStreet().", ".$Address->getCity().", ".$Address->getCountry());
-    }
-    
-    public function companyProfileAction($id){
-        
-        
-        $em = $this->getDoctrine()->getEntityManager();
-        $repo = $em->getRepository('sitereservationBundle:Infocomp');
-        $companyDetails = $repo->getthisCompany($id);
-        $em = $this->getDoctrine()->getEntityManager();
-        $repo = $em->getRepository('sitereservationBundle:Address');
-        $Address = $repo->getCompanyAddress($id);
-        return $this->render('sitereservationBundle:Site:companyProfile.html.twig',array('address'=>$Address , 'company'=> $companyDetails));   
-    }
 
-
-    public function UserProfileAction(){
-        
-        $custid=1; 
-   
-        
-        $cust= $this->getDoctrine()->getEntityManager();
-        $repo=$cust->getRepository('sitereservationBundle:Customer');
-        $info=$repo->getProfileInfo($custid);
-        file:///
-        $user= $this->getDoctrine()->getEntityManager();
-        $rep=$user->getRepository('sitereservationBundle:Userinfo');
-        $extrainfo=$rep->getProfileInfoUser($custid);
-      
-        return $this->render('sitereservationBundle:Site:userprofile.html.twig', array('custinfo'=>$info,'extrainfo'=>$extrainfo));
-             
-        
-    }
-    
-        public function UserserviceProviderAction(){
-        
-            
-        $cust= $this->getDoctrine()->getEntityManager();
-        $repo=$cust->getRepository('sitereservationBundle:Customer');
-        $info=$repo->getAllServiceprovider();
-        
-   
-      
-        return $this->render('sitereservationBundle:Site:userprofile.html.twig', array('custinfo'=>$info,'extrainfo'=>$extrainfo));
-             
-        
-    }
-    
-    public function signOutAction(){
-
-          $request = $this->getRequest();
-          $response = new Response($this->generateUrl('sitereservation_index'));
-          
-          if( $request->getMethod() == "POST"){
-              
-                $session = $request->getSession();
-                
-                $session->clear();
-                
-                if( $request->cookies->has('type') ){
-                    
-                   $keys = $request->cookies->keys();
-                    
-                    foreach ($keys as $key ){
-                        
-                        //$cookie = new Cookie($key,'',time()-3600 * 24 * 30);    
-                       // $response->clearCookie($k);
-                        $response->headers->clearCookie($key);
-                        
-                    }
-                                        
-                                       
-                   
-                }
-                                                                
-          }
-          
-         return $response;
-                          
-    }
-    
-    
 }
