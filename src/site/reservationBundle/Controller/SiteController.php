@@ -189,6 +189,7 @@ public function UserProfileAction(){
          return $response;
                           
     }
+    
  public function SignInAction(){
         
          $request = $this->getRequest();
@@ -260,5 +261,26 @@ public function UserProfileAction(){
         
                 
     }
+    
+    public function firstSignInAction($id){
+        
+            $request = $this->getRequest();
+            
+            $em = $this->getDoctrine()->getManager();
+        
+            $customer = $em->getRepository('sitereservationBundle:Customer')->findOneBy(array('id'=>$id) );
+            
+            $session = $request->getSession();
+            
+            $session->set('id',$customer->getId());
+            $session->set('username',$customer->getUsername());
+            $session->set('type',$customer->getType()); 
+            
+            
+            
+            return $this->redirect($this->generateUrl('sitereservation_homepage'));
+        
+    }
+    
 
 }

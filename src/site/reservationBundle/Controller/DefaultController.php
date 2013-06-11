@@ -15,7 +15,7 @@ use site\reservationBundle\Form\Type\MessageType;
 use site\reservationBundle\Form\Type\EventsType;
 use site\reservationBundle\Form\Type\CustomerType;
 use site\reservationBundle\Form\Type\UserInfoType;
-use site\reservationBundle\Form\Type\infoCompType;
+use site\reservationBundle\Form\Type\InfoCompType;
 use site\reservationBundle\Form\Type\companyAddressType;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -75,41 +75,39 @@ class DefaultController extends Controller
         }
 
         return $this->render('sitereservationBundle:Default:addnewuser.html.twig', array(
-            'form' => $form->createView(),
+             'form' => $form->createView(),
         ));
+        
     }
     
-    public function addNewCompanyAction(){
+    public function addNewCompanyAction(Request $request){
         
-        $request = $this->getRequest();
         
-        $customer = new Customer();
-        $customer->setType('company');
-        
-        $form = $this->createForm(new CustomerType(),$customer);
-        
-        if( $request->getMethod() == "POST" ){
-            
-            
+       $newcustomer=new Customer();
+       $newcustomer->setType("company");
+       
+       $form = $this->createForm(new CustomerType(), $newcustomer);
+       
+       if ($request->isMethod('POST')) {
+         
             $form->bind($request);
             
-            if( $form->isValid() ){
+            if ($form->isValid()) {
+       
+                $email = $newcustomer->getEmail();
                 
-                $email = $form->get('email');
-                
-                $em = $this->getDoctrine()->getManager();
-                
-                $em->persist($customer);
-                $em->flush();
-                
+                $em = $this->getDoctrine()->getManager();                     
+                $em->persist($newcustomer); 
+                $em->flush(); 
                 $newCustomer = $em->getRepository('sitereservationBundle:Customer')->findOneBy( array('email'=>$email) );
                 
                 $id = $newCustomer->getId();
                 
-                return new Response($this->addNewCompanyInfoAction($id));
+                return $this->redirect($this->generateUrl('sitereservation_addNewCompanyInfo',array('id'=>$id),TRUE));
                 
+               //return new Response($this->addNewCompanyInfoAction($id));
                 
-            }
+           }
             
             
         }
@@ -130,7 +128,7 @@ class DefaultController extends Controller
         $company = new Infocomp();
         $company->setCustid($customer);
         
-        $form = $this->createForm(new infoCompType(),$company);
+        $form = $this->createForm(new InfoCompType(),$company);
         
         if( $request->getMethod() == "POST" ){
             
@@ -142,9 +140,9 @@ class DefaultController extends Controller
                 $em->persist($company);
                 $em->flush();
                                
-                return new Response($this->addNewCompanyAddressAction($id));
+                return $this->redirect($this->generateUrl('sitereservation_addNewCompanyAdress',array('id'=>$id),TRUE));
                 
-                
+                //return 
             }
             
             
@@ -175,7 +173,7 @@ class DefaultController extends Controller
             
             if( $form->isValid() ){
                                                 
-                $em->persist($company);
+                $em->persist($companyAddress);
                 $em->flush();
                                
                 return $this->redirect($this->generateUrl('sitereservation_firstSignIn',array('id'=>$id),true));

@@ -1,0 +1,35 @@
+{% extends '::base.html.twig' %}
+{% block title%}New Company{% endblock %}
+{% block body %}
+
+<div class="what-we-do container">
+            
+ <div id="ajax_content" class="row">
+ <form method="POST" action="{{ path('sitereservation_addNewCompanyInfo',{ 'id':costumerId} ) }}"  > 
+<center>   
+        <div class="addNewCompany">
+            <p style="color:red" >{{form_errors(form.website)}}</p>
+            <p style="color:red" >{{form_errors(form.category)}}</p>                        
+        </div>
+        <div class="addNewCompany">
+                
+                <div style="margin-left:20%;margin-right:13%;float:left;">{{form_label(form.website)}}</div><div style="margin-right:5%;float:left;">{{ form_widget(form.website) }}</div>
+                <div style="clear:both "></div>
+                <div style="margin-left:20%;margin-right:8%;float:left;">{{ form_label(form.category) }}</div><div style="margin-right:5%;float:left;">{{ form_widget(form.category) }}</div>
+                <div style="clear:both "></div>
+                <input style="margin-top:5%;margin-left:40%" type="submit"  name="{{ path('sitereservation_addNewCompanyInfo',{ 'id':costumerId} ) }}" value="Next > " id="addnewComanyInfoButton" />       
+                
+        </div>
+        <div class="addNewCompany" style="margin-top:-0.1%;margin-bottom:3%">
+        
+            <p style="color:red;">Notices:</p>
+            <p id="wesiteNotice" style="color:#002a80">Url of Website Must be like pattern  http://www.X.com/ </p>
+        </div>
+        </center>
+                    {{ form_rest(form) }}
+        </form>
+            
+    </div>
+</div>
+
+{% endblock %}

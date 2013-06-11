@@ -98,7 +98,7 @@ sitereservation_addNewCompanyInfo:
     pattern: /home/addNewCompanyInfo/{id}
     defaults: { _controller: sitereservationBundle:Default:addNewCompanyInfo }
     
-sitereservation_addNewCompany:
-    pattern: /home/addNewCompanyAddress{id}
+sitereservation_addNewCompanyAdress:
+    pattern: /home/addNewCompanyAddress/{id}
     defaults: { _controller: sitereservationBundle:Default:addNewCompanyAddress }
     

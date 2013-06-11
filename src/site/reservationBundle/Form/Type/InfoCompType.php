@@ -11,13 +11,13 @@
   use Symfony\Component\OptionsResolver\OptionsResolverInterface;
   
   
-  class infoCompType extends AbstractType{
+  class InfoCompType extends AbstractType{
       
      
     public function buildForm( FormBuilderInterface $builder , array $options ){
         
-        $builder->add('website','text',array( 'label'=>'Url Of Web Site' , 'constraint'=> new Url() ) );
-        $builder->add('Category','choise',array('label'=>'Category','choices' => array('travel'=>'travel','tourism'=>'tourism','shopping'=>'shopping','restaurant'=>'restaurant','hotels'=>'hotels') ) );
+        $builder->add('website','text',array( 'label'=>'Url Of Web Site :' , 'constraints'=> new Url() ) );
+        $builder->add('category','choice',array('label'=>'Category Of Company :','choices' => array('travel'=>'travel','tourism'=>'tourism','shopping'=>'shopping','restaurant'=>'restaurant','hotels'=>'hotels') ) );
         
     }  
     

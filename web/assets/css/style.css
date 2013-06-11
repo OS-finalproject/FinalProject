@@ -1254,7 +1254,7 @@ span.arrow {
     width: 1px;
 }
 div#popup_content {
-    margin: 4px 7px;
+    margin: 4% 7%;
 }
 h2 {display:inline;}
 .div1, .div2 {width:700px;margin:0 auto;}
@@ -1360,6 +1360,12 @@ div.navBulletsWrapper div.active {background-position:0 -11px;}
     margin-top: 5%;
 }
 
+.addNewCompany{
+        
+    width:70%;
+    height: 50%;
+    margin-top:10%;
+}
 
 /*-----------------------*/
 

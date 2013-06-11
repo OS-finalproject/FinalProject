@@ -304,6 +304,62 @@ jQuery(function($) {
         
         //----- --------------///
         
+        //---  Add new Company  ajax --- ///
+        
+        
+        /* $('#addnewComanyButton').on('click',function(){
+            
+            var url = $('#addnewComanyButton').attr('name');
+            
+            $.ajax({
+                
+                    url:url,
+                    type:"POST",
+                    success:function(respo){
+                        
+                        $('#ajax_content').html(respo);
+                    }
+                                                
+            });
+            
+                                                
+        });
+        
+
+        $('#addnewComanyInfoButton').on('click',function(){
+            
+            var url = $('#addnewComanyInfoButton').attr('name');
+            
+            $.ajax({
+                
+                    url:url,
+                    type:"POST",
+                    success:function(respo){
+                        
+                        $('#ajax_content').html(respo);
+                    }
+                                                
+            });
+            
+                                                
+        });    
+        
+        
+       $('#addnewComanyAddressButton').on('click',function(){
+            
+            var url = $('#addnewComanyAddressButton').attr('name');
+            
+            $.ajax({
+                
+                    url:url,
+                    type:"POST"
+                                                
+            });
+            
+                                                
+        });
+        
+        */
         //---------------------///
         
 }); // jQuery End

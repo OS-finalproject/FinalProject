@@ -16,12 +16,12 @@
      
     public function buildForm( FormBuilderInterface $builder , array $options ){
         
-        $builder->add('city','text',array( 'label'=>'City' , 'constraint'=> new NotBlank() ) );
-        $builder->add('country','text',array( 'label'=>'Country' ,'constraint'=> new NotBlank()));
-        $builder->add('street','text',array( 'label'=>'Street' ,'constraint'=> new NotBlank()));
-        $builder->add('telephone','text',array( 'label'=>'Telephone' ,'constraint'=> new NotBlank()));
-        $builder->add('attr','text',array( 'label'=>'Attr Of Address' ,'constraint'=> new NotBlank()));
-        $builder->add('lang','text',array( 'label'=>'Lang Of Address' ,'constraint'=> new NotBlank()));
+        $builder->add('city','text',array( 'label'=>'City :' , 'constraints'=> new NotBlank() ) );
+        $builder->add('country','text',array( 'label'=>'Country :' ,'constraints'=> new NotBlank()));
+        $builder->add('street','text',array( 'label'=>'Street : ' ,'constraints'=> new NotBlank()));
+        $builder->add('telephone','text',array( 'label'=>'Telephone :' ,'constraints'=> new NotBlank()));
+        $builder->add('att','text',array( 'label'=>'Attr Of Address :' ,'constraints'=> new NotBlank()));
+        $builder->add('lang','text',array( 'label'=>'Lang Of Address :' ,'constraints'=> new NotBlank()));
                 
     }  
     

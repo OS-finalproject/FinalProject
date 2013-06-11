@@ -1,0 +1,46 @@
+{% extends '::base.html.twig' %}
+{% block title%}New Company{% endblock %}
+{% block body %}
+
+<div class="what-we-do container">
+            
+    <div id="ajax_content" class="row">
+       
+        <center>    
+         <form method="post" action="{{ path('sitereservation_addNewCompany') }}" {{ form_enctype(form) }} >     
+        <div class="addNewCompany">
+            <p style="color:red" >{{form_errors(form.username)}}</p>
+            <p style="color:red" >{{form_errors(form.email)}}</p>
+            <p style="color:red" >{{form_errors(form.password)}}</p>
+            <p style="color:red" >{{form_errors(form.file)}}</p>                        
+        </div>
+        <div class="addNewCompany">
+                
+                <div style="margin-left:20%;margin-right:8%;float:left;">{{form_label(form.username)}}</div><div style="margin-right:5%;float:left;">{{ form_widget(form.username) }}</div>
+                <div style="clear:both "></div>
+                <div style="margin-left:20%;margin-right:8%;float:left;">{{ form_label(form.email) }}</div><div style="margin-right:5%;float:left;">{{ form_widget(form.email) }}</div>
+                <div style="clear:both "></div>
+                <div style="margin-left:20%;margin-right:5%;float:left;">{{ form_label(form.password) }}</div><div style="margin-right:5%;float:left;">{{ form_widget(form.password) }}</div>
+                <div style="clear:both "></div>
+                <div style="margin-left:20%;margin-right:1%;float:left;">{{ form_label(form.file) }}</div><div style="margin-right:5%;float:left;">{{ form_widget(form.file) }}</div>
+                <div style="clear:both "></div>
+                <input style="margin-top:5%;margin-left:20%" type="submit"  name="{{ path('sitereservation_addNewCompany') }}" value="Next > " id="addnewComanyButton" />       
+                
+        </div>
+                 {{ form_rest(form) }}
+         </form>        
+        <div class="addNewCompany" style="margin-top:-0.1%;margin-bottom:3%">
+        
+            <p style="color:red;">Notices:</p>
+            <p id="userNameNotice" style="color:#002a80">User Name Must be at lest 5 characters and at most 30 characters</p>
+            <p id="emailNotice" style="color:#002a80">Email Must be at lest like www.X@X.com</p>
+            <p id="passwordNotice" style="color:#002a80" >Password Must be at lest 6 characters and at most 10 characters</p>
+        </div>
+        </center>
+                
+
+            
+    </div>
+</div>
+
+{% endblock %}

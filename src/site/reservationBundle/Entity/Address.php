@@ -63,7 +63,7 @@ class Address
     private $telephone;
 
     /**
-     * @var \Infocomp
+     * @var \Customer
      *
      * @ORM\ManyToOne(targetEntity="Customer")
      * @ORM\JoinColumns({
@@ -251,10 +251,10 @@ class Address
     /**
      * Set comp
      *
-     * @param \site\reservationBundle\Entity\Infocomp $comp
+     * @param \site\reservationBundle\Entity\Customer $comp
      * @return Address
      */
-    public function setComp(\site\reservationBundle\Entity\Infocomp $comp = null)
+    public function setComp(\site\reservationBundle\Entity\Customer $comp = null)
     {
         $this->comp = $comp;
     

@@ -1,0 +1,48 @@
+{% extends '::base.html.twig' %}
+{% block title%}New Company{% endblock %}
+{% block body %}
+
+<div class="what-we-do container">
+            
+ <div id="ajax_content" class="row">
+ <form method="POST" action="{{ path('sitereservation_addNewCompanyAdress',{'id':costumerId }) }}"  > 
+<center>   
+        <div class="addNewCompany">
+            <span style="color:red" >{{form_errors(form.city)}}</span>
+            <span style="color:red" >{{form_errors(form.country)}}</span>
+            <span style="color:red" >{{form_errors(form.street)}}</span>
+            <span style="color:red" >{{form_errors(form.telephone)}}</span>
+            <span style="color:red" >{{form_errors(form.att)}}</span>
+            <span style="color:red" >{{form_errors(form.lang)}}</span>
+        </div>
+                
+        <div class="addNewCompany">
+                
+                <div style="margin-left:20%;margin-right:11%;float:left;">{{form_label(form.city)}}</div><div style="margin-right:5%;float:left;">{{ form_widget(form.city) }}</div>
+                <div style="clear:both "></div>
+                <div style="margin-left:20%;margin-right:7.5%;float:left;">{{ form_label(form.country) }}</div><div style="margin-right:4%;float:left;">{{ form_widget(form.country) }}</div>
+                <div style="clear:both "></div>
+                <div style="margin-left:20%;margin-right:8%;float:left;">{{ form_label(form.street) }}</div><div style="margin-left:1%;margin-right:5%;float:left;">{{ form_widget(form.street) }}</div>
+                <div style="clear:both "></div>
+                <div style="margin-left:20%;margin-right:6%;float:left;">{{ form_label(form.telephone) }}</div><div style="margin-right:5%;float:left;">{{ form_widget(form.telephone) }}</div>
+                <div style="clear:both "></div>
+                <div style="margin-left:20%;margin-right:2.5%;float:left;">{{ form_label(form.att) }}</div><div style="margin-right:5%;float:left;">{{ form_widget(form.att) }}</div>
+                <div style="clear:both "></div>
+                <div style="margin-left:20%;margin-right:2.5%;float:left;">{{ form_label(form.lang) }}</div><div style="margin-right:5%;float:left;">{{ form_widget(form.lang) }}</div>
+                <div style="clear:both "></div>
+                <input style="margin-top:5%;margin-left:20%" type="submit"  name="{{ path('sitereservation_addNewCompanyAdress',{'id':costumerId }) }}" value="Save" id="addnewComanyAddressButton" />       
+                
+        </div>
+        <div class="addNewCompany" style="margin-top:-0.1%;margin-left:-10%;margin-bottom:3%">
+        
+            <p style="color:red;">Notices:</p>
+            <p id="userNameNotice" style="color:#002a80">Enter Date for Address Of  Head Company </p>
+        </div>
+        </center>
+                        {{ form_rest(form) }}
+        </form>
+            
+    </div>
+</div>
+
+{% endblock %}
