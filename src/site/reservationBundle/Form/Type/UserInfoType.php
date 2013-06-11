@@ -1,6 +1,7 @@
 <?php
 // src/Acme/TaskBundle/Form/Type/UserInfoType.php
 namespace site\reservationBundle\Form\Type;
+
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\AbstractType;

@@ -33,49 +33,72 @@ sitereservation_address:
 sitereservation_about:
     pattern:  /about
     defaults: { _controller: sitereservationBundle:Site:about }
+    
 sitereservation_contactus:
     pattern:  /contactus/{id}
     defaults: { _controller: sitereservationBundle:Default:contactus }
+    
 sitereservation_eventcat:
     pattern:  /eventscatuser/{cat}
     defaults: { _controller: sitereservationBundle:Site:eventcatuser }
+    
 sitereservation_EventProfileinfo:
     pattern: /eventprof/{id} 
     defaults: { _controller: sitereservationBundle:Site:oneeventprof }
+
 sitereservation_userAllOffers:
     pattern:  /allOffersuser
     defaults: { _controller: sitereservationBundle:Site:alloffersuser }
+
 sitereservation_Gcusthome:
     pattern:  /custhome
     defaults: { _controller: sitereservationBundle:Site:custhome }
+
 sitereservation_extrauserinfo:
     pattern:  /extrauser/{id}
     defaults: { _controller: sitereservationBundle:Default:extrauser }
+
 sitereservation_addnewuserform:
     pattern:  /adduser
     defaults: { _controller: sitereservationBundle:Default:addnewuser }
+
 sitereservation_addeventform:
     pattern:  /addevent
     defaults: { _controller: sitereservationBundle:Default:addevent }
+
 sitereservation_signOut:
     pattern: /signOut
     defaults: { _controller: sitereservationBundle:Site:signOut }
+
 sitereservation_userserviceprovider:
     pattern:  /userservice
     defaults: { _controller: sitereservationBundle:Site:UserserviceProvider }
+    
 sitereservation_userprofile:
     pattern:  /userprofile
     defaults: { _controller: sitereservationBundle:Site:UserProfile }
+
 sitereservation_signIn:
     pattern: /signIn
     defaults: {_controller: sitereservationBundle:Site:signIn }
+
 sitereservation_index:
     pattern:  /
     defaults: { _controller: sitereservationBundle:Site:index }
+    
+sitereservation_firstSignIn:
+    pattern: /fristSignIn/{id}
+    defaults: { _controller: sitereservationBundle:Site:firstSignIn }
+    
+sitereservation_addNewCompany:
+    pattern: /home/addNewCompany
+    defaults: { _controller: sitereservationBundle:Default:addNewCompany }
 
-
-
-
-
-
-
+sitereservation_addNewCompanyInfo:
+    pattern: /home/addNewCompanyInfo/{id}
+    defaults: { _controller: sitereservationBundle:Default:addNewCompanyInfo }
+    
+sitereservation_addNewCompany:
+    pattern: /home/addNewCompanyAddress{id}
+    defaults: { _controller: sitereservationBundle:Default:addNewCompanyAddress }
+    
