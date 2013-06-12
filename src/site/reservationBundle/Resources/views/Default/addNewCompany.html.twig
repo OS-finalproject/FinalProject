@@ -8,11 +8,11 @@
        
         <center>    
          <form method="post" action="{{ path('sitereservation_addNewCompany') }}" {{ form_enctype(form) }} >     
-        <div class="addNewCompany">
-            <p style="color:red" >{{form_errors(form.username)}}</p>
-            <p style="color:red" >{{form_errors(form.email)}}</p>
-            <p style="color:red" >{{form_errors(form.password)}}</p>
-            <p style="color:red" >{{form_errors(form.file)}}</p>                        
+        <div class="addNewCompany" style="color: red;">
+            {{form_errors(form.username)}}
+            {{form_errors(form.email)}}
+            {{form_errors(form.password)}}
+            {{form_errors(form.file)}}                        
         </div>
         <div class="addNewCompany">
                 

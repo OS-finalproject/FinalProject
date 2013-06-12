@@ -7,13 +7,13 @@
  <div id="ajax_content" class="row">
  <form method="POST" action="{{ path('sitereservation_addNewCompanyAdress',{'id':costumerId }) }}"  > 
 <center>   
-        <div class="addNewCompany">
-            <span style="color:red" >{{form_errors(form.city)}}</span>
-            <span style="color:red" >{{form_errors(form.country)}}</span>
-            <span style="color:red" >{{form_errors(form.street)}}</span>
-            <span style="color:red" >{{form_errors(form.telephone)}}</span>
-            <span style="color:red" >{{form_errors(form.att)}}</span>
-            <span style="color:red" >{{form_errors(form.lang)}}</span>
+        <div class="addNewCompany" style="color: red;">
+            {{form_errors(form.city)}}
+            {{form_errors(form.country)}}
+            {{form_errors(form.street)}}
+            {{form_errors(form.telephone)}}
+            {{form_errors(form.att)}}
+            {{form_errors(form.lang)}}
         </div>
                 
         <div class="addNewCompany">

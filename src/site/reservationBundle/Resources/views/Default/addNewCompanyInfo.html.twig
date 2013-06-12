@@ -7,9 +7,9 @@
  <div id="ajax_content" class="row">
  <form method="POST" action="{{ path('sitereservation_addNewCompanyInfo',{ 'id':costumerId} ) }}"  > 
 <center>   
-        <div class="addNewCompany">
-            <p style="color:red" >{{form_errors(form.website)}}</p>
-            <p style="color:red" >{{form_errors(form.category)}}</p>                        
+        <div class="addNewCompany" style="color: red;">
+            {{form_errors(form.website)}}
+            {{form_errors(form.category)}}                       
         </div>
         <div class="addNewCompany">
                 

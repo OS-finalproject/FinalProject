@@ -170,12 +170,16 @@ jQuery(function($) {
         var bottomOfPopup = parseInt(200);
         var bottomOfWindow = $(window).height();
  
+         var toTop_status = 0;
 		
 	//alert(heightOfPopup);
 	 	
 	$(window).scroll(function(){
 		
 		var top = $(window).scrollTop();
+                
+                showArrowUp();
+                
 		//var heightOfPopup = parseInt($('#toPopup').height());
 		//var bottomOfPopup = parseInt($('#toPopup').css('top')) + parseInt($('#toPopup').height()) +150 ;
 		//alert(bottomOfWindow);
@@ -198,7 +202,8 @@ jQuery(function($) {
 
 	 /************** start: functions. **************/
 	function loading() {
-		$("div.loader").show();  
+		$("div.loader").show();
+                toTop_status = 1;  
 	}
 	function closeloading() {
 		$("div.loader").fadeOut('normal');  
@@ -207,7 +212,7 @@ jQuery(function($) {
 	var popupStatus = 0; // set value
 	
 	function loadPopup() { 
-		if(popupStatus == 0) { // if value is 0, show popup
+		if(popupStatus === 0) { // if value is 0, show popup
 			closeloading(); // fadeout loading
                         $('input[name="signInEmail"]').val(""); 
                         $('input[name="signInPassword"]').val("");
@@ -221,13 +226,43 @@ jQuery(function($) {
 	}
 		
 	function disablePopup() {
-		if(popupStatus == 1) { // if value is 1, close popup
+		if(popupStatus === 1) { // if value is 1, close popup
 			$("#toPopup").fadeOut("normal");  
 			$("#backgroundPopup").fadeOut("normal");  
 			popupStatus = 0;  // and set value to 0
+                        toTop_status = 0;
 		}
 	}
 	/************** end: popup functions. **************/
+        
+        
+        /*-----------------------  arrow up Function   begin     ----------*/
+        
+        function showArrowUp(){
+	
+	if( toTop_status === 0){
+    				
+    				if ($(window).scrollTop()) {
+			        	
+			        	$('#arrow_up').fadeIn();
+			        	
+    				} else {
+				        
+				        $('#arrow_up').fadeOut();
+				        
+    				}
+    		}			
+	};
+	
+	 $('#arrow_up').on('click',function(){
+
+		
+    		$("html, body").animate({ scrollTop: 0 }, 600);
+		return false;
+ 	});
+
+        
+        /*-----------------------  arrow up Function   End     ----------*/
         
         //-------- Sign in --///
         
@@ -311,7 +346,9 @@ jQuery(function($) {
             
             var url = $('#addnewComanyButton').attr('name');
             
-            $.ajax({
+            $('#signUpForm').submit(function(){
+                
+                   $.ajax({
                 
                     url:url,
                     type:"POST",
@@ -320,13 +357,17 @@ jQuery(function($) {
                         $('#ajax_content').html(respo);
                     }
                                                 
+                });
+                
+                return false;
             });
+
             
                                                 
         });
         
 
-        $('#addnewComanyInfoButton').on('click',function(){
+        $('#addnewComanyInfoButton').on('submit',function(){
             
             var url = $('#addnewComanyInfoButton').attr('name');
             
@@ -345,7 +386,7 @@ jQuery(function($) {
         });    
         
         
-       $('#addnewComanyAddressButton').on('click',function(){
+       $('#addnewComanyAddressButton').on('submit',function(){
             
             var url = $('#addnewComanyAddressButton').attr('name');
             
@@ -357,9 +398,9 @@ jQuery(function($) {
             });
             
                                                 
-        });
+        });*/
         
-        */
+        
         //---------------------///
         
 }); // jQuery End

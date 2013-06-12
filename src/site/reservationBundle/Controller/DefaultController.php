@@ -103,7 +103,7 @@ class DefaultController extends Controller
                 
                 $id = $newCustomer->getId();
                 
-                return $this->redirect($this->generateUrl('sitereservation_addNewCompanyInfo',array('id'=>$id),TRUE));
+               return $this->redirect($this->generateUrl('sitereservation_addNewCompanyInfo',array('id'=>$id),TRUE));
                 
                //return new Response($this->addNewCompanyInfoAction($id));
                 
@@ -140,9 +140,9 @@ class DefaultController extends Controller
                 $em->persist($company);
                 $em->flush();
                                
-                return $this->redirect($this->generateUrl('sitereservation_addNewCompanyAdress',array('id'=>$id),TRUE));
+               return $this->redirect($this->generateUrl('sitereservation_addNewCompanyAdress',array('id'=>$id),TRUE));
                 
-                //return 
+               // return new Response($this->addNewCompanyAddressAction($id));
             }
             
             
@@ -177,7 +177,8 @@ class DefaultController extends Controller
                 $em->flush();
                                
                 return $this->redirect($this->generateUrl('sitereservation_firstSignIn',array('id'=>$id),true));
-                                
+                  
+               
             }
             
             
