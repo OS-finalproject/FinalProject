@@ -26,6 +26,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
+use Doctrine\ORM;
+
 
 class DefaultController extends Controller
 {
@@ -64,9 +66,21 @@ class DefaultController extends Controller
        if ($request->isMethod('POST')) {
             $form->bind($request);
             if ($form->isValid()) {
-                $em = $this->getDoctrine()->getManager();                     
-                $em->persist($newcustomer); 
-                $em->flush();
+                $em = $this->getDoctrine()->getManager();
+                
+                try {
+                         
+                     $em->persist($newcustomer); 
+                     $em->flush();
+                     
+                }  catch (\Exception $excep ){
+ 
+                   return $this->render('sitereservationBundle:Default:addnewuser.html.twig', array(
+                        'form' => $form->createView(),'email_error'=>" This email is uesed !! "
+                    ));
+                    
+                }
+                
                 $repo = $em->getRepository('sitereservationBundle:Customer');
                 $cust = $repo->getCustomerId();
                 
@@ -75,7 +89,7 @@ class DefaultController extends Controller
         }
 
         return $this->render('sitereservationBundle:Default:addnewuser.html.twig', array(
-             'form' => $form->createView(),
+             'form' => $form->createView(),'email_error'=>""
         ));
         
     }
@@ -96,9 +110,18 @@ class DefaultController extends Controller
        
                 $email = $newcustomer->getEmail();
                 
-                $em = $this->getDoctrine()->getManager();                     
-                $em->persist($newcustomer); 
-                $em->flush(); 
+                $em = $this->getDoctrine()->getManager();
+                
+                try{
+                         $em->persist($newcustomer); 
+                         $em->flush(); 
+                }catch(\Exception $excp ){
+                                        
+                    return $this->render('sitereservationBundle:Default:addNewCompany.html.twig',
+                    array( 'form'=> $form->createView(),'email_error'=>"" ) );
+                    
+                }
+
                 $newCustomer = $em->getRepository('sitereservationBundle:Customer')->findOneBy( array('email'=>$email) );
                 
                 $id = $newCustomer->getId();
@@ -113,7 +136,7 @@ class DefaultController extends Controller
         }
                 
         return $this->render('sitereservationBundle:Default:addNewCompany.html.twig',
-                array( 'form'=> $form->createView() ) );
+                array( 'form'=> $form->createView(),'email_error'=>" This email is uesed !!" ) );
     }
     
     
