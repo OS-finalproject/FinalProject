@@ -2,6 +2,80 @@
 {% block title%}New Company{% endblock %}
 {% block body %}
 
+  <script>
+        function initialize(){
+               // showAdd=document.getElementById("address");
+                $('#addnewComanyAddressButton').css('margin-top','2%');
+                var address = $('input[name="companyAddress[street]"]').val()+","+$('input[name="companyAddress[city]"]').val()+","+$('input[name="companyAddress[country]"]').val();
+                //address=showAdd.value;
+                var map;
+                var geocoder = new google.maps.Geocoder();
+                var latitude;
+                var longitude;
+                geocoder.geocode({address: address},function(results,status){
+                                  if (status == google.maps.GeocoderStatus.OK) {
+                                    latitude = results[0].geometry.location.lat();
+                                    longitude = results[0].geometry.location.lng();
+                                    $('input[name="companyAddress[att]"]').val(latitude);
+                                    $('input[name="companyAddress[lang]"]').val(longitude);
+                                    latlng = new google.maps.LatLng(latitude,longitude);
+                                        myOptions={
+                                                zoom:17,
+                                                center:latlng,
+                                                mapTypeId: google.maps.MapTypeId.ROADMAP
+                                        }
+                                        var marker = new google.maps.Marker({
+                                                            position: latlng,
+                                                            title:address
+                                                        });
+                                        map = new google.maps.Map(document.getElementById("map-canvas"),myOptions);
+                                        marker.setMap(map);
+                          } 
+                });
+ google.maps.event.addDomListener(window, 'load', initialize);
+        $("#confirmMap").show();
+        }
+        function yesMap(){
+                //address 7ayt5zen fel database howa fel long. wel lat.
+        }
+        function noMap(){
+                $("#placeMarker").show();
+                var latlng = new google.maps.LatLng(30.378157474535406, 30.824217815624934);
+            var map1 = new google.maps.Map(document.getElementById('map-canvas'), {
+                center: latlng,
+                zoom: 5,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+            var marker1 = new google.maps.Marker({
+                position: latlng,
+                map: map1,
+                title: 'Put the marker on your address',
+                draggable: true
+            });
+            google.maps.event.addListener(marker1, 'dragend', function(a) {
+                /*newlong=a.latLng.lng().toFixed(4);
+                newlat= a.latLng.lat().toFixed(4);
+                
+                alert(newlat);
+                alert(newlong);*/
+                $('input[name="companyAddress[att]"]').val(a.latLng.lat());
+                $('input[name="companyAddress[lang]"]').val(a.latLng.lng());
+                
+               /* var latlng = new google.maps.LatLng(a.latLng.lng(),a.latLng.lat());
+		var geocoder = new google.maps.Geocoder();
+                var address = "";
+                
+                geocoder.geocode({'latLng': latlng}, function(results, status) {
+                    
+                       address = results[1].formatted_address;
+		});
+                
+                var Result = address.split()*/
+                
+            });
+        }
+		</script> 
+
 <div class="what-we-do container">
             
  <div id="ajax_content" class="row">
@@ -13,7 +87,7 @@
             {{form_errors(form.street)}}
             {{form_errors(form.telephone)}}
             {{form_errors(form.att)}}
-            {{form_errors(form.lang)}}
+            {{form_errors(form.lang)}}    
         </div>
                 
         <div class="addNewCompany">
@@ -26,23 +100,34 @@
                 <div style="clear:both "></div>
                 <div style="margin-left:20%;margin-right:6%;float:left;">{{ form_label(form.telephone) }}</div><div style="margin-right:5%;float:left;">{{ form_widget(form.telephone) }}</div>
                 <div style="clear:both "></div>
-                <div style="margin-left:20%;margin-right:2.5%;float:left;">{{ form_label(form.att) }}</div><div style="margin-right:5%;float:left;">{{ form_widget(form.att) }}</div>
-                <div style="clear:both "></div>
-                <div style="margin-left:20%;margin-right:2.5%;float:left;">{{ form_label(form.lang) }}</div><div style="margin-right:5%;float:left;">{{ form_widget(form.lang) }}</div>
-                <div style="clear:both "></div>
-                <input style="margin-top:5%;margin-left:20%" type="submit"  name="{{ path('sitereservation_addNewCompanyAdress',{'id':costumerId }) }}" value="Save" id="addnewComanyAddressButton" />       
+                <div style="margin-left:-2%;">
+                <input type="button" id="show" value="Show location on the Map" onclick="initialize();"></div>
+                <div id="map-canvas" style="height:300px;width:300px;"></div>
+		<div id="confirmMap" style="display:none;">Is this your location??
+                <input type="button" id="yes" value="Yes" onclick="yesMap();">
+                <input type="button" id="no" value="No" onclick="noMap();">
+                <br/>
+                <span id="placeMarker" style="display:none;">So now you must put the marker on your place</span>    
+                </div>    
+                <input style="margin-top:-60%;margin-left:20%" type="submit"  name="{{ path('sitereservation_addNewCompanyAdress',{'id':costumerId }) }}" value="Save" id="addnewComanyAddressButton" />       
                 
         </div>
-        <div class="addNewCompany" style="margin-top:-0.1%;margin-left:-10%;margin-bottom:3%">
+        <div class="addNewCompany" style="margin-top:-1%;margin-left:-10%;margin-bottom:3%">
         
             <p style="color:red;">Notices:</p>
             <p id="userNameNotice" style="color:#002a80">Enter Date for Address Of  Head Company </p>
         </div>
         </center>
+        <div style="margin-left:20%;margin-right:2.5%;float:left;display:none">{{ form_label(form.att) }}</div><div style="margin-right:5%;float:left;display:none">{{ form_widget(form.att) }}</div>
+        <div style="clear:both "></div>
+        <div style="margin-left:20%;margin-right:2.5%;float:left;display:none">{{ form_label(form.lang) }}</div><div style="margin-right:5%;float:left;display:none">{{ form_widget(form.lang) }}</div>
+        <div style="clear:both "></div>
                         {{ form_rest(form) }}
         </form>
             
     </div>
+    
+        
 </div>
 
 {% endblock %}

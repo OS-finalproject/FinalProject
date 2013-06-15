@@ -1,0 +1,75 @@
+{% extends '::base.html.twig'%}
+{% block title %} profile {% endblock %}
+{% block body %}
+    <style>
+
+            label{
+                color: #AA3333;
+
+            }
+            .c{
+                width: 82%;
+                height: 50%;
+            }
+
+            button{
+     
+                color: #AA3333;
+           
+            }
+            span{
+
+                color: blue;
+
+
+            }
+            
+            #adminProfileError{
+                
+                color: red;
+                margin-left: -90%;
+                margin-top: 20%;
+            }
+
+        </style>
+        
+      <div class="what-we-do container">
+              <center>
+                  
+              <div class="AdminProfile" id="adminProfileDiv">
+                
+                <div style="margin-top:10%;margin-left:20%;margin-right:8%;float:left;"><span>Uaser Name :</span></div><div style="margin-top:10%;margin-right:5%;margin-left:-4%;float:left;"><span>{{ admin.username }}</span></div>
+                <div style="clear:both "></div>
+                <div style="margin-left:20%;margin-right:8%;float:left;"><span>Password :</span></div><div style="margin-right:5%;float:left;"><span>{{ admin.password }}</span></div>
+                <div style="clear:both "></div>
+                <div style="margin-left:20%;margin-right:5%;float:left;"><span>Email :</span></div><div style="margin-right:5%;margin-left:8%;float:left;"><span>{{ admin.email }}</span></div>
+                <div style="clear:both "></div>
+                
+                <div class="FormButton" ><a  href="javascript:void(0)" id="editAdminProfileButton" />Edit</a></div>      
+                
+                <br/>
+             </div>
+                 
+              <div class="AdminProfile" id="editAdminProfileDiv">
+                <span  id="adminProfileError"></span>
+                <div style="margin-top:10%;margin-left:20%;margin-right:8%;float:left;"><span>Uaser Name :</span></div><div style="margin-top:10%;margin-right:5%;margin-left:-4%;float:left;"><input type='text' name="adminUsername" value="{{ admin.username }}" /></div>
+                <div style="clear:both "></div>
+                <div style="margin-left:20%;margin-right:8%;float:left;"><span>Password :</span></div><div style="margin-right:5%;float:left;"><input type='password' name="adminPassword" value="{{ admin.password }}" /></div>
+                <div style="clear:both "></div>
+                <div style="margin-left:20%;margin-right:5%;float:left;"><span>Email :</span></div><div style="margin-right:5%;margin-left:8%;float:left;"><input type='text' name="adminEmail" value="{{ admin.email }}" /></div>
+                <div style="clear:both "></div>
+                
+                <div class="FormButton" ><a  href="{{ path('sitereservation_AdminProfile') }}" id="SaveChangesInAdminProfileButton" />Save</a></div>      
+                
+                <br/>
+             </div>                   
+             </center>          
+          
+       </div>
+
+{% endblock %}      
+        
+        
+        
+        
+

@@ -1,0 +1,79 @@
+{% extends '::base.html.twig'%}
+{% block title %} profile {% endblock %}
+{% block body %}
+
+    <script>
+        
+       $("li").removeClass("current-page");
+       $("#nav3").addClass("current-page");
+       
+    </script>
+    
+
+    <style>
+           
+            span{
+
+                color: blue;
+
+
+            }
+            
+            #addPaymentOfCompanyError{
+                
+                color: red;
+                margin-left: -90%;
+                margin-top: 20%;
+            }
+
+        </style>
+        
+             
+  <div class="what-we-do container">
+        <center>
+
+          <div class="AdminProfile" id="adminProfileDiv">
+
+            <span id="addPaymentOfCompanyError"></span>
+            <div style="margin-top:10%;margin-left:20%;margin-right:8%;float:left;"><span>Company :</span></div>
+            
+            <div style="margin-top:10%;margin-right:5%;margin-left:-0.5%;float:left;">
+                
+                <select id="addPaymentOfCompanySelect" >
+                     
+                    <option value="0">--Choosie Comapany--</option>
+                    
+                    {% for company in companys %}
+
+                        <option value="{{ company.id }}">{{ company.username }}</option>
+                        
+                    {% endfor %}
+                    
+                </select>
+                
+            </div>
+
+
+            <div style="clear:both "></div>
+
+            <div style="margin-left:20%;margin-right:8%;float:left;"><span>Payment :</span></div>            
+            <div style="margin-right:5%;float:left;"><input type='text' name="paymentOFCompany" value="0" /></div>
+            <div style="clear:both "></div>
+
+            
+            <div style="margin-left:7%;margin-right:5%;"><span>Time of Payment</span></div>
+            <div style="margin-right:5%;margin-left:8%;"><input type='text' name="paymentTimeOfCompany" /></div>
+
+            <div class="FormButton" ><a  href="{{ path('sitereservation_addPaymentForCompany') }}" id="SavePaymentOfCompanyButton" />Save</a></div>      
+
+            <br/>
+
+         </div>
+            
+         <br/>   
+         </center> 
+          
+   </div>
+          
+{% endblock %}      
+

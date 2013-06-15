@@ -12,29 +12,117 @@ use Doctrine\ORM\EntityRepository;
  */
 class EventsRepository extends EntityRepository
 {
-	public function getAlluseroffers()
+	public function getAlluseroffers($id,$page,$maxResult)
 	{
+	if($page<1){
+        return array();
+   			 }
+    	--$page;
 		$query = $this->getEntityManager()->createQuery('
 				SELECT E
 				FROM sitereservationBundle:Events E
 				JOIN E.comp c
 				where E.ispublished like :pub and E.isdeleted like :del
 			');
+		if($maxResult){
+            $query->setFirstResult($page * $maxResult);
+            $query->setMaxResults($maxResult);
+        }
 		$query->setParameter('pub','true');
 		$query->setParameter('del','0');
 		return $query->getResult();
 	}
-	public function getcatoffers($company)
+	public function getcatoffers($company,$id,$page,$maxResult)
 	{
+		if($page<1){
+        return array();
+   			 }
+    	--$page;
 		$query = $this->getEntityManager()->createQuery('
 				SELECT E
 				FROM sitereservationBundle:Events E
 				JOIN E.comp c
 				where E.category like :cat and E.ispublished like :pub and E.isdeleted like :del
 			');
+		if($maxResult){
+            $query->setFirstResult($page * $maxResult);
+            $query->setMaxResults($maxResult);
+        }
 		$query->setParameter('cat',$company);
 		$query->setParameter('pub','true');
 		$query->setParameter('del','0');
 		return $query->getResult();
 	}
+        public function getprofileoffer($id)
+	{
+		$query = $this->getEntityManager()->createQuery('
+				SELECT E
+				FROM sitereservationBundle:Events E
+				JOIN E.comp c
+				where E.id=:id and E.ispublished like :pub and E.isdeleted like :del
+			');
+		$query->setParameter('id',$id);
+		$query->setParameter('pub','true');
+		$query->setParameter('del','0');
+		return $query->getResult();
+	}
+        public function getLatestOffer()
+	{
+		$query = $this->getEntityManager()->createQuery('
+				SELECT E
+				FROM sitereservationBundle:Events E
+				order by E.id DESC
+			');
+		$query->setMaxResults(8);
+		return $query->getResult();
+	}
+        public function updateoffer($id){
+            $query = $this->getEntityManager()
+                        ->createQuery("
+                            UPDATE sitereservationBundle:Events c
+                            SET c.available = c.available-1 
+                            WHERE c.id = :eventId"
+                        )->setParameter('eventId',$id);
+            return $query->getSingleResult();
+        }
+        public function updateofferagain($id){
+            $query = $this->getEntityManager()
+                        ->createQuery("
+                            UPDATE sitereservationBundle:Events c
+                            SET c.isdeleted like :isd,
+                            c.ispublished like :isp
+                            WHERE c.id = :eventId"
+                        );
+            $query->setParameter('isd', '1');
+            $query->setParameter('isp', 'false');
+             $query->setParameter('eventId',$id);
+            return $query->getSingleResult();
+        }
+        public function publishoffer($id,$state){
+            $query = $this->getEntityManager()
+                        ->createQuery("
+                            UPDATE sitereservationBundle:Events c
+                            SET c.ispublished like :isp
+                            WHERE c.id = :eventId"
+                        );
+            $query->setParameter('isp', $state);
+             $query->setParameter('eventId',$id);
+            return $query->getSingleResult();
+        }
+        public function getOfferCount(){
+        	$query = $this->getEntityManager()->createQuery('
+            SELECT count(E) as counts
+            FROM sitereservationBundle:Events E
+            ');
+        return $query->getResult();
+        }
+        public function getTypeOfferCount($cat){
+        	$query = $this->getEntityManager()->createQuery('
+            SELECT count(E) as counts
+            FROM sitereservationBundle:Events E
+            where E.category = :cat
+            ');
+            $query->setParameter("cat",$cat);
+        return $query->getResult();
+        }
 }

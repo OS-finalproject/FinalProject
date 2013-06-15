@@ -264,7 +264,7 @@ class Address
     /**
      * Get comp
      *
-     * @return \site\reservationBundle\Entity\Infocomp 
+     * @return \site\reservationBundle\Entity\Customer
      */
     public function getComp()
     {

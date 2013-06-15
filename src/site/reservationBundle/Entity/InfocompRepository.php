@@ -13,8 +13,12 @@ use site\reservationBundle\Entity\Customer;
  */
 class InfocompRepository extends EntityRepository
 {
-	public function getCompanies($company)
+	public function getCompanies($company,$id,$page,$maxResult)
 	{
+		 if($page<1){
+        return array();
+   			 }
+    	--$page;
 		$query = $this->getEntityManager()->createQuery('
 				SELECT I
 				FROM sitereservationBundle:Infocomp I
@@ -22,16 +26,27 @@ class InfocompRepository extends EntityRepository
 				where I.category like :cat
 			');
 		$query->setParameter('cat',$company);
+		if($maxResult){
+            $query->setFirstResult($page * $maxResult);
+            $query->setMaxResults($maxResult);
+        }
 		return $query->getResult();
 	}
-	public function getAllCompanies()
+	public function getAllCompanies($id,$page,$maxResult)
 	{
+		 if($page<1){
+        return array();
+   			 }
+    	--$page;
 		$query = $this->getEntityManager()->createQuery('
 				SELECT I
 				FROM sitereservationBundle:Infocomp I
 				JOIN I.custid c
 			');
-		$query->setMaxResults(16);
+		if($maxResult){
+            $query->setFirstResult($page * $maxResult);
+            $query->setMaxResults($maxResult);
+        }
 		return $query->getResult();
 	}
     public function getthisCompany($id)
@@ -45,6 +60,25 @@ class InfocompRepository extends EntityRepository
 		$query->setParameter('id',$id);
 		return $query->getSingleResult();
 	}
+	public function getCount()
+    {
+     
+       $query = $this->getEntityManager()->createQuery('
+            SELECT count(I) as counts
+            FROM sitereservationBundle:Infocomp I
+            ');
+        return $query->getResult();
+    }
+    public function getTypeCount($company)
+    {
+       $query = $this->getEntityManager()->createQuery('
+            SELECT count(I) as counts
+            FROM sitereservationBundle:Infocomp I
+            where I.category = :cat
+            ');
+       $query->setParameter("cat",$company);
+        return $query->getResult();
+    }
 
         
 }

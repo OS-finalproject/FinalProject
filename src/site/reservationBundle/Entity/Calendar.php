@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="calendar")
  * @ORM\Entity(repositoryClass="site\reservationBundle\Entity\CalendarRepository")
  */
-class Calendar
-{
+class Calendar {
+
     /**
      * @var integer
      *
@@ -43,7 +43,21 @@ class Calendar
     private $category;
 
     /**
-     * @var \Userinfo
+     * @var string
+     *
+     * @ORM\Column(name="country", type="string", length=255, nullable=false)
+     */
+    private $country;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="city", type="string", length=255, nullable=false)
+     */
+    private $city;
+
+    /**
+     * @var \Customer
      *
      * @ORM\ManyToOne(targetEntity="Customer")
      * @ORM\JoinColumns({
@@ -52,15 +66,12 @@ class Calendar
      */
     private $user;
 
-
-
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -70,10 +81,9 @@ class Calendar
      * @param \DateTime $datefrom
      * @return Calendar
      */
-    public function setDatefrom($datefrom)
-    {
+    public function setDatefrom($datefrom) {
         $this->datefrom = $datefrom;
-    
+
         return $this;
     }
 
@@ -82,8 +92,7 @@ class Calendar
      *
      * @return \DateTime 
      */
-    public function getDatefrom()
-    {
+    public function getDatefrom() {
         return $this->datefrom;
     }
 
@@ -93,10 +102,9 @@ class Calendar
      * @param \DateTime $dateto
      * @return Calendar
      */
-    public function setDateto($dateto)
-    {
+    public function setDateto($dateto) {
         $this->dateto = $dateto;
-    
+
         return $this;
     }
 
@@ -105,8 +113,7 @@ class Calendar
      *
      * @return \DateTime 
      */
-    public function getDateto()
-    {
+    public function getDateto() {
         return $this->dateto;
     }
 
@@ -116,10 +123,9 @@ class Calendar
      * @param string $category
      * @return Calendar
      */
-    public function setCategory($category)
-    {
+    public function setCategory($category) {
         $this->category = $category;
-    
+
         return $this;
     }
 
@@ -128,31 +134,70 @@ class Calendar
      *
      * @return string 
      */
-    public function getCategory()
-    {
+    public function getCategory() {
         return $this->category;
     }
 
     /**
      * Set user
      *
-     * @param \site\reservationBundle\Entity\Userinfo $user
+     * @param \site\reservationBundle\Entity\Customer $user
      * @return Calendar
      */
-    public function setUser(\site\reservationBundle\Entity\Userinfo $user = null)
-    {
+    public function setUser(\site\reservationBundle\Entity\Customer $user = null) {
         $this->user = $user;
-    
         return $this;
     }
 
     /**
      * Get user
      *
-     * @return \site\reservationBundle\Entity\Userinfo 
+     * @return \site\reservationBundle\Entity\Customer
      */
-    public function getUser()
-    {
+    public function getUser() {
         return $this->user;
     }
+
+    /**
+     * Set country
+     *
+     * @param string $country
+     * @return Calendar
+     */
+    public function setCountry($country) {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * Get country
+     *
+     * @return string 
+     */
+    public function getCountry() {
+        return $this->country;
+    }
+
+    /**
+     * Set city
+     *
+     * @param string $city
+     * @return Calendar
+     */
+    public function setCity($city) {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Get city
+     *
+     * @return string 
+     */
+    public function getCity() {
+        return $this->city;
+    }
+
 }

@@ -441,10 +441,10 @@ class Events
     /**
      * Set comp
      *
-     * @param \site\reservationBundle\Entity\Infocomp $comp
+     * @param \site\reservationBundle\Entity\Customer $comp
      * @return Events
      */
-    public function setComp(\site\reservationBundle\Entity\Infocomp $comp = null)
+    public function setComp(\site\reservationBundle\Entity\Customer $comp = null)
     {
         $this->comp = $comp;
     
@@ -454,7 +454,7 @@ class Events
     /**
      * Get comp
      *
-     * @return \site\reservationBundle\Entity\Infocomp 
+     * @return \site\reservationBundle\Entity\ICustomer 
      */
     public function getComp()
     {
@@ -487,4 +487,5 @@ public function getAbsolutePath()
         // when displaying uploaded doc/image in the view.
         return 'uploads/documents';
     }
+    
 }

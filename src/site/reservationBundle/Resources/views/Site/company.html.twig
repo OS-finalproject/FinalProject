@@ -1,45 +1,82 @@
 {% extends '::base.html.twig' %}
-{% block title %}{{ type }} companies{% endblock %}
+{% block title %}companies{% endblock %}
 {% block body %}
-<div id="main-wrapper">
-				<div class="container">
-					<div class="row">
-						<div class="12u">
-								<section>
-									<header class="major">
-										<h2>{{ type }} companies</h2>
-									</header>
-										<div>
-										{% for company in companies %}
-											{% if (loop.index-1)%3 == 0 %}
-											  	<div class="row">
-											{% endif %}
-											<div class="4u">
-												<section class="box">
-													<header>
-														<h3>{{ company.custid.username }}</h3>
-													</header>
-													<p>
-													<div style="color:#d52349;font-weight: 700;">Contact Details</div>
-													<div style="position:relative;left:20px">
-														<div><b>Email</b>&nbsp;{{ company.custid.email }}</div>
-														<div><b>Website</b>&nbsp;{{ company.website }}</div>
-														<div><b>Activity</b>&nbsp;{{ company.category }}</div>
-													</div>
-													</p>
-													<footer>
-														<a href="{{ path('sitereservation_companyprofile',{"id" : company.id }) }}" class="button button-alt">Visit the company</a>
-													</footer>
-												</section>
-												</div>
-											{% if (loop.index)%3 == 0 %}
-											  	</div>
-											{% endif %}
-											{% endfor %}
-									</div>
-								</section>
-						</div>
+<script>
+	$("li").removeClass("current-page");
+	$("#nav2").addClass("current-page");
+</script>
+<div class="portfolio-title">
+		<h3>{{cat}} Providers</h3>
+	</div>    
+<br/><br/><br />
+<div class="what-we-do container">
+<div class="row">
+<div class="service span3" style="border:none;background-color: #FFFFFF">
+<!----------------accordion-------------------->
+{% include 'sitereservationBundle:Site:accordion.html.twig' %}
+<!---------------------------------------------->
+</div>
+<div class="service span3" style="width:72.5%;height:50%;border:none;background-color: #FFFFFF">
+<div class="what-we-do container">
+<div class="row">
+<br /><br />
+</div>
+			{% for company in companies %}
+			{% if (loop.index-1)%3 == 0 %}
+	          		<div class="row">	
+	          		<br />	
+			{% endif %}
+                <div class="service span3">
+                    <h4>{{ company.custid.username }}</h4>
+					<div style="color:#d52349;font-weight: 700;">Contact Details</div>
+					<div style="width:80%">
+						<table>
+						<tr>
+						<td align="left"><b>Email</b></td>
+						<td align="left">{{ company.custid.email }}</td></tr>
+						<tr>
+						<td align="left"><b>Website</b></td>
+						<td align="left">{{ company.website }}</td></tr>
+						<tr>
+						<td align="left"><b>Activity</b></td>
+						<td align="left">{{ company.category }}</td></tr>
+						</table>
 					</div>
-				</div>
-			</div>					
+					<br />
+					<a href="{{ path('sitereservation_companyprofile',{"id" : company.id }) }}">Visit the company</a>
+					</div>
+			{% if loop.index%3 == 0 %}
+                </div>
+                <br />
+            {% endif %}
+			{% endfor %}
+</div>
+</div>              
+</div>
+</div>
+
+
+<div class="pagination pagination-centered">
+            {% if lastPageno > 1 %}
+                <ul>
+                    {% if page > 1 %}
+                    <li><a href="{{ url('sitereservation_CompanyMenu',{'company': company}) }}">First</a></li>
+                    <li><a href="{{ url('sitereservation_CompanyMenu', {'company': company ,'page': page - 1}) }}">Prev</a></li>
+                    {% endif %}
+
+        {% for numberOfPage in 1..lastPageno %}
+        {% if numberOfPage > page - 3 and numberOfPage < page + 3 %}
+            {% if page == numberOfPage %}<li class="active"><a href="#">{{ numberOfPage }}</a></li>{% else %}<li><a href="{{ url('sitereservation_CompanyMenu', {'company': company ,'page': numberOfPage}) }}">{{ numberOfPage }}</a></li>{%endif%}
+        {% endif %}
+        {% endfor %}
+
+
+                    {% if page < lastPageno %}
+                <li><a href="{{ url('sitereservation_CompanyMenu', {'company': company ,'page': page + 1}) }}">Next</a></li>
+                <li><a href="{{ url('sitereservation_CompanyMenu', {'company': company ,'page': lastPageno}) }}">Last</a></li>                    
+{% endif %}
+                </ul>
+                {% endif %} 
+        </div>
+                    </div>    
 {% endblock %}

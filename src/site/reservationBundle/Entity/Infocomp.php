@@ -31,7 +31,7 @@ class Infocomp
     /**
      * @var string
      *
-       * @ORM\Column(name="category", type="string", nullable=false,columnDefinition="ENUM('travel', 'tourism', 'shopping', 'restaurant', 'hotels')")
+     * @ORM\Column(name="category", type="string", nullable=false,columnDefinition="ENUM('travel', 'tourism', 'shopping', 'restaurant', 'hotels')")
      */
     private $category;
 
@@ -44,6 +44,13 @@ class Infocomp
      * })
      */
     private $custid;
+    
+   /**
+     * @var integer
+     *
+     * @ORM\Column(name="is_active", type="integer", nullable=false,options={"default"=0})
+     */
+    private $is_active;
 
 
 
@@ -101,6 +108,30 @@ class Infocomp
     public function getCategory()
     {
         return $this->category;
+    }
+    
+    
+    /**
+     * Set is_active
+     *
+     * @param integer $is_active
+     * @return Infocomp
+     */
+    public function setIs_active($is_active)
+    {
+        $this->is_active = $is_active;
+    
+        return $this;
+    }
+
+    /**
+     * Get  is_active
+     *
+     * @return integer 
+     */
+    public function getIs_active()
+    {
+        return $this->is_active;
     }
 
     /**

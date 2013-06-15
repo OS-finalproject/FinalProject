@@ -1,0 +1,77 @@
+{% extends '::base.html.twig' %}
+{% block title %}offers{% endblock %}
+{% block body %}
+<script>
+	$("li").removeClass("current-page");
+	$("#nav2").addClass("current-page");
+</script>
+<div class="portfolio-title">
+    
+    {% for event in events %}
+<h3>{{ event.name }}</h3>
+{% endfor %}
+</div>
+<br><br><br>
+    <div class="what-we-do container" >
+
+	<div class="row">
+            <div class="service span3" style="border:none;background-color: #FFFFFF">
+
+<!----------------accordion-------------------->
+{% include 'sitereservationBundle:Site:accordion.html.twig' %}
+<!---------------------------------------------->
+</div>
+<div class="service span3" style="width:72.5%;height: 50%;border: none;background-color: #FFFFFF">
+
+
+  <div class="what-we-do container" >
+           <div class='row'>
+               <br><br>
+               </div>
+          {% for offer in events %}
+          <div class="row">
+           <div class="service span3">
+               <br>
+               <div style="alignment-adjust: auto">
+               <img src="{{ asset(offer.getWebPath()) }}" style="width:60%;height:40%">
+               </div><br>
+               <div style="color:#8F0047;"> From : </div>
+               <div>{{ offer.datefrom|date }}</div><br>
+               <div style="color:#8F0047;">To :</div>
+               <div>{{ offer.dateto|date }}</div><br>
+               <div style="color:#8F0047;">Place :</div>
+               <div>{{ offer.place }}</div><br>
+               <div style="color:#8F0047;">Company :</div>
+               <div>{{ offer.comp.getUsername() }}</div><br>
+               <div style="color:#8F0047;">Category :</div>
+               <div>{{ offer.category }}</div><br>
+               <div style="color:#8F0047;">Available for  :</div>
+               <div>{{ offer.available }}</div><br>
+               <div style="color:#8F0047;">Rating :</div>
+               <div>{{ offer.rating }}</div><br>
+               <div style="color:#8F0047;">Description :</div>
+               <div>{{ offer.description }}</div><br>
+               {% if type == "user" %}
+               <a href="{{ path('sitereservation_registeroffer',{'id':app.session.get('id'),'eventid':offer.id}) }}">Register</a>
+               {% elseif type == "company" %}
+               {% if offer.ispublished == 'true' %}
+               <a href="{{ path('sitereservation_publishoffer',{'id':app.session.get('id'),'eventid':offer.id,'state':'false'}) }}">Unpublish</a>
+               {% else %}
+               <a href="{{ path('sitereservation_publishoffer',{'id':app.session.get('id'),'eventid':offer.id,'state':'true'}) }}">Publish</a>
+               {% endif %}
+               <a href="{{ path('sitereservation_deleteoffer',{'id':app.session.get('id'),'eventid':offer.id}) }}">Delete</a>
+               <a href="">Edite</a>
+               {% elseif type == "admin" %}
+               {% else %}
+               <a href="#" class="topopup">Register</a>
+               {% endif %}
+               
+       
+           
+           </div>
+          </div>
+</div>
+{% endfor %}
+{% endblock %}
+			
+                                           

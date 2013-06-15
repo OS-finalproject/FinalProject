@@ -1,0 +1,47 @@
+{% extends '::base.html.twig'%}
+{% block title %} Add Data{% endblock %}
+{% block body %}
+
+    <script>
+        
+       $("li").removeClass("current-page");
+       $("#nav3").addClass("current-page");
+       
+    </script>
+    
+     <style>
+
+            span{
+
+                color: blue;
+
+
+            }
+
+     </style>
+        
+      <div class="what-we-do container">
+              <center>             
+              <div class="Reports">
+                <br/>
+                <div>
+                    <span>add Payment for Company</span>
+                </div>                
+                <div class="ReportsButton" ><a  href="{{ path('sitereservation_addPaymentForCompany') }}" />add</a></div>      
+             
+              </div>        
+            <div class="Reports">
+                <br/>
+                <div>
+                    <span>active new company requests </span>
+                </div>                
+                <div class="ReportsButton" ><a  href="{{ path('sitereservation_activeNewCompany') }}"  />add</a></div>      
+             
+                </div>
+                      
+             </center>          
+              
+       </div>
+        <br/>
+{% endblock %}      
+    

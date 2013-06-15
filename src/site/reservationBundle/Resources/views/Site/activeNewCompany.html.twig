@@ -1,0 +1,40 @@
+{% extends '::base.html.twig'%}
+{% block title %} Add Data{% endblock %}
+{% block body %}
+ <script>
+        
+       $("li").removeClass("current-page");
+       $("#nav3").addClass("current-page");
+       
+ </script>
+
+
+      <div class="what-we-do container">
+              <center>             
+              <div class="AdminProfile">
+                <br/>
+                <select id="activeNewCompanyRequestSelect" >
+                        {% for company in companys  %}
+
+                        <option value="{{ company.id }}">{{ company.custid.username }}</option>
+
+                        {% endfor %}                    
+                </select>        
+                <div class="ReportsButton"  ><a  href="{{ path('sitereservation_activeNewCompany') }}"  id="activeNewCompanyRequestButton" name = "{{ path('sitereservation_AdminAddData') }}"/>active</a></div>      
+             
+              </div>        
+                      
+             </center>          
+              
+       </div>
+        <br/>
+        
+       <!-- <script>
+            $('#activeNewCompanyRequestSelect').on('change',function(){
+                
+                
+                alert($('#activeNewCompanyRequestSelect').val());
+            });
+        </script>-->
+{% endblock %}
+

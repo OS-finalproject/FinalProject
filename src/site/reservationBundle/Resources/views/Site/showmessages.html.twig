@@ -1,0 +1,6 @@
+{# empty Twig template #}
+<ul style="list-style: none;font-size:15px;text-align: center">
+    {% for msg in messages %}
+        <li><a href="" name="{{ path('sitereservation') }}">{{ msg.subject }}</a></li>
+    {% endfor %}
+    </ul>

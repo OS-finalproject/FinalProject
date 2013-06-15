@@ -27,49 +27,50 @@
                         </div>
                     </div>
                 </div>
+        </div>
             </div>
         </div>
 <!-- Site Description -->
         <div class="presentation container">
             <h2>We provide <span class="violet">Booking Service</span></h2>
+            <p>Check Daily Our latest offers from our service providers</p>
             <p>Browse, Ready and Go to your vacation</p>
-
         </div>
+        <br />
+        <br />
         <!-- Services -->
         <div class="what-we-do container">
             <div class="row">
-                <div class="service span3">
+            <div class="service span3" style="border:none;background-color: #FFFFFF;">
+                <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/AgaztyCom"  data-widget-id="344194317524533249">Tweets by @AgaztyCom</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+            </div>
+              <div class="service span3">
                     <div class="icon-awesome">
-                        <i class="icon-eye-open"></i>
+                        <i class="icon-magic"></i>
                     </div>
-                    <h4>Beautiful Websites</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et...</p>
-                    <a href="services.html">Read more</a>
+                    <h4>Travel</h4>
+                   <p> Check Our Travel Companies' Offers</p>
+                   <a href="">Travel Companies</a>
                 </div>
-                <div class="service span3">
+            <div class="service span3">
                     <div class="icon-awesome">
-                        <i class="icon-table"></i>
+                        <i class="icon-magic"></i>
                     </div>
-                    <h4>Responsive Layout</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et...</p>
-                    <a href="services.html">Read more</a>
+                    <h4>Shopping</h4>
+                   <p>Check Our Shopping Offers</p>
+                   <a href="">Shopping Offers</a>
                 </div>
                 <div class="service span3">
                     <div class="icon-awesome">
                         <i class="icon-magic"></i>
                     </div>
-                    <h4>Awesome Logos</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et...</p>
-                    <a href="services.html">Read more</a>
+                    <h4>Resturants</h4>
+                   <p> Check Our Resturants' Offers</p>
+                   <a href="">Resturants</a>
                 </div>
-                <div class="service span3">
-                    <div class="icon-awesome">
-                        <i class="icon-print"></i>
-                    </div>
-                    <h4>High Res Prints</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et...</p>
-                    <a href="services.html">Read more</a>
-                </div>
+            
             </div>
         </div>
 
@@ -78,80 +79,28 @@
             <div class="portfolio-title">
                 <h3>Our Latest Offers</h3>
             </div>
-            <div class="row">
+            
+                
+                {% for offer in offers %}
+                    {% if (loop.index-1)%4 == 0 %}
+                        <div class="row">            
+                    {% endif %}
                 <div class="work span3">
-                    <img src="assets/img/portfolio/work1.jpg" alt="">
-                    <h4>Lorem Website</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor...</p>
-                    <div class="icon-awesome">
-                        <a href="assets/img/portfolio/work1.jpg" rel="prettyPhoto"><i class="icon-search"></i></a>
-                        <a href="portfolio.html"><i class="icon-link"></i></a>
-                    </div>
+                    <img src="{{ asset('uploads/documents/offer.image') }}" alt="">
+                    <h4>{{ offer.name }}</h4>
+                    <p><div>{{ offer.description }}</div>
+                    <div>It will be from {{ offer.datefrom|date("m/d/Y") }} to {{ offer.dateto|date("m/d/Y") }}</div>
+                    <div></div>
+                    <div></div></p>
+                    <a href="">view more details</a>
                 </div>
-                <div class="work span3">
-                    <img src="assets/img/portfolio/work2.jpg" alt="">
-                    <h4>Ipsum Logo</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor...</p>
-                    <div class="icon-awesome">
-                        <a href="assets/img/portfolio/work2.jpg" rel="prettyPhoto"><i class="icon-search"></i></a>
-                        <a href="portfolio.html"><i class="icon-link"></i></a>
-                    </div>
-                </div>
-                <div class="work span3">
-                    <img src="assets/img/portfolio/work3.jpg" alt="">
-                    <h4>Dolor Prints</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor...</p>
-                    <div class="icon-awesome">
-                        <a href="assets/img/portfolio/work3.jpg" rel="prettyPhoto"><i class="icon-search"></i></a>
-                        <a href="portfolio.html"><i class="icon-link"></i></a>
-                    </div>
-                </div>
-                <div class="work span3">
-                    <img src="assets/img/portfolio/work4.jpg" alt="">
-                    <h4>Sit Amet Website</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor...</p>
-                    <div class="icon-awesome">
-                        <a href="assets/img/portfolio/work4.jpg" rel="prettyPhoto"><i class="icon-search"></i></a>
-                        <a href="portfolio.html"><i class="icon-link"></i></a>
-                    </div>
-                </div>
+                {% if loop.index%4 == 0 %}
+                        </div>     
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
-
-        <!-- Testimonials -->
-        <div class="testimonials container">
-            <div class="testimonials-title">
-                <h3>Testimonials</h3>
-            </div>
-            <div class="row">
-                <div class="testimonial-list span12">
-                    <div class="tabbable tabs-below">
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="A">
-                                <img src="assets/img/testimonials/1.jpg" title="" alt="">
-                                <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et. Lorem ipsum dolor sit amet, consectetur..."<br /><span class="violet">Lorem Ipsum, dolor.co.uk</span></p>
-                            </div>
-                            <div class="tab-pane" id="B">
-                                <img src="assets/img/testimonials/2.jpg" title="" alt="">
-                                <p>"Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat..."<br /><span class="violet">Minim Veniam, nostrud.com</span></p>
-                            </div>
-                            <div class="tab-pane" id="C">
-                                <img src="assets/img/testimonials/3.jpg" title="" alt="">
-                                <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et. Lorem ipsum dolor sit amet, consectetur..."<br /><span class="violet">Lorem Ipsum, dolor.co.uk</span></p>
-                            </div>
-                            <div class="tab-pane" id="D">
-                                <img src="assets/img/testimonials/1.jpg" title="" alt="">
-                                <p>"Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat..."<br /><span class="violet">Minim Veniam, nostrud.com</span></p>
-                            </div>
-                        </div>
-                       <ul class="nav nav-tabs">
-                           <li class="active"><a href="#A" data-toggle="tab"></a></li>
-                           <li class=""><a href="#B" data-toggle="tab"></a></li>
-                           <li class=""><a href="#C" data-toggle="tab"></a></li>
-                           <li class=""><a href="#D" data-toggle="tab"></a></li>
-                       </ul>
-                   </div>
-                </div>
-            </div>
-        </div>
+<br />
+<br />
+       
 {% endblock %}

@@ -139,10 +139,10 @@ class Userevent
     /**
      * Set user
      *
-     * @param \site\reservationBundle\Entity\Userinfo $user
+     * @param \site\reservationBundle\Entity\Customer $user
      * @return Userevent
      */
-    public function setUser(\site\reservationBundle\Entity\Userinfo $user = null)
+    public function setUser(\site\reservationBundle\Entity\Customer $user = null)
     {
         $this->user = $user;
     
@@ -152,7 +152,7 @@ class Userevent
     /**
      * Get user
      *
-     * @return \site\reservationBundle\Entity\Userinfo 
+     * @return \site\reservationBundle\Entity\Customer 
      */
     public function getUser()
     {

@@ -1,0 +1,54 @@
+{% extends '::base.html.twig'%}
+{% block title %} Reports {% endblock %}
+{% block body %}
+
+    <script>
+        
+       $("li").removeClass("current-page");
+       $("#nav2").addClass("current-page");
+       
+    </script>
+    
+     <style>
+
+            span{
+
+                color: blue;
+
+
+            }
+
+     </style>
+        
+      <div class="what-we-do container">
+              <center>             
+              <div class="Reports">
+                <br/>
+                <div>
+                    <span>Report show unpayment company </span>
+                </div>                
+                <div class="ReportsButton" ><a  href="" id="" />Result of Report</a></div>      
+             
+              </div>        
+            <div class="Reports">
+                <br/>
+                <div>
+                    <span>Report show active User </span>
+                </div>                
+                <div class="ReportsButton" ><a  href="" id="" />Result of Report</a></div>      
+             
+                </div>
+             <div class="Reports">
+                <br/>
+                <div>
+                    <span>Report show unactive User </span>
+                </div>                
+                <div class="ReportsButton" ><a  href="" id="" />Result of Report</a></div>      
+
+             </div> 
+             </center>          
+              
+       </div>
+        <br/>
+{% endblock %}      
+        

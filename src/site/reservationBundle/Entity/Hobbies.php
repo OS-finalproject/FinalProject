@@ -24,7 +24,7 @@ class Hobbies
      /**
      * @var string
      *
-     * @ORM\Column(name="hobby", type="string", nullable=false,columnDefinition="ENUM('travel', 'shopping','reading','music','sports','drawing')")
+     * @ORM\Column(name="hobby", type="array", nullable=false)
      */
     private $hobby;
 
@@ -76,10 +76,10 @@ class Hobbies
     /**
      * Set user
      *
-     * @param \site\reservationBundle\Entity\Userinfo $user
+     * @param \site\reservationBundle\Entity\Customer $user
      * @return Hobbies
      */
-    public function setUser(\site\reservationBundle\Entity\Userinfo $user = null)
+    public function setUser(\site\reservationBundle\Entity\Customer $user = null)
     {
         $this->user = $user;
     
@@ -89,7 +89,7 @@ class Hobbies
     /**
      * Get user
      *
-     * @return \site\reservationBundle\Entity\Userinfo 
+     * @return \site\reservationBundle\Entity\Customer 
      */
     public function getUser()
     {

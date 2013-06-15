@@ -1,0 +1,47 @@
+{% extends '::base.html.twig' %}
+{% block title %}Search Results{% endblock %}
+{% block body %}
+<script>
+	$("li").removeClass("current-page");
+	$("#nav2").addClass("current-page");
+</script>
+<div class="portfolio-title">
+<h3>Search Results</h3>
+</div>
+<br/><br/><br />
+<div class="what-we-do container">
+<div class="row">
+<div class="service span3" style="border:none;background-color: #FFFFFF">
+<!----------------accordion-------------------->
+{% include 'sitereservationBundle:Site:accordion.html.twig' %}
+<!---------------------------------------------->
+</div>
+<div class="service span3" style="width:72.5%;height:50%;border:none;background-color: #FFFFFF">
+<div class="what-we-do container">
+<div class="row">
+<br /><br />
+</div>
+<div class="service span3">
+<div align="right" style="width:50%;height:20%;">
+	<img src="{{ asset('/upload/documents/results.image') }}">
+</div>
+<div>
+	<span class="violet"><b>{{ results.username }}</b></span>
+</div>
+<br />
+<div align="left">
+	<b>Contact Details</b>
+		<div style="position:relative;left:30px;">
+		<br />
+			<div><b>Email</b></div><div style="position:relative;left:30px;">{{ results.email }}</div>
+			{% render url('sitereservation_restInfoCompany',{ id: results.id })  %}
+		</div>
+</div>
+<br />
+<a href="">Visit the Company</a>
+</div>
+</div>
+</div>
+</div></div><br />
+
+{% endblock %}

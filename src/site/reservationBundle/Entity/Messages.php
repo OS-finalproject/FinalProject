@@ -27,6 +27,20 @@ class Messages
      * @ORM\Column(name="message", type="text", nullable=false)
      */
     private $message;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="subject", type="string", nullable=false)
+     */
+    private $subject;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="checked", type="string", nullable=false,columnDefinition="ENUM('no', 'yes')")
+     */
+    private $checked;
 
     /**
      * @var \Customer
@@ -129,4 +143,53 @@ class Messages
     {
         return $this->msgfrom;
     }
+    
+      /**
+     * Set checked
+     *
+     * @param string $checked
+     * @return Messages
+     */
+       public function setGendar($checked)
+    {
+        $this->checked = $checked;
+    
+        return $this;
+    }
+
+    /**
+     * Get checked
+     *
+     * @return string 
+     */
+    public function getChecked()
+    {
+        return $this->checked;
+    }
+    
+    
+    /**
+     * Set subject
+     *
+     * @param string $subject
+     * @return Messages
+     */
+    public function setSubject($subject)
+    {
+        $this->subject = $subject;
+    
+        return $this;
+    }
+
+    /**
+     * Get subject
+     *
+     * @return string 
+     */
+    public function getSubject()
+    {
+        return $this->subject;
+    }
+
+    
 }

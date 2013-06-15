@@ -12,4 +12,15 @@ use Doctrine\ORM\EntityRepository;
  */
 class messagesRepository extends EntityRepository
 {
+    public function getmessages($rid){
+        $query = $this->getEntityManager()->createQuery('
+				SELECT M
+				FROM sitereservationBundle:Messages M
+				where M.msgto = :rid
+                                and M.checked like :chk
+			');
+		$query->setParameter('rid',$rid);
+                $query->setParameter('chk','no');
+		return $query->getResult();
+    }
 }

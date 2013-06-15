@@ -17,6 +17,8 @@ use site\reservationBundle\Form\Type\CustomerType;
 use site\reservationBundle\Form\Type\UserInfoType;
 use site\reservationBundle\Form\Type\InfoCompType;
 use site\reservationBundle\Form\Type\companyAddressType;
+use site\reservationBundle\Form\Type\HobbiesType;
+
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -66,21 +68,9 @@ class DefaultController extends Controller
        if ($request->isMethod('POST')) {
             $form->bind($request);
             if ($form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
-                
-                try {
-                         
-                     $em->persist($newcustomer); 
-                     $em->flush();
-                     
-                }  catch (\Exception $excep ){
- 
-                   return $this->render('sitereservationBundle:Default:addnewuser.html.twig', array(
-                        'form' => $form->createView(),'email_error'=>" This email is uesed !! "
-                    ));
-                    
-                }
-                
+                $em = $this->getDoctrine()->getManager();                     
+                $em->persist($newcustomer); 
+                $em->flush();
                 $repo = $em->getRepository('sitereservationBundle:Customer');
                 $cust = $repo->getCustomerId();
                 
@@ -89,11 +79,107 @@ class DefaultController extends Controller
         }
 
         return $this->render('sitereservationBundle:Default:addnewuser.html.twig', array(
-             'form' => $form->createView(),'email_error'=>""
+            'form' => $form->createView(),
+        ));
+    }
+
+    public function extrauserAction(Request $request,$id)
+    {
+       $entity  = new Userinfo();
+       $form = $this->createForm(new UserinfoType(), $entity);
+       if ($request->isMethod('POST')) {
+
+            $form->bind($request);
+            if ($form->isValid()) {    
+            
+                $em = $this->getDoctrine()->getManager();           
+                $repo = $em->getRepository('sitereservationBundle:Customer');
+                $cust = $repo->getProfileInfo($id);
+                $entity->setCustid($cust[0]);                    
+                $em->persist($entity); 
+                $em->flush();
+                //return $$this->redirect($this->generateUrl('sitereservation_addressuserinfo',{'id':$cust[0]['id']}));  
+            return $this->redirect($this->generateUrl('sitereservation_hobbiesuserinfo',array('id'=>$id),true));
+
+           }
+        }
+
+        return $this->render('sitereservationBundle:Default:extrauserinfo.html.twig', array(
+            'form' => $form->createView(),'id'=>$id
+        ));
+    }
+       public function hobbiesuserAction(Request $request,$id)
+    {
+       $entity  = new Hobbies();
+       $form = $this->createForm(new HobbiesType(), $entity);
+       if ($request->isMethod('POST')) {
+
+            $form->bind($request);
+            if ($form->isValid()) {    
+            
+                $em = $this->getDoctrine()->getManager();           
+                $repo = $em->getRepository('sitereservationBundle:Customer');
+                $cust = $repo->getProfileInfo($id);
+                $entity->setUser($cust[0]);                    
+                $em->persist($entity); 
+                $em->flush();
+                //return $$this->redirect($this->generateUrl('sitereservation_addressuserinfo',{'id':$cust[0]['id']}));  
+            return $this->render('sitereservationBundle:Default:insertsuccess.html.twig');
+
+           }
+        }
+
+        return $this->render('sitereservationBundle:Default:Hobbiesuserinfo.html.twig', array(
+            'form' => $form->createView(),'id'=>$id
+        ));
+    }
+   /* public function addressuserinfoAction(Request $request,$id)
+    {
+       $entity  = new Hobbies();
+       $form = $this->createForm(new HobbiesType(), $entity);
+       if ($request->isMethod('POST')) {
+            $form->bind($request);
+            if ($form->isValid()) {                
+                $repo = $em->getRepository('sitereservationBundle:Customer');
+                $cust = $repo->find($id);
+                $entity->setCustid($cust);
+                $em = $this->getDoctrine()->getManager();                     
+                $em->persist($entity); 
+                $em->flush();
+                return $this->render('sitereservationBundle:Default:insertsuccess.html.twig');
+           }
+        }
+
+        return $this->render('sitereservationBundle:Default:addextrainfo.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }*/
+
+     public function contactusAction(Request $request,$id)
+    {
+        $entity  = new Messages();        
+        $cust= $this->getDoctrine()->getEntityManager();
+        $repo=$cust->getRepository('sitereservationBundle:Customer');
+        $info=$repo->getAdmin();
+        $sender=$repo->getProfileInfo($id);
+        $entity->setMsgfrom($sender[0]);
+        $entity->setMsgto($info);
+        $form = $this->createForm(new MessageType(), $entity);
+        if ($request->isMethod('POST')) {
+            $form->bind($request);
+            //if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($entity);             
+                $em->flush();
+                return $this->render('sitereservationBundle:Default:insertsuccess.html.twig');  
+       // }
+    }
+        return $this->render('sitereservationBundle:Default:contactus.html.twig', array(
+            'form' => $form->createView(),'sender'=>$sender,
         ));
         
     }
-    
+
     public function addNewCompanyAction(Request $request){
         
         
@@ -118,7 +204,7 @@ class DefaultController extends Controller
                 }catch(\Exception $excp ){
                                         
                     return $this->render('sitereservationBundle:Default:addNewCompany.html.twig',
-                    array( 'form'=> $form->createView(),'email_error'=>"" ) );
+                    array( 'form'=> $form->createView(),'email_error'=>" This email is uesed !! " ) );
                     
                 }
 
@@ -127,7 +213,8 @@ class DefaultController extends Controller
                 $id = $newCustomer->getId();
                 
                return $this->redirect($this->generateUrl('sitereservation_addNewCompanyInfo',array('id'=>$id),TRUE));
-                
+               //return $this->forward(''); 
+                       
                //return new Response($this->addNewCompanyInfoAction($id));
                 
            }
@@ -136,7 +223,7 @@ class DefaultController extends Controller
         }
                 
         return $this->render('sitereservationBundle:Default:addNewCompany.html.twig',
-                array( 'form'=> $form->createView(),'email_error'=>" This email is uesed !!" ) );
+                array( 'form'=> $form->createView(),'email_error'=>"" ) );
     }
     
     
@@ -150,6 +237,7 @@ class DefaultController extends Controller
         
         $company = new Infocomp();
         $company->setCustid($customer);
+        $company->setIs_active(0);
         
         $form = $this->createForm(new InfoCompType(),$company);
         
@@ -211,76 +299,5 @@ class DefaultController extends Controller
                 array( 'form'=> $form->createView(),'costumerId'=>$id ) );
     }
     
-
-    public function extrauserAction(Request $request,$id)
-    {
-       $entity  = new Userinfo();
-       $form = $this->createForm(new UserinfoType(), $entity);
-       if ($request->isMethod('POST')) {
-
-            $form->bind($request);
-            if ($form->isValid()) {    
-            
-                $em = $this->getDoctrine()->getManager();           
-                $repo = $em->getRepository('sitereservationBundle:Customer');
-                $cust = $repo->getProfileInfo($id);
-                $entity->setCustid($cust[0]);                    
-                $em->persist($entity); 
-                $em->flush();
-                //return $$this->redirect($this->generateUrl('sitereservation_addressuserinfo',{'id':$cust[0]['id']}));  
-            return $this->render('sitereservationBundle:Default:insertsuccess.html.twig');
-
-           }
-        }
-
-        return $this->render('sitereservationBundle:Default:extrauserinfo.html.twig', array(
-            'form' => $form->createView(),'id'=>$id
-        ));
-    }
-   /* public function addressuserinfoAction(Request $request,$id)
-    {
-       $entity  = new Hobbies();
-       $form = $this->createForm(new HobbiesType(), $entity);
-       if ($request->isMethod('POST')) {
-            $form->bind($request);
-            if ($form->isValid()) {                
-                $repo = $em->getRepository('sitereservationBundle:Customer');
-                $cust = $repo->find($id);
-                $entity->setCustid($cust);
-                $em = $this->getDoctrine()->getManager();                     
-                $em->persist($entity); 
-                $em->flush();
-                return $this->render('sitereservationBundle:Default:insertsuccess.html.twig');
-           }
-        }
-
-        return $this->render('sitereservationBundle:Default:addextrainfo.html.twig', array(
-            'form' => $form->createView(),
-        ));
-    }*/
-
-     public function contactusAction(Request $request,$id)
-    {
-        $entity  = new Messages();        
-        $cust= $this->getDoctrine()->getEntityManager();
-        $repo=$cust->getRepository('sitereservationBundle:Customer');
-        $info=$repo->getAdmin();
-        $sender=$repo->getProfileInfo($id);
-        $entity->setMsgfrom($sender[0]);
-        $entity->setMsgto($info);
-        $form = $this->createForm(new MessageType(), $entity);
-        if ($request->isMethod('POST')) {
-            $form->bind($request);
-            //if ($form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($entity);             
-                $em->flush();
-                return $this->render('sitereservationBundle:Default:insertsuccess.html.twig');  
-       // }
-    }
-        return $this->render('sitereservationBundle:Default:contactus.html.twig', array(
-            'form' => $form->createView(),'sender'=>$sender,
-        ));
-        
-    }
+    
 }

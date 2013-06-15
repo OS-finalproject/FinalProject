@@ -1,0 +1,27 @@
+{# src/Acme/TaskBundle/Resources/views/Default/new.html.twig #}
+{% extends '::base.html.twig' %}
+{% block title %}Index{% endblock %}
+{% block body %}
+	<div class="row">
+						<div class="12u">
+							<!-- Banner -->
+								<section class="box">
+									<div  style="position:relative;left:375px;">
+<form action="{{ path('sitereservation_hobbiesuserinfo',{'id':id}) }}" method="post" {{ form_enctype(form) }}>
+<table>
+
+    <tr>
+    <td>{{ form_label(form.hobby) }}</td>
+    <td> {{ form_errors(form.hobby) }}
+    {{ form_widget(form.hobby) }}</td>
+    </tr>
+     
+    <tr><td colspan='2'>{{ form_rest(form) }}</td></tr>
+    <tr><td colspan='2'><center><br><br><input type="submit" value="Save"/></center></td></tr>
+    </table>
+</form>
+</div>
+								</section>
+						</div>
+						</div>
+{% endblock %}

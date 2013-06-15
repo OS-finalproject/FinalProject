@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +20,7 @@
         <link rel="stylesheet" href="{{ asset('assets/css/flexslider.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
         <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -36,6 +37,7 @@
 
         <!-- Javascript -->
         {% block javascripts %}
+        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
         <script src="{{ asset('assets/js/jquery-1.8.2.min.js') }}"></script>
         <script src="{{ asset('assets/bootstrap/js/bootstrap.min.js') }}"></script>
         <script src="{{ asset('assets/js/jquery.flexslider.js') }}"></script>
@@ -46,6 +48,7 @@
         <script src="{{ asset('assets/js/jquery.quicksand.js') }}"></script>
         <script src="{{ asset('assets/prettyPhoto/js/jquery.prettyPhoto.js') }}"></script>
         <script src="{{ asset('assets/js/scripts.js') }}"></script>
+        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
         {% endblock %}
     </head>
     <body>
@@ -75,7 +78,7 @@
                                     </li>
                                    {% else %}
                                     <li>
-                                        <a href="#" class="topopup"><br />Sign In</a>
+                                        <a href="{{ path('sitereservation_signInPageForSmallDevice') }}" class="topopup"0><br />Sign In</a>
                                     </li>
                                     <li>
                                         <a href="{{ path('sitereservation_addnewuserform') }}"><br />Sign Up</a>
@@ -89,80 +92,24 @@
                                 <br>                                                     
                             <div class="nav-collapse collapse">
 				{% if type == "user" %}
- 				 <ul class="nav">
-                                    <li class="current-page" id="nav1">
-                                        <a href="{{ path('sitereservation_Gcusthome') }}"><i class="icon-home"></i><br />Home</a>
-                                    </li>
-				    <li id="nav2">
-                                        <a href="{{ path('sitereservation_userprofile') }}"><i class="icon-home"></i><br />Profile</a>
-                                    </li>
-				     <li id="nav3">
-                                        <a href="{{ path('sitereservation_homepage') }}"><i class="icon-home"></i><br />Calendar</a>
-                                    </li>
-                                    <li id="nav4">
-                                        <a href="{{ path('sitereservation_AllCompanies') }}"><i class="icon-tasks"></i><br />Service Providers</a>
-                                       <div  style="display: none" >
-                                        <ul>
-                                            <li><a href="{{ path('sitereservation_eventcat',{'cat':'travel'}) }}">Travel</a></li>
-                                            <li><a href="{{ path('sitereservation_eventcat',{'cat':'shopping'}) }}">Shoping</a></li>
-                                            <li><a href="{{ path('sitereservation_eventcat',{'cat':'tourism'}) }}">Tourism</a></li>
-                                            <li><a href="{{ path('sitereservation_eventcat',{'cat':'resturant'}) }}">Resturants</a></li>
-                                            <li><a href="{{ path('sitereservation_eventcat',{'cat':'hotels'}) }}">Hotels</a></li>
-                                        </ul>
-                                       </div>
-                                    </li>
-				   <li id="nav5">
-                                        <a href="{{ path('sitereservation_userAllOffers') }}"><i class="icon-tasks"></i><br />Offers</a>
-                                    </li>
-                                     <li id="nav6">
-                                        <a href="{{ path('sitereservation_about') }}"><i class="icon-user"></i><br />About</a>
-                                    </li>
-                                    <li id="nav7">
-                                        <a href="{{ path('sitereservation_contactus',{'id':app.session.get('id')}) }}"><i class="icon-envelope-alt"></i><br />Contact</a>
-                                    </li>       
-                                </ul>
+                                    {%  include 'userMenu.html.twig'  %}
 				{% elseif type == "company" %}
-                            
-	                        {% elseif type == "admin" %}
-	                    
+                                    {%  include 'companyMenu.html.twig'  %}
+                                {% elseif type == "admin" %}
+                                    {%  include 'adminMenu.html.twig'  %}
 	                        {% else %}
-                                <ul class="nav">
-                                    <li class="current-page" id="nav1">
-                                        <a href="{{ path('sitereservation_homepage') }}"><i class="icon-home"></i><br />Home</a>
-                                    </li>
-                                    <li id="nav2" class="sousMenu">
-                                        <a href="{{ path('sitereservation_AllCompanies') }}"><i class="icon-tasks"></i><br />Service Providers</a>
-                                        <ul style="display: none">
-                                            <li><a href="{{ path('sitereservation_eventcat',{'cat':'travel'}) }}">Travel</a></li>
-                                            <li><a href="{{ path('sitereservation_eventcat',{'cat':'shopping'}) }}">Shoping</a></li>
-                                            <li><a href="{{ path('sitereservation_eventcat',{'cat':'tourism'}) }}">Tourism</a></li>
-                                            <li><a href="{{ path('sitereservation_eventcat',{'cat':'resturant'}) }}">Resturants</a></li>
-                                            <li><a href="{{ path('sitereservation_eventcat',{'cat':'hotels'}) }}">Hotels</a></li>
-                                        </ul>
-                                    </li>
-                                     <li id="nav3">
-                                        <a href="{{ path('sitereservation_about') }}"><i class="icon-user"></i><br />About</a>
-                                    </li>
-                                    <li id="nav4">
-                                        <a href="{{ path('sitereservation_contactus',{'id':100}) }}"><i class="icon-envelope-alt"></i><br />Contact</a>
-                                    </li>       
-                                </ul>
+                                    {%  include 'visitorMenu.html.twig'  %}
 			        {% endif %}
-                            </div>0
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-                
             <div id="toPopup">
             <div class="close"></div>
             <span class="ecs_tooltip">Press Esc to close <span class="arrow"></span></span>
             <div id="popup_content"> <!--your content start-->
-
-
-             
-                    
                     <div class="signIn">
                         <div class="signInDiv">
                             <center><span id="signInError"></span></center>
@@ -191,57 +138,45 @@
                         <div class="signInDiv" >
                             <br/><br/><br/>   
                             <div>
-                                <a href="#">Sign up as a Customer</a>
+                                <a href="{{ path('sitereservation_addnewuserform') }}">Sign up as a Customer</a>
 
                             </div>
                             <br/>    
                             <div>
-                                <a href="{{ path('sitereservation_companysignup') }}"  >Sign up as a Company</a>
+                                <a href="{{ path('sitereservation_addNewCompany') }}"  >Sign up as a Company</a>
                             </div>
                         </div>        
                     </div>       
               
 
             </div> <!--your content end-->
-        </div> 
-        <div class="loader"></div>
-        <div id="backgroundPopup"></div>  
-        
-        <!--toPopup end-->
+        </div> <!--toPopup end-->
         
         <!-- arrow up div  begin -->
         
         <div id="arrow_up"></div>
         
         <!-- arrow up div end-->
+  
+        <div class="loader"></div>
+        <div id="backgroundPopup"></div>  
         {% block body %}{% endblock %}
         <!-- Footer -->
         <footer>
             <div class="container">
                 <div class="row">
-                    
-                    <div class="widget span3">
-                        <h4>Latest Tweets</h4>
-                        <div class="show-tweets"></div>
-                    </div>
                     <div class="widget span3">
                         <h4>Contact Us</h4>
                         <p><i class="icon-map-marker"></i> Address: Via Principe Amedeo 9, 10100, Torino, TO, Italy</p>
                         <p><i class="icon-phone"></i> Phone: 0039 333 12 68 347</p>
-                        <p><i class="icon-user"></i> Skype: Andia_Agency</p>
                         <p><i class="icon-envelope-alt"></i> Email: <a href="">contact@andia.co.uk</a></p>
                     </div>
                 </div>
-                <div class="footer-border"></div>
+                <div class="footer-border" ></div>
                 <div class="row">
-                    <div class="copyright span4">
-                        <p>Copyright 2012 Andia - All rights reserved. Template by <a href="http://azmind.com">Azmind</a>.</p>
-                    </div>
-                    <div class="social span8">
+                    <div class="social span8 pull-right">
                         <a class="facebook" href=""></a>
-                        <a class="dribbble" href=""></a>
                         <a class="twitter" href=""></a>
-                        <a class="pinterest" href=""></a>
                     </div>
                 </div>
             </div>

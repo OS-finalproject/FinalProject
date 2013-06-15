@@ -1,0 +1,60 @@
+{% extends '::base.html.twig' %}
+{% block title %}companies{% endblock %}
+{% block body %}
+<script>
+	$("li").removeClass("current-page");
+	$("#nav2").addClass("current-page");
+</script>
+
+<div class="what-we-do container">
+	<div class="row">
+
+	<div>
+		<h2><span class="violet" style="position: relative;
+left:-5%;"><br/>{{cat}} Providers</span></h2>
+	</div>
+	
+   
+</div>
+</div>
+</div>
+<br/><br/><br/><br/>
+<!----------------accordion-------------------->
+{% include 'sitereservationBundle:Site:accordion.html.twig' %}
+<!---------------------------------------------->
+                <div class="what-we-do container" style="border-top:solid red;width:68%;position:relative;left:10%;top:-233px">
+
+			{% for company in companies %}
+			{% if (loop.index-1)%3 == 0 %}
+				<div class="row">
+				
+			{% endif %}
+                <div class="service span3">
+                    <h4>{{ company.custid.username }}</h4>
+					<div style="color:#d52349;font-weight: 700;">Contact Details</div>
+					<div style="position:relative;left:50px">
+						<table>
+						<tr>
+						<td align="left"><b>Email</b></td>
+						<td align="left">{{ company.custid.email }}</td></tr>
+						<tr>
+						<td align="left"><b>Website</b></td>
+						<td align="left">{{ company.website }}</td></tr>
+						<tr>
+						<td align="left"><b>Activity</b></td>
+						<td align="left">{{ company.category }}</td></tr>
+						</table>
+					</div>
+					<br />
+					<a href="{{ path('sitereservation_companyprofile',{"id" : company.id }) }}">Visit the company</a>
+					</div>
+			{% if loop.index%3 == 0 %}
+                </div>
+                <br />
+            {% endif %}
+			{% endfor %}
+        
+</div>	
+</div>     
+<br />
+{% endblock %}

@@ -1,0 +1,263 @@
+{% extends '::base.html.twig'%}
+{% block title %} calendar {% endblock %}
+{% block body %}
+<script>
+      $(document).ready(function(){
+                   
+       $("li").removeClass("current-page");
+       $("#nav3").addClass("current-page");
+        $(function() {
+        $( ".datepicker" ).datepicker({ changeMonth: true, changeYear: true,  dateFormat:'yy-mm-dd' , minDate: 0}).attr('readonly',true);
+        });
+        
+    
+    $("#i1").change(function(){
+
+      var value=$("#i1").val();
+      if(value){
+          $("#i2").val(value);
+      }
+    }); 
+    
+ 
+    
+     
+    function getcities(){   
+          $.ajax({
+                       
+                    url:"{{ path('sitereservation_cities') }}",
+                    type: "post",
+                    data: {
+                        
+                       country : $("#country").val()
+                    },
+                    success: function(resp){
+                       $("#cities").html(" ") ;
+                        cities=jQuery.parseJSON(resp);
+                        for(var i=0; i < cities.length ;i++){                            
+                          option = "<option>"+cities[i]+"</option>";
+                          $("#cities").append(option);
+                        }
+                    }                
+                });      
+            }
+            
+       function calendardata(){   
+          $.ajax({
+                       
+                    url:"{{ path('sitereservation_calendardata') }}",
+                    type: "post",
+                    data: {
+
+                       from:$("#i1").val(),
+                       to:$("#i2").val(),
+                       categry:$("#categry").val(),
+                       country:$("#country").val(),
+                       city:$("#cities").val()
+                       
+                    },
+                    success: function(resp){
+                      
+                    }                
+                });      
+            }
+      
+     
+         getcities();
+    $("#country").on('change',function(){
+        
+        getcities();
+    
+   });
+           
+    $("#save").on('click',function(){
+        var val=$("#i1").val();
+        if(val){
+            $("#error").css("display","none");
+            $("#sys").css("display","block");
+            $("#sys").fadeOut(2000);
+           // calendardata();
+            $("#i1").val(" ");
+            $("#i2").val(" ");
+            $("#disciption").val(" ");
+       }else{ $("#error").css("display","block"); }
+    
+   });   
+
+    $(function() {
+        $( "#accordion" ).accordion({  collapsible: true,active: true,heightStyle: "content"  });
+    });
+           
+ });
+
+      
+    </script>
+    <style>
+
+            p{
+                color: #AA3333;
+            }
+            .cal{
+                padding-left: 3%;
+            }
+            button{
+                background-color: #9d426b;
+                color: #bfbfbf;
+            }
+            .c{
+                width: 73%;
+                height: 50%;
+            }
+
+            span{  color: #AA3333    }
+
+        </style>
+        <div class="what-we-do container calendar">
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="row"> 
+                <div class="service span3"> 
+                    <div>
+                        <div >
+                            <div style="display: none" id="error"> <span style="color: red ">  you must enter your time </span></div>
+                            <div style="display: none" id="sys"> <span style="color: green">  sucssefully save </span></div>
+                            <p>  Select Your Date  </p>  
+
+                            <!--  <div class="cal" id="one" style="display: block">
+                                  <p>Date to: <input type="text" class="datepicker" id="i1" /></p>
+  
+                              </div>
+                            <-->
+                            <div class="cal" id="two" >
+                                <p>from</p> <input type="text" class="datepicker" id="i1" /> 
+
+                                <p>to  </p><input type="text" class="datepicker" id="i2"/>   
+
+                            </div>    
+                            <p>  interseted in  </p>
+                            <select id="categry" >
+                                <option> travel</option>
+                                <option> tourism</option>
+                                <option> shopping</option>
+                                <option> restaurant</option>
+                                <option> hotels</option>
+                            </select>
+                            <p>  country  </p>   
+                            <select id="country">
+                                   {% for index in country %}
+                                    <option>  {{ index }} </option>
+                                   {% endfor %}      
+                                </select>
+                                <p>  city  </p> 
+                                <select id="cities">
+
+
+
+                                </select>  
+                                <p> other info you want edit</p>  
+                                <input type="text"  id="disciption"/> 
+                                <br>
+                                <br>
+                                <button id="save">  
+                                    save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="presentation containe">   
+                        <span class="violet"><h2 style="color:  #AA3333"> Calendar Feeds </h2></span>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <div class="what-we-do container calendar">
+
+                        <div class="service span3 c"> 
+
+
+                            <div id="accordion">
+                                     <div> 
+                         
+                                            <label> to :</label>                    
+                            
+                                            <span> 2013-8-9  </span>
+                          
+                                            <label> from: </label>                    
+                        
+                                            <span>  2013-8-20 </span>
+                                  
+                                            <label> country:</label>                    
+                                     
+                                            <span> egypt  </span>
+                             
+                                            <label>  city  </label>                    
+                                 
+                                            <span>  alex </span>
+                             
+                                    </div> 
+                                
+                                <div>
+                                    <p>
+                                        Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+                                        ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+                                        amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+                                        odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+                                    </p>
+                                </div>
+                                <h3>Section 2</h3>
+                                <div>
+                                    <p>
+                                        Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+                                        purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+                                        velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+                                        suscipit faucibus urna.
+                                    </p>
+                                </div>
+                                <h3>Section 3</h3>
+                                <div>
+                                    <p>
+                                        Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
+                                        Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
+                                        ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
+                                        lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
+                                    </p>
+                                    <ul>
+                                        <li>List item one</li>
+                                        <li>List item two</li>
+                                        <li>List item three</li>
+                                    </ul>
+                                </div>
+                                <h3>Section 4</h3>
+                                <div>
+                                    <p>
+                                        Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+                                        et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
+                                        faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
+                                        mauris vel est.
+                                    </p>
+                                    <p>
+                                        Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
+                                        Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+                                        inceptos himenaeos.
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>  
+                    </div>
+
+                </div> 
+
+
+            </div> 
+        </div>      
+        <br>
+        <br>
+
+{% endblock %}
+
+
+
+

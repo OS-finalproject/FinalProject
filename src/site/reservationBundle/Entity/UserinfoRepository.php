@@ -13,7 +13,7 @@ use Doctrine\ORM\EntityRepository;
 class UserinfoRepository extends EntityRepository
 {
     
-     public function getProfileInfoUser($id) {
+      public function getProfileInfoUser($id) {
     
 
         $query = $this->getEntityManager()->createQuery('
@@ -26,5 +26,6 @@ class UserinfoRepository extends EntityRepository
         $query->setParameter('id', $id);
         return  $query->getResult();
     }
+    
     
 }

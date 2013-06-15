@@ -1,0 +1,21 @@
+                                    <ul class="nav">
+                                    <li class="current-page" id="nav1">
+                                        <a href="{{ path('sitereservation_Gcusthome') }}"><i class="icon-home"></i><br />Home</a>
+                                    </li>
+				    <li id="nav2">
+                                        <a href="{{ path('sitereservation_userprofile') }}"><i class="icon-home"></i><br />Profile</a>
+                                    </li>
+                                    <li id="nav3">
+                                        <a href="{{ path('sitereservation_AllCompanies') }}"><i class="icon-tasks"></i><br />Service Providers</a>
+                                     </li>
+				   <li id="nav4">
+                                        <a href=""><i class="icon-tasks"></i><br />Offers</a>
+                                    </li>
+                                     <li id="nav5">
+                                        <a href="{{ path('sitereservation_about') }}"><i class="icon-user"></i><br />About</a>
+                                    </li>
+                                    <li id="nav6">
+                                        <a href="{{ path('sitereservation_contactus',{'id':app.session.get('id')}) }}"><i class="icon-envelope-alt"></i><br />Contact</a>
+                                    </li>       
+                                </ul>
+                            

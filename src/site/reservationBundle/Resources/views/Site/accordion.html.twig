@@ -1,0 +1,182 @@
+{% block stylesheets %}
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+
+{% endblock %}
+{% block javascripts %}
+ <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<!--<link rel="stylesheet" href="/resources/demos/style.css" />-->
+<script>
+$(function() {
+$( "#accordion" ).accordion({
+    collapsible: true,
+    active: true,
+    heightStyle: "content",
+});
+});
+</script>
+{% endblock %}
+{% block body %}
+
+<div id="accordion">
+{% if type == 'user' %}
+        <h3>S.P Categories</h3>
+<div>
+<ul style="list-style: none;font-size:15px;text-align: center">
+        <li><a style="" href="{{ path('sitereservation_CompanyMenu',{'company':'travel'}) }}">Travel</a></li>
+        <li><a style="" href="{{ path('sitereservation_CompanyMenu',{'company':'hotels'}) }}">Hotels</a></li>
+        <li><a style="" href="{{ path('sitereservation_CompanyMenu',{'company':'tourism'}) }}">Tourism</a></li>
+        <li><a style="" href="{{ path('sitereservation_CompanyMenu',{'company':'shopping'}) }}">Shopping</a></li>
+        <li><a style="" href="{{ path('sitereservation_CompanyMenu',{'company':'resturant'}) }}">Resturants</a></li>
+</ul>
+</div>
+<h3>Offers Categories</h3>
+<div>
+<ul style="list-style: none;font-size:15px;text-align: center">
+        <li><a style="" href="{{ path('sitereservation_eventcat',{'cat':'travel'}) }}">Travel</a></li>
+        <li><a style="" href="{{ path('sitereservation_eventcat',{'cat':'hotels'}) }}">Hotels</a></li>
+        <li><a style="" href="{{ path('sitereservation_eventcat',{'cat':'shopping'}) }}">Shoping</a></li>
+        <li><a style="" href="{{ path('sitereservation_eventcat',{'cat':'tourism'}) }}">Tourism</a></li>
+        <li><a style="" href="{{ path('sitereservation_eventcat',{'cat':'resturant'}) }}">Resturants</a></li>
+        
+    </ul>
+</div>
+<h3>Send Mesage</h3>
+<div>
+    <div id="msgresp"></div>
+<form action="" method="post" >
+<label for="cat">Category</label>
+<select style="width:90%" id="selectcat" name="{{ path('sitereservationBundle_getcompanycat') }}" >
+    <option> Select Category</option>
+    <option value="travel">Travel</option>
+    <option value="tourism">Tourism</option>
+    <option value="shopping">Shopping</option>
+    <option value="resturant">Resturant</option>
+    <option value="hotels">Hotels</option>
+</select>
+<label for="companies">To :</label><br>
+
+<select style="width:90%" id="companies" name="companies">
+</select>
+<br><label for="textarea">Message:</label><br>
+<textarea style="width:90%" name="textarea" id="textareamsg"></textarea>
+<br>
+<center><input type="button" id="submit" value="Send" name="{{ path('sitereservationBundle_msgsent',{'id':app.session.get('id')}) }}"/></center>
+</form>
+    </div>
+<h3>Show Messages</h3>
+    <div>   
+        <!----------------accordion-------------------->
+{% render url('sitereservationBundle_showmessages') %}
+<!---------------------------------------------->
+    </div>
+<h3>History</h3>
+<div>
+<p>
+Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
+faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
+mauris vel est.
+</p>
+<p>
+Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
+Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+inceptos himenaeos.
+</p>
+</div>
+<h3>FeedBack</h3>
+<div>
+here div to see feedbackssitereservation_search
+</div>
+<h3>Search</h3>
+    <div>   
+        <p>
+            Search For Certain Service Provider
+        </p>
+        <div>
+    		<form method="post" action="{{ path('sitereservation_search') }}">
+    			<input type="search" name="searchkey" style="width:90%;" placeholder="Search">
+    		</form>
+        </div>
+    </div>
+
+	
+{% elseif type == 'company'%}
+        <h3>S.P Categories</h3>
+<div>
+<ul style="list-style: none;font-size:15px;text-align: center">
+        <li><a style="" href="{{ path('sitereservation_CompanyMenu',{'company':'travel'}) }}">Travel</a></li>
+        <li><a style="" href="{{ path('sitereservation_CompanyMenu',{'company':'hotels'}) }}">Hotels</a></li>
+        <li><a style="" href="{{ path('sitereservation_CompanyMenu',{'company':'tourism'}) }}">Tourism</a></li>
+        <li><a style="" href="{{ path('sitereservation_CompanyMenu',{'company':'shopping'}) }}">Shopping</a></li>
+        <li><a style="" href="{{ path('sitereservation_CompanyMenu',{'company':'resturant'}) }}">Resturants</a></li>
+</ul>
+</div>
+<h3>>Offers Categories></h3>
+<div>
+<ul style="list-style: none;font-size:15px;text-align: center">
+        <li><a style="" href="{{ path('sitereservation_eventcat',{'cat':'travel'}) }}">Travel</a></li>
+        <li><a style="" href="{{ path('sitereservation_eventcat',{'cat':'hotels'}) }}">Hotels</a></li>
+        <li><a style="" href="{{ path('sitereservation_eventcat',{'cat':'shopping'}) }}">Shoping</a></li>
+        <li><a style="" href="{{ path('sitereservation_eventcat',{'cat':'tourism'}) }}">Tourism</a></li>
+        <li><a style="" href="{{ path('sitereservation_eventcat',{'cat':'resturant'}) }}">Resturants</a></li>
+        
+    </ul>
+</div>
+<h3>Show Messages</h3>
+    <div>   
+<!----------------accordion-------------------->
+{% render url('sitereservationBundle_showmessages') %}
+<!---------------------------------------------->
+    </div>
+<h3>Search</h3>
+    <div>   
+        <p>
+            Search For Certain Service Provider
+        </p>
+        <div >
+    		<form method="post" action="{{ path('sitereservation_search') }}">
+    			<input type="search" name="searchkey" style="width:90%;" placeholder="Search">
+    		</form>
+        </div>
+	</div>
+
+{% elseif type == 'admin' %}
+{% else %}
+        <h3>S.P Categories</h3>
+<div>
+<ul style="list-style: none;font-size:15px;text-align: center">
+        <li><a style="" href="{{ path('sitereservation_CompanyMenu',{'company':'travel'}) }}">Travel</a></li>
+        <li><a style="" href="{{ path('sitereservation_CompanyMenu',{'company':'hotels'}) }}">Hotels</a></li>
+        <li><a style="" href="{{ path('sitereservation_CompanyMenu',{'company':'tourism'}) }}">Tourism</a></li>
+        <li><a style="" href="{{ path('sitereservation_CompanyMenu',{'company':'shopping'}) }}">Shopping</a></li>
+        <li><a style="" href="{{ path('sitereservation_CompanyMenu',{'company':'resturant'}) }}">Resturants</a></li>
+</ul>
+</div>
+<h3><div class="row">Offers Categories</div></h3>
+<div>
+<ul style="list-style: none;font-size:15px;text-align: center">
+        <li><a style="" href="{{ path('sitereservation_eventcat',{'cat':'travel'}) }}">Travel</a></li>
+        <li><a style="" href="{{ path('sitereservation_eventcat',{'cat':'hotels'}) }}">Hotels</a></li>
+        <li><a style="" href="{{ path('sitereservation_eventcat',{'cat':'shopping'}) }}">Shoping</a></li>
+        <li><a style="" href="{{ path('sitereservation_eventcat',{'cat':'tourism'}) }}">Tourism</a></li>
+        <li><a style="" href="{{ path('sitereservation_eventcat',{'cat':'resturant'}) }}">Resturants</a></li>
+        
+    </ul>
+</div>
+<h3>Search</h3>
+    <div>   
+        <p>
+            Search For Certain Service Provider
+        </p>
+        <div >
+    		<form method="post" action="{{ path('sitereservation_search') }}">
+    			<input type="search" name="searchkey" style="width:90%;" placeholder="Search">
+    		</form>
+        </div>
+	</div>
+{% endif %}
+</div>
+
+
+{% endblock %}
+

@@ -21,7 +21,8 @@ class CustomerRepository extends EntityRepository {
                          where C.id= :id
                     ');
         $query->setParameter('id',$custid);
-		return $query->getResult();       
+		return $query->getResult();
+  
        
     }    
     
@@ -69,5 +70,38 @@ class CustomerRepository extends EntityRepository {
         return $query->getResult();
         
     }
+    public function getsearchResult($keyword){
+        $query = $this->getEntityManager()->createQuery('
+        select c
+        from sitereservationBundle:Customer c
+        where c.username like :name
+
+        ');
+
+        $query->setParameter("name",'%'.$keyword.'%');
+
+        return $query->getSingleResult();
+}
+
+// ------------  admin DQL -- --------////
+
+ public function getUnactiveCompany(){
+     
+     
+     $query = $this->getEntityManager()->createQuery('
+         
+        select comp 
+        from sitereservationBundle:Infocomp comp
+        join comp.custid c
+        where comp.custid = c.id and comp.is_active = 0 
+
+    ');
+     
+     return $query->getResult();
+     
+     
+ }
+ 
+ //----------------------------------------///
 
 }

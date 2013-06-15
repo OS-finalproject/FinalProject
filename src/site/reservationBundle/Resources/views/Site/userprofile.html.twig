@@ -1,49 +1,168 @@
-{% extends '::base.html.twig' %}
-{% block title %}profile{% endblock %}
-
+{% extends '::base.html.twig'%}
+{% block title %} profile {% endblock %}
 {% block body %}
 <script>
-        $('li').removeClass('current_page_item');
-        $('#l2').addClass('current_page_item');
- 
+       $("li").removeClass("current-page");
+       $("#nav2").addClass("current-page");
     </script>
-    <div class="userprofile">
-        <center>
-        <table>     
-           {% for info in custinfo  %}
+    <style>
 
-                <tr>
-                    <td><lable> name: </lable></td> <td>  </td> <td> {{ info.username }}</td>
-                </tr>
-                <tr>
-                    <td>  <label> email: </label> </td> <td>  </td> <td> {{ info.email }}</td>
-                </tr>
-                <tr>
-                   
-                </tr>
+            label{
+                color: #AA3333;
 
+            }
+            .c{
+                width: 82%;
+                height: 50%;
+            }
+ 
+            .image{
+            
+                width: 13%;
+                height: 13%;
+            }
+            button{
+     
+                color: #AA3333;
+           
+            }
+            span{
 
-            {% endfor %}
-
-             {% for extinfo in extrainfo  %}
-
-                <tr>
-                    <td><lable> address: </lable> </td> <td>  </td> <td> {{ extinfo.address }}</td>
-                </tr>
-                 <td><label> telephone: </label> </td> <td>  </td> <td> {{ extinfo.telephone }}</td>
-                <tr>
-                    <td> <label> mobile: </label> </td> <td>  </td> <td> {{ extinfo.mobile }}</td>
-                </tr>
-                <tr>
-                    <td><label> gendar: </label> </td> <td>  </td> <td> {{ extinfo.gendar }}</td>
-                </tr>
-
-             {% endfor %}
+                color: blue;
 
 
+            }
 
-            </table>
-        </center>
-        </div>        
+        </style>
+
+        <div class="what-we-do container">
+           <br>
+            <br>
+            <br>
+            <br>
+            <div class="row">
+
+                <div class="service span3 image"  style="border:none;background-color: #FFFFFF">
+                     
+                    <img  src="{{ asset('assets/img/m.png') }}"/>
+                  
+                </div>    
+                <div class="service span3 c" > 
+
+                    <div >
+                        
+                        <center> 
+                            
+                            <table>
+                         {% for info in custinfo %}
+                                    <tr>
+                                        <td>
+                                            <label>Name :</label>                        
+                                        </td>
+                                        <td>
+                                            <span>{{info.username}}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label> Email :</label>                        
+                                        </td>
+                                        <td>
+                                            <span> {{info.email}}</span>
+                                        </td>
+                                    </tr>
+                         {% endfor %}
+                          {% for extrainfo in userinfo %}
+                                    <tr>
+                                        <td>
+                                            <label>Address :</label>                    
+                                        </td>
+                                        <td>
+
+                                            <span>{{extrainfo.address}}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4><label>Gender :</label></h4>                      
+                                        </td>
+                                        <td>
+
+                                            <span>{{extrainfo.gendar}}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4><label>Mobile :</label></h4>                       
+                                        </td>
+                                        <td>
+
+                                            <span>{{extrainfo.mobile}}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4><label>Telephone :</label></h4>                        
+                                        </td>
+                                        <td>
+
+                                            <span>{{extrainfo.telephone}}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h4><label> Children :</label></h4>                        
+                                        </td>
+                                        <td>
+
+                                            <span>{{extrainfo.numChildren}}</span>
+                                        </td>
+                                    </tr>
+                                      <tr>
+                                        <td>
+                                            <h4><label> Children :</label></h4>                        
+                                        </td>
+                                        <td>
+
+                                            <span>{{extrainfo.numChildren}}</span>
+                                        </td>
+                                    </tr>
+                                      <tr>
+                                        <td>
+                                            <h4><label> Children :</label></h4>                        
+                                        </td>
+                                        <td>
+
+                                            <span>{{extrainfo.numChildren}}</span>
+                                        </td>
+                                    </tr>
+                                      <tr>
+                                        <td>
+                                            <h4><label> Children :</label></h4>                        
+                                        </td>
+                                        <td>
+
+                                            <span>{{extrainfo.numChildren}}</span>
+                                        </td>
+                                    </tr>
+                         {% endfor %}
+                                </table>
+                          
+                            </center>       
+                        </div>
+                    </div>
+                  
+                   <div >
+                     
+                       
+                </div>  
+                
+                </div>
+                <br> 
+
+            </div>
+
+            <br>
+            <br>
+
 {% endblock %}
-

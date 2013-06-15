@@ -1,0 +1,49 @@
+{% extends '::base.html.twig' %}
+{% block title%}Sign In{% endblock %}
+{% block body %}
+
+<div class="what-we-do container">
+
+    <center>
+        
+    <div class="signInPageOfSmallDevices">
+        
+      <div class="signInDivPageOfSmallDevices">
+          
+          <center><span id="signInPageError" style="color:red;margin-bottom:5%" ></span></center>
+ 
+          
+            <lebal>Email</lebal>
+            <br/>
+            <input type="text" name="signInPageEmail"  />
+            <br/>
+            <lebal>Password</lebal>
+            <br/>
+            <input type="password" name="signInPagePassword" />
+            <br/>
+            <input type="checkbox" name="rememderMePage" value="rememderMe" />
+            <br/>
+            <label>Remember Me</label>
+            <a style="margin-left:65%;margin-top:5%;" href="javascript:void(0)" type="button" id="signInPageButton" name="{{ path('sitereservation_signIn') }}">Login</a>    
+
+      </div>
+        
+      <div class="signInHorizantalLine">
+      </div>                                                                       
+      <div class="signInDivPageOfSmallDevices" >
+          <br/><br/><br/>   
+          <div>
+              <a href="{{ path('sitereservation_addnewuserform') }}">Sign up as a Customer</a>
+
+          </div>
+          <br/>    
+          <div>
+              <a href="{{ path('sitereservation_addNewCompany') }}"  >Sign up as a Company</a>
+          </div>
+      </div>        
+  </div>  
+    </center>    
+    
+</div>
+
+{% endblock %}
