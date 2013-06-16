@@ -8,12 +8,34 @@
        
  </script>
 
+     <style>
+           
+            
+            #activeNewCompanyRequestError{
+                
+                color: red;
+                margin-left: -20%;
+                margin-top: 20%;
+            }
+            
+            #activeNewCompanyRequestSuccess{
+                
+                color: green;
+                margin-left: -40%;
+                margin-top: 20%;
+            }
+
+        </style>
 
       <div class="what-we-do container">
               <center>             
               <div class="AdminProfile">
+               <span id="activeNewCompanyRequestError"></span>
+               <span id="activeNewCompanyRequestSuccess"></span> 
                 <br/>
                 <select id="activeNewCompanyRequestSelect" >
+                    
+                        <option value="0">-- Choose Company --- </option>
                         {% for company in companys  %}
 
                         <option value="{{ company.id }}">{{ company.custid.username }}</option>

@@ -695,17 +695,23 @@ public function userprofileAction() {
 
                     if( $request->getMethod() == "POST" ){
 
+                        
+                        
                         $companyId = $request->request->get('companyId');
                         $payment = $request->request->get('payment');
                         $paymentTime = $request->request->get('paymentTime');
+                        $paymentOfCompanyForMonth = $request->request->get('paymentOfCompanyForMonth');
 
-                        if($companyId != 0 && $payment != 0 && strlen($paymentTime) > 0 ){
+                        if($companyId != 0 && $payment != 0 && $paymentOfCompanyForMonth != 0 && strlen($paymentTime) > 0 ){
 
+                                $cutomer = $em->getRepository("sitereservationBundle:Customer")->find($companyId);
+                            
                                 $paymentCompany = new CompanyPayment();
 
-                                $paymentCompany->setCompanyId($companyId);
+                                $paymentCompany->setCompanyId($cutomer);
                                 $paymentCompany->setPayment($payment);
-                                $paymentCompany->setPaymentTime($paymentTime);
+                                $paymentCompany->setPaymentTime( new \DateTime($paymentTime) );
+                                $paymentCompany->setPaymentForMonth($paymentOfCompanyForMonth);
 
                                 $em->persist($paymentCompany);
                                 $em->flush();
@@ -729,6 +735,42 @@ public function userprofileAction() {
        }
        
    }
+   
+   public function showUnPaymentCompanyAction(){
        
-  //-------------------------------------------------------///
+        $request = $this->getRequest();
+        $session = $request->getSession();
+        $em = $this->getDoctrine()->getManager();
+
+        if ( $session->get('type') == "admin" ){
+            
+                 if( $request->getMethod() == "POST" ){
+            
+                     
+                      $paymentYear = $request->request->get('paymentYear');
+                      $paymentMonth = $request->request->get('paymentMonth');
+                              
+                      $companys = $em->getRepository("sitereservationBundle:Customer")->getUnpaymentCompany($paymentYear,$paymentMonth);
+                      $allCompanys = $em->getRepository("sitereservationBundle:Customer")->findAll(); 
+                     
+                      return $this->render( "sitereservationBundle:Site:ShowUnPaymentCompanyResult.html.twig",array('companys'=>$companys,'allCompanys'=>$allCompanys) ); 
+            
+                     
+                 }
+                 
+                 return $this->render('sitereservationBundle:Site:ShowUnPaymentCompany.html.twig'); 
+            
+        }else {
+           
+          return $this->redirect( $this->generateUrl('sitereservation_index') );
+           
+       }
+       
+       
+   }
+
+
+
+
+   //-------------------------------------------------------///
 }

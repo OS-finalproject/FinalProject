@@ -101,6 +101,30 @@ class CustomerRepository extends EntityRepository {
      
      
  }
+
+ public function getUnpaymentCompany($paymentYear,$paymentMonth){
+
+   $query = $this->getEntityManager()->createQuery('
+         
+        select comp
+        from sitereservationBundle:CompanyPayment comp
+        join comp.companyId customer
+        where comp.companyId = customer.id 
+        and  comp.paymentTime like :paymentYear
+        and  comp.paymentForMonth = :paymentMonth
+
+    ');
+    
+    $query->setParameter("paymentYear", $paymentYear."%");
+    $query->setParameter("paymentMonth", $paymentMonth);
+     
+
+     
+     return $query->getResult();
+     
+     
+     
+ }
  
  //----------------------------------------///
 

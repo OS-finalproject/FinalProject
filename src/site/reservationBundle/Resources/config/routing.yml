@@ -176,10 +176,17 @@ sitereservation_AdminAddData:
 
 sitereservation_activeNewCompany:
     pattern: /admin/adminAddData/activeNewCompany
-    defaults: { _controller: sitereservationBundle:Site:activeNewCompanyrequest}
+    defaults: { _controller: sitereservationBundle:Site:activeNewCompanyrequest }
     
 sitereservation_addPaymentForCompany:
     pattern: /admin/adminAddData/addPaymentForCompany
-    defaults: { _controller: sitereservationBundle:Site:addPaymentForCompany}    
-    
-    
+    defaults: { _controller: sitereservationBundle:Site:addPaymentForCompany }
+
+sitereservation_showUnPaymentCompany:
+    pattern: /admin/reports/showUnPaymentCompany
+    defaults: { _controller: sitereservationBundle:Site:showUnPaymentCompany }
+
+sitereservation_showActiveUserReport:
+    pattern: /admin/reports/showActiveUser
+    defaults: { _controller: sitereservationBundle:Site:showActiveUser }
+

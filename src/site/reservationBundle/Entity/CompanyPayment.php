@@ -46,7 +46,13 @@ class CompanyPayment {
      */
     private $paymentTime;
 
-
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="paymentForMonth", type="integer", nullable=false )
+     */
+    
+     private $paymentForMonth;
     
     
     /**
@@ -106,6 +112,29 @@ class CompanyPayment {
     public function getPaymentTime(){
         
         return $this->paymentTime;
+    }
+    
+   /**
+     * Set paymentForMonth
+     *
+     * @param integer $paymentForMonth
+     * @return CompanyPayment
+     */
+    public function setPaymentForMonth($paymentForMonth){
+        
+        $this->paymentForMonth = $paymentForMonth;
+    
+        return $this;
+    }
+
+    /**
+     * Get paymentForMonth
+     *
+     * @return integer 
+     */
+    public function getPaymentForMonth(){
+        
+        return $this->paymentForMonth;
     }
     
     

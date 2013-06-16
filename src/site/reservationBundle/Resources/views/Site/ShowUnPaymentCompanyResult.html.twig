@@ -1,0 +1,21 @@
+
+<span>Un Payment Company</span>
+<br/>
+
+{% for allCompany in allCompanys  %}
+
+    {% for company in companys  %}
+    
+        {% if  company.companyId.id != allCompany.id %}
+            
+            {{ allCompany.username }}<br/>
+
+        {% endif%}
+            
+     {% else %}       
+
+            {{ allCompany.username }}<br/>
+            
+    {% endfor %}
+    
+{% endfor %}

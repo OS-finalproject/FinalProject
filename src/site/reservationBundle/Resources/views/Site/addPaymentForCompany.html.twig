@@ -25,6 +25,13 @@
                 margin-left: -90%;
                 margin-top: 20%;
             }
+            
+            #addPaymentOfCompanySuccess{
+                
+                color: green;
+                margin-left: -60%;
+                margin-top: 20%;
+            }
 
         </style>
         
@@ -35,6 +42,7 @@
           <div class="AdminProfile" id="adminProfileDiv">
 
             <span id="addPaymentOfCompanyError"></span>
+            <span id="addPaymentOfCompanySuccess"></span>
             <div style="margin-top:10%;margin-left:20%;margin-right:8%;float:left;"><span>Company :</span></div>
             
             <div style="margin-top:10%;margin-right:5%;margin-left:-0.5%;float:left;">
@@ -60,11 +68,33 @@
             <div style="margin-right:5%;float:left;"><input type='text' name="paymentOFCompany" value="0" /></div>
             <div style="clear:both "></div>
 
+            <div style="margin-left:7%;margin-right:5%;"><span>Payment For Month </span></div>
+            <div style="margin-right:5%;margin-left:8%;">
+                
+                <select id="paymentOfMonthSelect" > 
+                    
+                        <option value="0">  --- Choose Month --- </option>
+                        <option value="01">January</option>
+                        <option value="02">Fabruary</option>
+                        <option value="03">March</option>
+                        <option value="04">April</option>
+                        <option value="05">May</option>
+                        <option value="06">June</option>
+                        <option value="07">July</option>
+                        <option value="08">August</option>
+                        <option value="09">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                        
+                </select>
+                
+            </div>
             
             <div style="margin-left:7%;margin-right:5%;"><span>Time of Payment</span></div>
             <div style="margin-right:5%;margin-left:8%;"><input type='text' name="paymentTimeOfCompany" /></div>
 
-            <div class="FormButton" ><a  href="{{ path('sitereservation_addPaymentForCompany') }}" id="SavePaymentOfCompanyButton" />Save</a></div>      
+            <div class="FormButton" ><a  href="{{ path('sitereservation_addPaymentForCompany') }}" id="SavePaymentOfCompanyButton" name="{{ path('sitereservation_AdminAddData') }}" />Save</a></div>      
 
             <br/>
 

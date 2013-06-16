@@ -517,26 +517,43 @@ jQuery(function($) {
 
         $('#activeNewCompanyRequestButton').on('click',function(){
             
+            
+            
            
-            $.ajax({
-                
-                url:$(this).attr('href'),
-                type:"POST",
-                dataType:"html",
-                data:{
-                    companyId:$('#activeNewCompanyRequestSelect').val()                    
-                },
-                success: function(respo){
-                    
-                    if( respo.toString() === "ok" ){
-                        
-                        window.location.href = $('#activeNewCompanyRequestButton').attr('name');
-                       
-                    }
+           if($('#activeNewCompanyRequestSelect').val() != 0){
+           
+                $.ajax({
 
-                    
-                }
-            });
+                    url:$(this).attr('href'),
+                    type:"POST",
+                    dataType:"html",
+                    data:{
+                        companyId:$('#activeNewCompanyRequestSelect').val()                    
+                    },
+                    success: function(respo){
+
+                        if( respo.toString() === "ok" ){
+
+                             $('#activeNewCompanyRequestError').html("");
+                            $('#activeNewCompanyRequestSuccess').html(" Data Entered Successfaul ");
+                            setTimeout(function(){
+                                
+                              window.location.href = $('#activeNewCompanyRequestButton').attr('name');
+                              
+                            },200);
+
+
+                        }
+
+
+                    }
+                });
+
+           }else{
+               
+             $('#activeNewCompanyRequestError').html(" you must  Choose Company ");
+               
+           }
             
             return false;
         });
@@ -551,9 +568,119 @@ jQuery(function($) {
          dateFormat:'yy-mm-dd' 
      }).attr('readonly',true);   
         
-    
+        
+     $('#SavePaymentOfCompanyButton').on('click',function(){
+         
+        var companyId = $('#addPaymentOfCompanySelect').val();
+        var Payment = parseInt( $('input[name="paymentOFCompany"]').val());
+        var paymentOfCompanyForMonth = $('#paymentOfMonthSelect').val();
+        var  paymentTime = $('input[name="paymentTimeOfCompany"]').val();
+        var errorMessage = "";
+
+        if (companyId !== 0 && Payment !== 0 && paymentOfCompanyForMonth !== 0 && paymentTime !== "" ) {
+                        
+            
+             $.ajax({
+                
+                url: $(this).attr('href'),
+                type: "POST",
+                dataType: "html",
+                data: {
+                    companyId: companyId,
+                    payment: Payment,
+                    paymentTime: paymentTime,
+                    paymentOfCompanyForMonth:paymentOfCompanyForMonth
+                },
+                success: function(respo) {                    
+                    
+                    if (respo.toString() === "ok") {
+                        
+                        $('#addPaymentOfCompanyError').html("");
+                        $('#addPaymentOfCompanySuccess').html(" Data Entered Successfaul ");
+                            
+                        setTimeout(function(){
+                                
+                                 window.location.href = $('#SavePaymentOfCompanyButton').attr('name');
+                              
+                         },200);
+                        
+
+                        
+                    } else if (respo.toString() === "fail") {
+                        
+                        errorMessage ="Enter All Fields";
+                        $('#addPaymentOfCompanyError').html(errorMessage);
+                        
+                    }
+                }
+
+            });
+
+        } else {
+
+            errorMessage = "Enter All Fields ";
+            $('#addPaymentOfCompanyError').html(errorMessage);
+
+        }
+
+          return false;
+         
+         
+     });   
+            
    //-----------------------------------------------///
     
+   //------------- Report OF Unpayment Company ------// 
+   
+   
+    $('#showResultOfUnpaymentCompanyButton').on('click',function(){
+        
+        
+        
+        var Year = $('#YearSelect').val();
+        var Month = $('#MonthSelect').val();
+        
+        if( Year != 0 && Month != 0){
+            
+            $('#ReportOfUnpaymentCompanyError').html("");
+            
+            var paymentTime = Year+"-";
+            
+            $.ajax({
+                
+                    url:$(this).attr('href'),
+                    type:"POST",
+                    data:{
+                        
+                         paymentYear:paymentTime,
+                         paymentMonth:Month
+                         
+                    },
+                    dataType:"html",
+                    success:function(respo){
+                                                
+                        $('#ReportResult').css("dispaly","block");                        
+                        $('#ReportResult').html("");
+                        $('#ReportResult').html(respo);
+                    }                
+                
+            });
+                        
+            //alert(paymentTime);
+            
+        }else{
+            
+            $('#ReportOfUnpaymentCompanyError').html(" Choose Year and Month ");
+            
+        }
+        
+        return false;
+        
+    });
+    
+
+   //------------------------------------------------// 
+
 
 }); // jQuery End
 
