@@ -23,7 +23,8 @@ class InfocompRepository extends EntityRepository
 				SELECT I
 				FROM sitereservationBundle:Infocomp I
 				JOIN I.custid c
-				where I.category like :cat
+				where I.category like :cat 
+                                and I.is_active = 1
 			');
 		$query->setParameter('cat',$company);
 		if($maxResult){
@@ -42,6 +43,7 @@ class InfocompRepository extends EntityRepository
 				SELECT I
 				FROM sitereservationBundle:Infocomp I
 				JOIN I.custid c
+                                where I.is_active = 1
 			');
 		if($maxResult){
             $query->setFirstResult($page * $maxResult);
@@ -56,6 +58,7 @@ class InfocompRepository extends EntityRepository
 				FROM sitereservationBundle:Infocomp I
 				JOIN I.custid c
 				where I.custid = :id
+                                and I.is_active = 1
 			');
 		$query->setParameter('id',$id);
 		return $query->getSingleResult();
@@ -66,6 +69,7 @@ class InfocompRepository extends EntityRepository
        $query = $this->getEntityManager()->createQuery('
             SELECT count(I) as counts
             FROM sitereservationBundle:Infocomp I
+             where I.is_active = 1
             ');
         return $query->getResult();
     }
@@ -75,6 +79,7 @@ class InfocompRepository extends EntityRepository
             SELECT count(I) as counts
             FROM sitereservationBundle:Infocomp I
             where I.category = :cat
+            and I.is_active = 1
             ');
        $query->setParameter("cat",$company);
         return $query->getResult();
