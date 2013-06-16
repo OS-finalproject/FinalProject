@@ -753,7 +753,7 @@ public function userprofileAction() {
                       $companys = $em->getRepository("sitereservationBundle:Customer")->getUnpaymentCompany($paymentYear,$paymentMonth);
                       $allCompanys = $em->getRepository("sitereservationBundle:Customer")->findAll(); 
                      
-                      return $this->render( "sitereservationBundle:Site:ShowUnPaymentCompanyResult.html.twig",array('companys'=>$companys,'allCompanys'=>$allCompanys) ); 
+                      return $this->render( "sitereservationBundle:Site:ShowUnPaymentCompanyResult.html.twig",array('companys'=>$companys,'allCompanys'=>$allCompanys) ) ; 
             
                      
                  }
@@ -769,8 +769,52 @@ public function userprofileAction() {
        
    }
 
+   
+   public function showActiveUserAction(){
+       
+        $request = $this->getRequest();
+        $session = $request->getSession();
+        $em = $this->getDoctrine()->getManager();
+       
+        if ( $session->get('type') == "admin" ){
+       
+                $events = $em->getRepository("sitereservationBundle:Userevent")->findAll();
+                $customer = $em->getRepository("sitereservationBundle:Customer")->findBy( array("type"=>"user") );
+                        
+                return $this->render("sitereservationBundle:Site:ShowActiveUserReport.html.twig",array("events"=>$events,"customers"=>$customer));
+            
+            
+        }else {
+           
+          return $this->redirect( $this->generateUrl('sitereservation_index') );
+           
+       }
+       
+   }
+   
+      public function showUnActiveUserAction(){
+       
+        $request = $this->getRequest();
+        $session = $request->getSession();
+        $em = $this->getDoctrine()->getManager();
+       
+        if ( $session->get('type') == "admin" ){
+       
+                $events = $em->getRepository("sitereservationBundle:Userevent")->findAll();
+                $customer = $em->getRepository("sitereservationBundle:Customer")->findBy( array("type"=>"user") );
+                        
+                return $this->render("sitereservationBundle:Site:ShowUnActiveUserReport.html.twig",array("events"=>$events,"customers"=>$customer));
+            
+            
+        }else {
+           
+          return $this->redirect( $this->generateUrl('sitereservation_index') );
+           
+       }
+       
+   }
 
-
+  
 
    //-------------------------------------------------------///
 }

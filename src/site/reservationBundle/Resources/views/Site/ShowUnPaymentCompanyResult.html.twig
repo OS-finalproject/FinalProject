@@ -1,6 +1,7 @@
 
 <span>Un Payment Company</span>
 <br/>
+<br/>
 
 {% for allCompany in allCompanys  %}
 
@@ -8,13 +9,15 @@
     
         {% if  company.companyId.id != allCompany.id %}
             
-            {{ allCompany.username }}<br/>
+            User Name :&nbsp; {{ allCompany.username }}<br/>
+            Email:&nbsp;{{ allCompany.email }}<br/><br/>
 
         {% endif%}
             
      {% else %}       
 
-            {{ allCompany.username }}<br/>
+            User Name :&nbsp; {{ allCompany.username }}<br/>
+            Email:&nbsp;{{ allCompany.email }}<br/><br/>
             
     {% endfor %}
     

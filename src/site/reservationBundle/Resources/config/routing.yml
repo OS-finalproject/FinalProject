@@ -190,3 +190,7 @@ sitereservation_showActiveUserReport:
     pattern: /admin/reports/showActiveUser
     defaults: { _controller: sitereservationBundle:Site:showActiveUser }
 
+sitereservation_showUnActiveUserReport:
+    pattern: /admin/reports/showUnActiveUser
+    defaults: { _controller: sitereservationBundle:Site:showUnActiveUser }
+

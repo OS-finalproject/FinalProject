@@ -1,0 +1,59 @@
+{% extends '::base.html.twig'%}
+{% block title %} Reports {% endblock %}
+{% block body %}
+ <script>
+        
+       $("li").removeClass("current-page");
+       $("#nav2").addClass("current-page");
+       
+ </script>
+
+     <style>
+           
+            
+            #ReportOfUnpaymentCompanyError{
+                
+                color: red;
+                margin-left: -10%;
+                margin-top: 20%;
+                
+            }
+            
+
+        </style>
+
+      <div class="what-we-do container">
+              <center>             
+              <div class="AdminProfile">
+
+                  <p> Active User </p>
+                  
+                   {% for customer in  customers %}
+
+                        {% for event in events  %}
+
+                            {% if  customer.id == event.user.custid.id %}
+
+                                User Name :&nbsp; {{ customer.username }}<br/>
+                                Email:&nbsp;{{ customer.email }}<br/><br/>
+
+                            {% endif%}
+
+
+                        {% endfor %}
+
+                    {% endfor %}
+                  
+                  
+                <div class="ReportsButton"  ><a  href="javascript:void(0)"  id="PrintReportButton" />Print Report</a></div>      
+                <div class="ReportsButton" style="margin-top: -4%" ><a  href="{{ path('sitereservation_AdminReports') }}" />Back</a></div> 
+              </div>
+                                                            
+                      
+             </center>          
+              
+       </div>
+        <br/>
+        
+
+{% endblock %}
